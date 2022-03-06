@@ -1,7 +1,8 @@
 import React, { useRef } from "react"
-import { Link } from "react-router-dom";
-import { useNavigate} from "react-router-dom"
-// import "./Login.css"
+import { Link, useNavigate } from "react-router-dom";
+// import { useNavigate} from "react-router-dom"
+import "./Login.css"
+import "./../HomeGroan.css"
 
 
 export const Login = ({setAuthUser}) => {
@@ -30,32 +31,39 @@ export const Login = ({setAuthUser}) => {
     }
 
     return (
-        <main className="container--login">
-            <dialog className="dialog dialog--auth" ref={existDialog}>
-                <div>User does not exist</div>
-                <button className="button--close" onClick={e => existDialog.current.close()}>Close</button>
+        <main>
+            <dialog className="dialog" ref={existDialog}>
+                <div className="dialog__login">Psst ... That user doesn't exist.</div>
+                <button className="dialog__btn" onClick={e => existDialog.current.close()}>Close</button>
             </dialog>
 
             <section>
-                <form className="form--login" onSubmit={handleLogin}>
-                    <h1>Home Groan</h1>
-                    <h2>Please sign in</h2>
-                    <fieldset>
-                        <label htmlFor="inputEmail"> Email address </label>
-                        <input ref={email} type="email"
+                <form className="form__login" onSubmit={handleLogin}>
+                    <picture>
+                        <img className="main__image" src={'./../../images/house.png'} alt="Computer-generated 3D house" />
+                    </picture>
+                    <h1 className="main__hed">Home Groan</h1>
+                    <h2 className="main__subhed">Please sign in</h2>
+                    <fieldset className="main__input">
+                        {/* <label htmlFor="inputEmail"> Email address </label> */}
+                        <input 
+                            ref={email} 
+                            type="email"
                             id="email"
-                            className="form-control"
+                            className="input__field"
                             placeholder="Email address"
                             required autoFocus />
                     </fieldset>
                     <fieldset>
-                        <button type="submit">
+                        <button 
+                            type="submit"
+                            className="main__btn">
                             Sign in
                         </button>
                     </fieldset>
                 </form>
             </section>
-            <section className="link--register">
+            <section className="register__link">
                 <Link to="/register">No account? Sign up here</Link>
             </section>
         </main>

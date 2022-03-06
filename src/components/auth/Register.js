@@ -10,7 +10,7 @@ export const Register = ({setAuthUser}) => {
     const navigate = useNavigate()
 
     const existingUserCheck = () => {
-        return fetch(`http://localhost:8088/customers?email=${email.current.value}`)
+        return fetch(`http://localhost:8088/users?email=${email.current.value}`)
             .then(res => res.json())
             .then(user => !!user.length)
     }
@@ -22,7 +22,7 @@ export const Register = ({setAuthUser}) => {
         existingUserCheck()
             .then((userExists) => {
                 if (!userExists) {
-                    fetch("http://localhost:8088/customers", {
+                    fetch("http://localhost:8088/users", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
@@ -50,30 +50,50 @@ export const Register = ({setAuthUser}) => {
     return (
         <main style={{ textAlign: "center" }}>
 
-            <dialog className="dialog dialog--password" ref={conflictDialog}>
+            <dialog className="dialog" ref={conflictDialog}>
                 <div>Account with that email address already exists</div>
-                <button className="button--close" onClick={e => conflictDialog.current.close()}>Close</button>
+                <button className="dialog__btn" onClick={e => conflictDialog.current.close()}>Close</button>
             </dialog>
 
-            <form className="form--login" onSubmit={handleRegister}>
-                <h1 className="h3 mb-3 font-weight-normal">Please Register for NSS Kennels</h1>
-                <fieldset>
-                    <label htmlFor="firstName"> First Name </label>
-                    <input ref={firstName} type="text" name="firstName" className="form-control" placeholder="First name" required autoFocus />
+            <form className="form__login" onSubmit={handleRegister}>
+                <picture>
+                        <img className="main__image" src={'./../../images/house.png'} alt="Computer-generated 3D house" />
+                    </picture>
+                <h1 className="main__hed">Home Groan </h1>
+                <h2 className="main__subhed">Please register</h2>
+                <div className="name__inputs">
+                    <fieldset className="main__inputs name__input">
+                        {/* <label htmlFor="firstName"> First Name </label> */}
+                        <input ref={firstName} 
+                            type="text" 
+                            name="firstName" 
+                            className="input__field" 
+                            placeholder="First name" 
+                            required autoFocus />
+                    </fieldset>
+                    <fieldset className="main__input name__input">
+                        {/* <label htmlFor="lastName"> Last Name </label> */}
+                        <input ref={lastName} 
+                            type="text" 
+                            name="lastName" 
+                            className="input__field" 
+                            placeholder="Last name" 
+                            required />
+                    </fieldset>
+                </div>
+                <fieldset className="main__input">
+                    {/* <label htmlFor="inputEmail"> Email address </label> */}
+                    <input ref={email} 
+                        type="email" 
+                        name="email" 
+                        className="input__field" 
+                        placeholder="Email address" 
+                        required />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="lastName"> Last Name </label>
-                    <input ref={lastName} type="text" name="lastName" className="form-control" placeholder="Last name" required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="inputEmail"> Email address </label>
-                    <input ref={email} type="email" name="email" className="form-control" placeholder="Email address" required />
-                </fieldset>
-                <fieldset>
-                    <button type="submit"> Sign in </button>
+                    <button type="submit" className="main__btn "> Register </button>
                 </fieldset>
             </form>
         </main>
     )
 }
-

@@ -1,3 +1,115 @@
-/* * {
-    background-color: green;
-} */
+@import url('https://fonts.googleapis.com/css2?family=Atma:wght@600&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: rgb(30,76,146);
+    background: radial-gradient(circle, rgba(30,76,146,1) 0%, rgba(30,76,146,0.09877454399728647) 0%, rgba(30,76,146,0.692612079011292) 100%);
+}
+
+/* LINKS ********************  */
+a {
+    color: #1e4c92;
+}
+
+a:visited {
+    color: white;
+}
+
+a:hover {
+    color: black;
+}
+
+/* LAYOUT ********************  */
+fieldset {
+    border: none;
+    padding: .5rem 0;
+}
+
+input[placeholder] {
+    text-align: center;
+}
+
+.form__login {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.input__field {
+    border-radius: 25px;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    padding: .2rem .5rem;
+    width: 200px;
+}
+
+.input__field:hover {
+    border-radius: 25px;
+    background-color: #1e4c92;
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+    padding: .2rem .5rem;
+    width: 200px;
+}
+ 
+.main__input {
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+}
+ 
+/* IMAGES ******************** */
+.main__image {
+    display: block;
+    height: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4%;
+}
+
+/* HEADINGS ********************  */
+.main__hed {
+    color: #1e4c92;
+    text-shadow: 3px 3px 3px darkgray;
+    font-family: 'Atma', cursive;
+    font-size: 5.5rem;
+    text-align: center;
+}
+
+.main__subhed {
+    font-size: 1rem;
+    margin-top: -5%;
+    text-align: center;
+}
+
+/* BUTTONS ********************  */
+.main__btn {
+    background-color: white;
+    border-radius: 25px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: .2rem;
+    width: 200px;
+}
+
+.main__btn:hover {
+    background-color: #1e4c92;
+    color: white;
+}
+
+.option__btns {
+    display: flex;
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+}
+ 
