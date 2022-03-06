@@ -11,25 +11,23 @@ export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
     }
 
     const setAuthUser = (user) => {
-    sessionStorage.setItem("kennel_customer", JSON.stringify(user))
-    setIsAuthenticated(sessionStorage.getItem("kennel_customer") !== null)
+    sessionStorage.setItem("homegroan_user", JSON.stringify(user))
+    setIsAuthenticated(sessionStorage.getItem("homegroan_user") !== null)
     }
 
     return (
         <>
             <Routes>
                 {/* Render the location list when http://localhost:3000/ */}
-                <Route exact path="/login" element={<Login setAuthUser={setAuthUser} />} />
-
-                <Route exact path="/register" element={<Register />} />
-
                 <Route exact path="/" element={
                     <PrivateRoute>
                         <Home />
                     </PrivateRoute>
                 } />
 
-                
+                <Route exact path="/login" element={<Login setAuthUser={setAuthUser} />} />
+
+                <Route exact path="/register" element={<Register />} />
 
 
 
