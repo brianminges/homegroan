@@ -1,10 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"
 import "./components/auth/Login.css"
 import "./components/HomeGroan.css"
 
 export const Home = () => {
   const sessionUser = JSON.parse(window.sessionStorage.getItem("homegroan_user"))
   const sessionUserName = sessionUser.name
+
+  const navigate = useNavigate();
+
+  
 
   return (
     <>
@@ -18,14 +23,18 @@ export const Home = () => {
         </section>
         <section>
           <div  className="option__btns">
-            <button className="main__btn">Search</button>
-            <button className="main__btn">Add Service Provider</button>
-            <button className="main__btn">Create New Invoice</button>
+            <button 
+              className="main__btn" 
+              onClick={() => {navigate(`/Search`)}}>Search</button>
+            <button 
+              className="main__btn" 
+              onClick={() => {navigate(`/AddServiceProvider`)}}>Add Provider</button>
+            <button 
+              className="main__btn" 
+              onClick={() => {navigate(`/CreateInvoice`)}}>Create Invoice</button>
           </div> 
         </section>
-
       </main>
-      
     </>
   );
 };

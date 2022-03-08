@@ -1,6 +1,7 @@
 import React, { useState } from "react"
-import { ApplicationViews } from '../ApplicationViews'
-import './HomeGroan.css'
+import { ApplicationViews } from "../ApplicationViews"
+import { NavBar } from "./nav/NavBar"
+import "./HomeGroan.css"
 
 export const HomeGroan = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(sessionStorage.getItem("homegrown_user") !== null)
@@ -17,13 +18,12 @@ export const HomeGroan = () => {
 
     return (
         <>
-            {/* <NavBar clearUser={clearUser} isAuthenticated={isAuthenticated}/> */}
+            <NavBar clearUser={clearUser} isAuthenticated={isAuthenticated}/>
             <ApplicationViews 
                 setAuthUser={setAuthUser}
                 isAuthenticated={isAuthenticated}
                 setIsAuthenticated={setIsAuthenticated}
-      />
-            
+            />
         </>
     )
 }
