@@ -25,13 +25,13 @@ export const Home = () => {
           <div  className="option__btns">
             <button 
               className="main__btn" 
-              onClick={() => {navigate(`/#`)}}>Search</button>
+              onClick={() => {navigate(`/Search`)}}>Search</button>
             <button 
               className="main__btn" 
-              onClick={() => {navigate(`/#`)}}>Add Provider</button>
+              onClick={() => {navigate(`/AddServiceProvider`)}}>Add Provider</button>
             <button 
               className="main__btn" 
-              onClick={() => {navigate(`/#`)}}>Create Invoice</button>
+              onClick={() => {navigate(`/CreateInvoice`)}}>Create Invoice</button>
           </div> 
         </section>
       </main>

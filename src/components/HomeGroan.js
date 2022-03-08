@@ -24,7 +24,6 @@ export const HomeGroan = () => {
                 isAuthenticated={isAuthenticated}
                 setIsAuthenticated={setIsAuthenticated}
             />
-            
         </>
     )
 }
