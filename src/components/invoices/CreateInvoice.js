@@ -1,12 +1,18 @@
-import React, { useState } from "react"
+import React, { useState, useEffect, useRef } from "react"
+import { useNavigate } from "react-router-dom"
+import { addInvoice } from "./../../modules/InvoiceManager"
+import { getAllTypes } from "./../../modules/TypeManager"
 import "./CreateInvoice.css"
 import "./../HomeGroan.css"
 
 export const CreateInvoice = () => {
     const sessionUser = JSON.parse(window.sessionStorage.getItem("homegroan_user"))
-    const sessionUserId = sessionUser.id
+    const sessionUserId = sessionUser.id;
 
-    const [invoice, setInvoice] = useState ({
+    const navigate = useNavigate();
+    const [types, setTypes] = useState([]);
+
+    const [invoice, setInvoice] = useState({
         userId: sessionUserId,
         title: "",
         details: "",
@@ -18,21 +24,52 @@ export const CreateInvoice = () => {
         costTax: "",
         costTotal: "",
         typeId: "",
-        providerId: parseInt(""),
-        timestamp: new Date().toLocaleString(),
-    })
+        // providerId: "",
+        timestamp: new Date().toLocaleString()
+    });
  
     const handleInputChange = (event) => {
         const newInvoice = {...invoice}
         let selectedVal = event.target.value
         newInvoice[event.target.id] = selectedVal
         setInvoice(newInvoice)
-    }
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault()
-    }
- 
+        if ((invoice.title === "") || 
+                (invoice.details === "") || 
+                    (invoice.date === "") || 
+                        (invoice.costService === "") || 
+                            (invoice.costParts === "") ||
+                                (invoice.costLabor === "") ||
+                                    (invoice.costMisc === "") ||
+                                        (invoice.Tax === "") ||
+                                            (invoice.Total === "") 
+                                                (invoice.typeId === "")) {
+                                                //     (invoice.providerId === "")) {
+                                                             window.alert('All fields must be filled in')
+                                                    }
+        else {
+            addInvoice(invoice)
+                .then(() => navigate("/"))
+        }
+    };
+
+     
+    
+    useEffect(() => {
+        getAllTypes()
+            .then(setTypes)
+                // .then(types.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1) )
+                //     .then(setTypes)
+    }, []);
+
+    // useEffect(() => {
+    //     types.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1)
+    //         .then(setTypes)
+    // }, [])
+
 
     return (
         <>
@@ -108,11 +145,15 @@ export const CreateInvoice = () => {
                                 onChange={handleInputChange}
                                 value={invoice.typeId}
                                 required>
-                                <option>Please select ...</option>
+                                <option value="0">Please select ...</option>
+                                {types.map(
+                                    type => (
+                                        <option key={type.id} value={type.id}>{type.name}</option>
+                                    ))}
                             </select>
                         </fieldset>
 
-                        <fieldset >
+                        {/* <fieldset >
                             <label 
                                 htmlFor="provider"
                                 className="form__input__label">
@@ -130,14 +171,14 @@ export const CreateInvoice = () => {
                                 <div className="form__textlink"> Add service provider</div>
                                 <div className="form__textlink"> Edit service provider</div>
                             </div>
-                        </fieldset>
+                        </fieldset>  */}
 
                         <fieldset>
                             <button 
                                 type="submit"
-                                className="invoice__btn" >
+                                className="invoice__btn"
+                                onClick={handleSubmit} >
                                 Submit invoice
-                                onClick={handleSubmit}
                             </button>
                         </fieldset>
 
@@ -148,14 +189,14 @@ export const CreateInvoice = () => {
 
                     <fieldset>
                         <label 
-                            htmlFor="serviceFee"
+                            htmlFor="costService"
                             className="form__input__label__calc">
                             Service fee
                         </label>
                         <input 
                             type="number" 
-                            className="form__input__input__calc"
-                            id="serviceFee"
+                            className="form__input__input__calc" 
+                            id="costService"
                             placeholder="$0.00" 
                             onChange={handleInputChange}
                             value={invoice.costService}
@@ -168,7 +209,7 @@ export const CreateInvoice = () => {
                             htmlFor="costParts"
                             className="form__input__label__calc">
                             Cost (parts)
-                            </label>
+                        </label>
                         <input 
                             type="number" 
                             className="form__input__input__calc" 
@@ -177,7 +218,7 @@ export const CreateInvoice = () => {
                             onChange={handleInputChange}
                             value={invoice.costParts}
                             required >
-                            </input>
+                        </input>
                     </fieldset>
 
                     <fieldset>

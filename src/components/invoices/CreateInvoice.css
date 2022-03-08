@@ -25,6 +25,7 @@
 .page__grid__right {
     background-color: lightgray;
     border-radius: 25px;
+    box-shadow: 5px 5px 15px black;
     padding: 20px;
 }
 
