@@ -61,6 +61,7 @@ export const CreateInvoice = () => {
                                                     }
         else {
             addInvoice(invoice)
+                .then(window.alert('Your invoice has been submitted'))
                 .then(() => navigate("/"))
         }
     };
