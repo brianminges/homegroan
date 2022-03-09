@@ -7,3 +7,9 @@ export const getAllTypes = () => {
     return fetch(`${URL}/types`)
     .then(res => res.json())
 }
+
+// Gets all types of providers
+export const getAllProviders = () => {
+    return fetch(`${URL}/providers`)
+    .then(res => res.json())
+}

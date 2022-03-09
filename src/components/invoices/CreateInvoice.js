@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { addInvoice } from "./../../modules/InvoiceManager"
-import { getAllTypes } from "./../../modules/TypeManager"
+import { getAllTypes, getAllProviders } from "./../../modules/TypeManager"
 import "./CreateInvoice.css"
 import "./../HomeGroan.css"
 
@@ -11,6 +11,7 @@ export const CreateInvoice = () => {
 
     const navigate = useNavigate();
     const [types, setTypes] = useState([]);
+    const [providers, setProviders] = useState([]);
 
     const [invoice, setInvoice] = useState({
         userId: sessionUserId,
@@ -24,13 +25,16 @@ export const CreateInvoice = () => {
         costTax: "",
         costTotal: "",
         typeId: "",
-        // providerId: "",
+        providerId: "",
         timestamp: new Date().toLocaleString()
     });
  
     const handleInputChange = (event) => {
         const newInvoice = {...invoice}
         let selectedVal = event.target.value
+        if (event.target.id.includes("Id")) {
+            selectedVal = parseInt(selectedVal)
+        }
         newInvoice[event.target.id] = selectedVal
         setInvoice(newInvoice)
     };
@@ -44,10 +48,10 @@ export const CreateInvoice = () => {
                             (invoice.costParts === "") ||
                                 (invoice.costLabor === "") ||
                                     (invoice.costMisc === "") ||
-                                        (invoice.Tax === "") ||
-                                            (invoice.Total === "") 
-                                                (invoice.typeId === "")) {
-                                                //     (invoice.providerId === "")) {
+                                        (invoice.costTax === "") ||
+                                            (invoice.costTotal === "") ||
+                                                (invoice.typeId === "") ||
+                                                    (invoice.providerId === "")) {
                                                              window.alert('All fields must be filled in')
                                                     }
         else {
@@ -61,7 +65,7 @@ export const CreateInvoice = () => {
     useEffect(() => {
         getAllTypes()
             .then(setTypes)
-                // .then(types.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1) )
+                // .then(() => types.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1) )
                 //     .then(setTypes)
     }, []);
 
@@ -69,6 +73,11 @@ export const CreateInvoice = () => {
     //     types.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1)
     //         .then(setTypes)
     // }, [])
+
+    useEffect(() => {
+        getAllProviders()
+            .then(setProviders)
+    }, []);
 
 
     return (
@@ -135,15 +144,16 @@ export const CreateInvoice = () => {
 
                         <fieldset>
                             <label
-                                htmlFor="type" 
+                                htmlFor="typeId" 
                                 className="form__input__label">
                                 Type
                             </label>
                             <select  
                                 className="form__select"
-                                id="type"
+                                id="typeId"
                                 onChange={handleInputChange}
                                 value={invoice.typeId}
+                                name="typeId"
                                 required>
                                 <option value="0">Please select ...</option>
                                 {types.map(
@@ -153,7 +163,7 @@ export const CreateInvoice = () => {
                             </select>
                         </fieldset>
 
-                        {/* <fieldset >
+                        <fieldset >
                             <label 
                                 htmlFor="provider"
                                 className="form__input__label">
@@ -161,17 +171,22 @@ export const CreateInvoice = () => {
                             </label>
                             <select 
                                 className="form__select"
-                                id="provider"
+                                id="providerId"
                                 onChange={handleInputChange}
                                 value={invoice.providerId}
+                                name="providerId"
                                 required>
                                 <option>Please select ... </option>
+                                {providers.map(
+                                    provider => (
+                                            <option key={provider.id} value={provider.id}> {provider.name} </option>
+                                    ))}
                             </select>
-                            <div  className="form__textlinks">
+                            {/* <div  className="form__textlinks">
                                 <div className="form__textlink"> Add service provider</div>
                                 <div className="form__textlink"> Edit service provider</div>
-                            </div>
-                        </fieldset>  */}
+                            </div> */}
+                        </fieldset> 
 
                         <fieldset>
                             <button 
@@ -251,7 +266,7 @@ export const CreateInvoice = () => {
                             placeholder="$0.00"
                             onChange={handleInputChange}
                             value={invoice.costMisc}
-                            required >
+                             >
                         </input>
                     </fieldset>
 
@@ -268,7 +283,7 @@ export const CreateInvoice = () => {
                             placeholder="$0.00" 
                             onChange={handleInputChange}
                             value={invoice.costTax}
-                            required >
+                             >
                         </input>
                     </fieldset>
 
