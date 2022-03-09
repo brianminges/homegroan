@@ -96,8 +96,10 @@ h3 {
 
 /* BUTTONS ********************  */
 .main__btn {
-    background-color: white;
+    background-color: #1e4c92;
     border-radius: 25px;
+    box-shadow: 5px 5px 20px white;
+    color: white;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -106,9 +108,10 @@ h3 {
 }
 
 .main__btn:hover {
-    background-color: #1e4c92;
-    box-shadow: 5px 5px 20px white;
-    color: white;
+    background-color: lightgray;
+    box-shadow: 5px 5px 20px #1e4c92;
+    color: #1e4c92;
+    font-weight: bold;
 }
 
 .option__btns {

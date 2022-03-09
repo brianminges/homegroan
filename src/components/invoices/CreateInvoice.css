@@ -62,7 +62,7 @@ textarea {
     border: none;
     border-radius: 5px;
     font-size: 1rem;
-    padding: 3px;
+    padding: 5px;
     width: 85%;
 }
 
@@ -73,8 +73,14 @@ textarea {
 }
 
 .form__textlinks {
-    font-size: .75rem;
+    font-size: .8rem;
     width: 275px;
+}
+
+.form__textlink__left {
+    margin-left: 75px;
+    margin-top: 3px;
+    font-weight: bold;
 }
 
 /* CALCULATOR FORM LINKS ******************** */

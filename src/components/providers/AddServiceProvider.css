@@ -1,21 +1,28 @@
-.page__grid__center {
-    width: 80%;
-    padding: 10px;
-}
-
-.page__grid__right {
-    background-color: lightgray;
-    border-radius: 25px;
-    box-shadow: 5px 5px 15px black;
-    padding: 20px;
-}
 
 .form__inputs {
     display: flex;
+    justify-content: space-between;
 }
 
 #city, 
 #state, 
 #zip {
     width: 25%;
+}
+
+.label__input__align {
+    display: flex;
+
+}
+
+/* input {
+    background-color: white !important;
+} */
+
+.subhed__hr {
+    border: 1px ridge white;
+    margin: 30px 0;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
 }

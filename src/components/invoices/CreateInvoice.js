@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import { addInvoice } from "./../../modules/InvoiceManager"
 import { getAllTypes, getAllProviders } from "./../../modules/TypeManager"
 import "./CreateInvoice.css"
@@ -196,10 +196,10 @@ export const CreateInvoice = () => {
                                             <option key={provider.id} value={provider.id}>{provider.name}</option>
                                     ))}
                             </select>
-                            {/* <div  className="form__textlinks">
-                                <div className="form__textlink"> Add service provider</div>
-                                <div className="form__textlink"> Edit service provider</div>
-                            </div> */}
+                            <div  className="form__textlinks">
+                                <div className="form__textlink form__textlink__left"> <Link to="/AddServiceProvider">Add new provider</Link></div>
+                                {/* <div className="form__textlink"> Edit service provider</div> */}
+                            </div>
                         </fieldset> 
 
                         <fieldset>

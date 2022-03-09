@@ -25,6 +25,10 @@ export const AddServiceProvider = () => {
         state: "",
         zip: "",
         typeId: "",
+        phone: "",
+        emailaddress: "",
+        twitter: "",
+        facebook: "",
         timestamp: new Date().toLocaleString()
     })
 
@@ -60,17 +64,12 @@ export const AddServiceProvider = () => {
     // Checks for values in required fields
     const handleSubmit = (event) => {
         event.preventDefault()
-        if ((provider.name === "") || 
-                (provider.address === "") || 
-                    (provider.city === "") || 
-                        (provider.state === "") || 
-                            (provider.zip === "") ||
-                                (provider.typeId === "")) {
-                                    window.alert('All fields must be filled in')
+        if ((provider.name === "") || (provider.typeId === "")) {
+            window.alert('Name and Type are required fields')
         } else {
             addProvider(provider)
                 .then(window.alert('Your provider has been added'))
-                .then(() => navigate("/"))
+                .then(() => navigate(-1))
         }
     };
 
@@ -82,7 +81,7 @@ export const AddServiceProvider = () => {
                     <picture>
                         <img 
                             className="main__image" 
-                            src={'./../../images/black.png'} 
+                            src={'./../../images/orange.png'} 
                             alt="Computer-generated figure holding a large wrench" />
                     </picture>
                 </div>
@@ -116,10 +115,9 @@ export const AddServiceProvider = () => {
                             <input 
                                 type="text"
                                 className="input__field__form"
-                                id="addres"
+                                id="address"
                                 onChange={handleInputChange} 
-                                value={provider.address}
-                                required >  
+                                value={provider.address} >  
                             </input>
                         </fieldset>
 
@@ -198,6 +196,99 @@ export const AddServiceProvider = () => {
                                     ))}
                             </select>
                         </fieldset>
+
+                        <div className="subhed__hr"></div>
+
+                        <h3>Contact information</h3>
+                        <div className="form__inputs">
+                            <fieldset>
+                                <div className="label__input__align">
+                                    <div>
+                                        <label 
+                                            htmlFor="phone" 
+                                            className="form__input__label">
+                                            Phone
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <input 
+                                            type="text" 
+                                            className="input__field__form" 
+                                            id="phone" 
+                                            onChange={handleInputChange} 
+                                            value={provider.phone} 
+                                            placeholder="555-555-5555">
+                                        </input>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset>
+                                <div className="label__input__align">
+                                    <div>
+                                        <label 
+                                            htmlFor="emailaddress" 
+                                            className="form__input__label">
+                                            Email
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <input 
+                                            type="email" 
+                                            className="input__field__form" 
+                                            id="emailaddress" 
+                                            onChange={handleInputChange} 
+                                            value={provider.email} 
+                                            placeholder="example@email.com">
+                                        </input>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div className="form__inputs">
+                            <fieldset>
+                                <div className="label__input__align">
+                                    <div>
+                                        <label 
+                                            htmlFor="twitter" 
+                                            className="form__input__label">
+                                            Twitter
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <input 
+                                            type="text" 
+                                            className="input__field__form" 
+                                            id="twitter" 
+                                            onChange={handleInputChange} 
+                                            value={provider.twitter} 
+                                            placeholder="@handle">
+                                        </input>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset>
+                                <div className="label__input__align">
+                                    <div>
+                                        <label 
+                                            htmlFor="facebook" 
+                                            className="form__input__label">
+                                            Facebook
+                                        </label>
+                                        </div>
+                                        <div>
+                                        <input 
+                                            type="url" 
+                                            className="input__field__form" 
+                                            id="facebook" 
+                                            onChange={handleInputChange} 
+                                            value={provider.facebook} >
+                                        </input>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
 
                         <fieldset>
                             <button 
