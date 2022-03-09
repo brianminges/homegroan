@@ -32,3 +32,7 @@
     text-align: center;
     width: 300px;
 }
+
+input[id=email] {
+    text-align: center;
+}

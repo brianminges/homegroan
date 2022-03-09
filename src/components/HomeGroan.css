@@ -31,10 +31,6 @@ fieldset {
     padding: .5rem 0;
 }
 
-input[placeholder] {
-    text-align: center;
-}
-
 .form__login {
     width: 600px;
     margin-left: auto;
@@ -90,11 +86,17 @@ input[placeholder] {
     text-align: center;
 }
 
+h2 {
+    font-size: 3rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
 /* BUTTONS ********************  */
 .main__btn {
     background-color: white;
-    
-    /* rgba(0, 0, 0, 0.75); */
     border-radius: 25px;
     display: block;
     margin-left: auto;
