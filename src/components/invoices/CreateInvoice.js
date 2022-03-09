@@ -10,8 +10,12 @@ export const CreateInvoice = () => {
     const sessionUserId = sessionUser.id;
 
     const navigate = useNavigate();
+
     const [types, setTypes] = useState([]);
+    const [sortedTypes, setSortedTypes] = useState([]);
+
     const [providers, setProviders] = useState([]);
+    const [sortedProviders, setSortedProviders] = useState({});
 
     const [invoice, setInvoice] = useState({
         userId: sessionUserId,
@@ -39,6 +43,7 @@ export const CreateInvoice = () => {
         setInvoice(newInvoice)
     };
 
+    // Checks for values in required fields
     const handleSubmit = (event) => {
         event.preventDefault()
         if ((invoice.title === "") || 
@@ -61,23 +66,31 @@ export const CreateInvoice = () => {
     };
 
      
-    
+    // Sets types dropdown on load
     useEffect(() => {
         getAllTypes()
             .then(setTypes)
-                // .then(() => types.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1) )
-                //     .then(setTypes)
     }, []);
 
-    // useEffect(() => {
-    //     types.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1)
-    //         .then(setTypes)
-    // }, [])
+    // Alphabetizes types dropdown
+    useEffect(() => {
+        if (types.length > 0) {
+            const tempTypes = types.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1)
+            setSortedTypes(tempTypes)}
+    }, [types])
 
+    // Sets providers dropdown on load
     useEffect(() => {
         getAllProviders()
             .then(setProviders)
     }, []);
+
+    // Alphabetizes providers dropdown 
+    useEffect(() => {
+        if (providers.length > 0) {
+            const tempProviders = providers.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1)
+            setSortedProviders(tempProviders)}
+    }, [providers])
 
 
     return (
@@ -154,7 +167,7 @@ export const CreateInvoice = () => {
                                 onChange={handleInputChange}
                                 value={invoice.typeId}
                                 name="typeId"
-                                required>
+                                required >
                                 <option value="0">Please select ...</option>
                                 {types.map(
                                     type => (
@@ -175,11 +188,11 @@ export const CreateInvoice = () => {
                                 onChange={handleInputChange}
                                 value={invoice.providerId}
                                 name="providerId"
-                                required>
-                                <option>Please select ... </option>
+                                required >
+                                <option value="0">Please select ... </option>
                                 {providers.map(
                                     provider => (
-                                            <option key={provider.id} value={provider.id}> {provider.name} </option>
+                                            <option key={provider.id} value={provider.id}>{provider.name}</option>
                                     ))}
                             </select>
                             {/* <div  className="form__textlinks">
@@ -266,7 +279,7 @@ export const CreateInvoice = () => {
                             placeholder="$0.00"
                             onChange={handleInputChange}
                             value={invoice.costMisc}
-                             >
+                            required >
                         </input>
                     </fieldset>
 
@@ -283,7 +296,7 @@ export const CreateInvoice = () => {
                             placeholder="$0.00" 
                             onChange={handleInputChange}
                             value={invoice.costTax}
-                             >
+                            required >
                         </input>
                     </fieldset>
 
