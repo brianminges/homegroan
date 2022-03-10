@@ -81,7 +81,7 @@ export const AddServiceProvider = () => {
                     <picture>
                         <img 
                             className="main__image" 
-                            src={'./../../images/orange.png'} 
+                            src={'./../../images/orangewide.png'} 
                             alt="Computer-generated figure holding a large wrench" />
                     </picture>
                 </div>
@@ -90,7 +90,7 @@ export const AddServiceProvider = () => {
                     <form>
                         <h3>Basic information</h3>
 
-                        <fieldset>
+                        <fieldset className="form__input__fieldset">
                             <label 
                                 htmlFor="name" 
                                 className="form__input__label">
@@ -106,7 +106,7 @@ export const AddServiceProvider = () => {
                             </input>
                         </fieldset>
 
-                        <fieldset>
+                        <fieldset  className="form__input__fieldset">
                             <label 
                                 htmlFor="address"
                                 className="form__input__label">
@@ -122,7 +122,7 @@ export const AddServiceProvider = () => {
                         </fieldset>
 
                         <div className="form__inputs">
-                            <fieldset>
+                            <fieldset  className="form__input__fieldset">
                                 <label
                                     htmlFor="city" 
                                     className="form__input__label">
@@ -138,7 +138,7 @@ export const AddServiceProvider = () => {
                                 </input>
                             </fieldset>
 
-                            <fieldset >
+                            <fieldset className="form__input__fieldset">
                                 <label 
                                     htmlFor="state"
                                     className="form__input__label">
@@ -159,7 +159,7 @@ export const AddServiceProvider = () => {
                                 </select>
                             </fieldset>
 
-                            <fieldset>
+                            <fieldset className="form__input__fieldset">
                                 <label
                                     htmlFor="zip" 
                                     className="form__input__label">
@@ -176,7 +176,7 @@ export const AddServiceProvider = () => {
                             </fieldset>
                         </div>
 
-                        <fieldset>
+                        <fieldset className="form__input__fieldset">
                             <label
                                 htmlFor="typeId" 
                                 className="form__input__label">
@@ -202,7 +202,7 @@ export const AddServiceProvider = () => {
                         <h3>Contact information</h3>
                         <div className="form__inputs">
                             <fieldset>
-                                <div className="label__input__align">
+                                <div className="label__input__align form__input__fieldset">
                                     <div>
                                         <label 
                                             htmlFor="phone" 
@@ -224,7 +224,7 @@ export const AddServiceProvider = () => {
                             </fieldset>
 
                             <fieldset>
-                                <div className="label__input__align">
+                                <div className="label__input__align form__input__fieldset">
                                     <div>
                                         <label 
                                             htmlFor="emailaddress" 
@@ -247,7 +247,7 @@ export const AddServiceProvider = () => {
                         </div>
                         <div className="form__inputs">
                             <fieldset>
-                                <div className="label__input__align">
+                                <div className="label__input__align form__input__fieldset">
                                     <div>
                                         <label 
                                             htmlFor="twitter" 
@@ -273,7 +273,7 @@ export const AddServiceProvider = () => {
                                     <div>
                                         <label 
                                             htmlFor="facebook" 
-                                            className="form__input__label">
+                                            className="form__input__label form__input__fieldset">
                                             Facebook
                                         </label>
                                         </div>

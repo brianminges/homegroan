@@ -109,8 +109,8 @@ export const CreateInvoice = () => {
                 <div className="page__grid__center">
                     <form>
                         <h3>Basic information</h3>
-
-                        <fieldset>
+ 
+                        <fieldset className="form__input__fieldset">
                             <label 
                                 htmlFor="title" 
                                 className="form__input__label">
@@ -125,8 +125,8 @@ export const CreateInvoice = () => {
                                 required >
                             </input>
                         </fieldset>
-
-                        <fieldset>
+ 
+                        <fieldset className="form__input__fieldset">
                             <label 
                                 htmlFor="details"
                                 className="form__input__label">
@@ -141,7 +141,7 @@ export const CreateInvoice = () => {
                             </textarea>
                         </fieldset>
                         
-                        <fieldset>
+                        <fieldset  className="form__input__fieldset">
                             <label
                                 htmlFor="date" 
                                 className="form__input__label">
@@ -156,7 +156,7 @@ export const CreateInvoice = () => {
                             </input>
                         </fieldset>
 
-                        <fieldset>
+                        <fieldset  className="form__input__fieldset">
                             <label
                                 htmlFor="typeId" 
                                 className="form__input__label">
@@ -177,7 +177,7 @@ export const CreateInvoice = () => {
                             </select>
                         </fieldset>
 
-                        <fieldset >
+                        <fieldset className="form__input__fieldset">
                             <label 
                                 htmlFor="provider"
                                 className="form__input__label">
@@ -196,11 +196,12 @@ export const CreateInvoice = () => {
                                             <option key={provider.id} value={provider.id}>{provider.name}</option>
                                     ))}
                             </select>
+                        </fieldset>
                             <div  className="form__textlinks">
                                 <div className="form__textlink form__textlink__left"> <Link to="/AddServiceProvider">Add new provider</Link></div>
                                 {/* <div className="form__textlink"> Edit service provider</div> */}
                             </div>
-                        </fieldset> 
+                         
 
                         <fieldset>
                             <button 

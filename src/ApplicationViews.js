@@ -5,6 +5,7 @@ import { Login } from './components/auth/Login'
 import { Home } from "./Home"
 import { CreateInvoice } from "./components/invoices/CreateInvoice"
 import { AddServiceProvider } from "./components/providers/AddServiceProvider"
+import { ServiceProviderCard } from "./components/providers/ServiceProviderCard"
 import { Search } from "./components/search/Search"
 
 export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
@@ -42,6 +43,16 @@ export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
                     <AddServiceProvider />
                 </PrivateRoute>
             } />
+            <Route exact path="/ServiceProviders" element={
+                // <PrivateRoute>
+                    <ServiceProviderCard />
+                // </PrivateRoute>
+            } />
+            <Route exact path="/ServiceProviders/:serviceProviderId" element={
+                // <PrivateRoute>
+                    <ServiceProviderCard />
+                // </PrivateRoute>
+            } />
 
             <Route exact path="/Search" element={
                 <PrivateRoute>
@@ -53,3 +64,4 @@ export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
         </>
     )
 }
+

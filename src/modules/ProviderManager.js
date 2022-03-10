@@ -8,6 +8,12 @@ export const getAllStates = () => {
     .then(res => res.json())
 }
 
+export const getAllProviders = () => {
+    return fetch(`${URL}/providers`)
+    .then(res => res.json())
+}
+
+// Posts new provider to database
 export const addProvider = (newProvider) => {
     return fetch(`${URL}/providers`, {
         method: "POST",

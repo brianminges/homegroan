@@ -29,6 +29,7 @@
     box-shadow: 5px 5px 15px black;
     padding: 20px;
     width: 20%;
+
 }
 
 /* MAIN FORM INPUT FIELDS ******************** */
@@ -50,7 +51,14 @@ textarea {
     height: 200px;
 }
  
+
+.form__input__fieldset {
+    display: flex;
+    align-items: center;
+}
+
 .form__input__label {
+    align-items: center;
     display: inline-block;
     font-weight: bold;
     margin-right: 0px;
@@ -74,6 +82,7 @@ textarea {
 
 .form__textlinks {
     font-size: .8rem;
+    margin-top: -5px;
     width: 275px;
 }
 
