@@ -1,0 +1,29 @@
+
+.form__inputs {
+    display: flex;
+    justify-content: space-between;
+}
+
+#city, 
+#state, 
+#zip {
+    width: 25%;
+}
+
+.form__input__fieldset {
+    display: flex;
+    align-items: center;
+}
+
+.label__input__align {
+    display: flex;
+
+}
+
+.subhed__hr {
+    border: 1px ridge white;
+    margin: 30px 0;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
