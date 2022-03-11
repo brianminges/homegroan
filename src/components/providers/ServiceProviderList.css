@@ -1,0 +1,14 @@
+.provider__cards {
+    /* background-color: purple; */
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 1200px;
+}
+
+.page__grid__center__list {
+    /* background-color: green; */
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;  
+}
