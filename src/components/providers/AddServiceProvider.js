@@ -151,10 +151,10 @@ export const AddServiceProvider = () => {
                                     value={provider.state}
                                     name="state"
                                     required >
-                                    <option value="0">Please select ... </option>
+                                    <option value="0"> Select ... </option>
                                     {states.map(
                                         state => (
-                                                <option key={state.id} value={state.id}>{state.name}</option>
+                                                <option key={state.id} value={state.abbreviation}>{state.abbreviation}</option>
                                         ))}
                                 </select>
                             </fieldset>
@@ -283,7 +283,8 @@ export const AddServiceProvider = () => {
                                             className="input__field__form" 
                                             id="facebook" 
                                             onChange={handleInputChange} 
-                                            value={provider.facebook} >
+                                            value={provider.facebook} 
+                                            placeholder="/yourpage">
                                         </input>
                                     </div>
                                 </div>

@@ -5,7 +5,10 @@ import "./ServiceProviderDetail.css"
 
 export const ServiceProviderDetail = () => {
 
-    const [provider, setProvider] = useState({ id: null, name: "", address: "" });
+    const [provider, setProvider] = useState({ 
+        id: null, 
+        name: "", 
+        address: "" });
     // const [isLoading, setIsLoading] = useState(true);
   
     const {providerId} = useParams();
@@ -28,8 +31,10 @@ export const ServiceProviderDetail = () => {
             <p>{provider.city}, {provider.state} {provider.zip}</p>
             <p>{provider.phone}</p>
             <p>{provider.email}</p>
-            <p>{provider.twitter}</p>
-            <p>{provider.facebook}</p>
+            <p><a href={"http://www.twitter.com/"+ provider.facebook} target="_blank" rel="noopener noreferrer" >{provider.twitter}</a></p>
+            <p><a href={"http://www.facebook.com/"+ provider.facebook} target="_blank" rel="noopener noreferrer" >Facebook.com{provider.facebook}</a></p>
+
+            {/* <p> Facebook: <a href={provider.facebook} target="_blank">{provider.twitter}</a></p> */}
         </div>
         </>
     )

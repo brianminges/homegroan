@@ -28,8 +28,8 @@ export const ServiceProviderCard = ({provider, handleDeleteProvider}) => {
                 <p>{provider.city}, {provider.state} {provider.zip}</p>
                 <p>{provider.phone}</p>
                 <p>{provider.email}</p>
-                <p>{provider.twitter}</p>
-                <p>{provider.facebook}</p>
+                <p><a href={"http://www.twitter.com/"+ provider.facebook} target="_blank" rel="noopener noreferrer" >{provider.twitter}</a></p>
+                <p><a href={"http://www.facebook.com/"+ provider.facebook} target="_blank" rel="noopener noreferrer" >facebook.com{provider.facebook}</a></p>
                 <button
                     onClick={() => handleDeleteProvider(provider.id)}>
                     Delete
