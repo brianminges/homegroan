@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import { addInvoice } from "./../../modules/InvoiceManager"
 import { getAllTypes, getAllProviders } from "./../../modules/TypeManager"
+import { getAllProvidersByType } from "./../../modules/ProviderManager"
 import "./CreateInvoice.css"
 import "./../HomeGroan.css"
+import { getInvoicesByProvider } from "./../../modules/InvoiceManager"
 
 export const CreateInvoice = () => {
     const sessionUser = JSON.parse(window.sessionStorage.getItem("homegroan_user"))
@@ -81,7 +83,7 @@ export const CreateInvoice = () => {
 
     // Sets providers dropdown on load
     useEffect(() => {
-        getAllProviders()
+        getAllProvidersByType()
             .then(setProviders)
     }, []);
 
@@ -91,7 +93,6 @@ export const CreateInvoice = () => {
             const tempProviders = providers.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1)
             setSortedProviders(tempProviders)}
     }, [providers])
-
 
     return (
         <>
@@ -193,8 +194,8 @@ export const CreateInvoice = () => {
                                 <option value="0">Please select ... </option>
                                 {providers.map(
                                     provider => (
-                                            <option key={provider.id} value={provider.id}>{provider.name}</option>
-                                    ))}
+                                        <option key={provider.id} value={provider.id}>{provider.name}</option>
+                                    ))} 
                             </select>
                         </fieldset>
                             <div  className="form__textlinks">

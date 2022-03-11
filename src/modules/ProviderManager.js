@@ -13,6 +13,12 @@ export const getAllProviders = () => {
     .then(res => res.json())
 }
 
+export const getAllProvidersByType = () => {
+    return fetch(`${URL}/providers?_expand=type`)
+    .then(res => res.json())
+}
+
+
 // Posts new provider to database
 export const addProvider = (newProvider) => {
     return fetch(`${URL}/providers`, {

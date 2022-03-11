@@ -4,7 +4,10 @@ import { Register } from './components/auth/Register'
 import { Login } from './components/auth/Login'
 import { Home } from "./Home"
 import { CreateInvoice } from "./components/invoices/CreateInvoice"
+import { InvoicesList } from "./components/invoices/InvoicesList"
+import { InvoicesCard } from "./components/invoices/InvoicesCard"
 import { AddServiceProvider } from "./components/providers/AddServiceProvider"
+import { ServiceProviderList } from "./components/providers/ServiceProviderList"
 import { ServiceProviderCard } from "./components/providers/ServiceProviderCard"
 import { Search } from "./components/search/Search"
 
@@ -32,20 +35,26 @@ export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
                 </PrivateRoute>
             } />
 
+            <Route exact path="/Invoices" element={
+                // <PrivateRoute>
+                    <InvoicesList />
+                // </PrivateRoute>
+            } />
+            <Route exact path="/Invoices/:invoicesId" element={
+                // <PrivateRoute>
+                    <InvoicesCard />
+                // </PrivateRoute>
+            } />
             <Route exact path="/CreateInvoice" element={
                 <PrivateRoute>
                     <CreateInvoice />
                 </PrivateRoute>
             } />
 
-            <Route exact path="/AddServiceProvider" element={
-                <PrivateRoute>
-                    <AddServiceProvider />
-                </PrivateRoute>
-            } />
+            
             <Route exact path="/ServiceProviders" element={
                 // <PrivateRoute>
-                    <ServiceProviderCard />
+                    <ServiceProviderList />
                 // </PrivateRoute>
             } />
             <Route exact path="/ServiceProviders/:serviceProviderId" element={
@@ -53,11 +62,16 @@ export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
                     <ServiceProviderCard />
                 // </PrivateRoute>
             } />
+            <Route exact path="/AddServiceProvider" element={
+                <PrivateRoute>
+                    <AddServiceProvider />
+                </PrivateRoute>
+            } />
 
             <Route exact path="/Search" element={
-                <PrivateRoute>
+                // <PrivateRoute>
                     <Search />
-                </PrivateRoute>
+                // </PrivateRoute>
             } />
 
             </Routes>
