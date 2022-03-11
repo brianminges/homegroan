@@ -1,8 +1,32 @@
-import React from "react"
+import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { getAllProviders } from "./../../modules/TypeManager"
+import { getAllInvoices } from "./../../modules/InvoiceManager"
 import "./Search.css"
 
 export const Search = () => {
 
+    const [search, setSearch] =  useState({
+        value: ""
+    });
+
+    const navigate = useNavigate();
+
+    const handleChange = event => {
+        const newSearch = {...search}
+        let selectedVal = event.target.value
+        newSearch["value"] = parseInt(selectedVal)
+        setSearch(newSearch)
+    }
+
+    const handleSearch = (event) => {
+        event.preventDefault()
+        if (search.value === 1) {
+            navigate("/ServiceProviders")
+        } else if (search.value === 2) {
+            navigate('/Invoices')
+        } 
+    }
  
 
     return (
@@ -18,29 +42,30 @@ export const Search = () => {
             </div>
             <div className="search__menus">
                 <div>
-                    {/* <label
+                    <label
                         htmlFor="search" 
                         className="search__input__label">
                         Search by
-                    </label> */}
+                    </label>
                 </div>
                 <div>
                     <select  
                         className="form__select"
                         id="typeId"
-                        // onChange={ }
-                        // value={ }
+                        onChange={ handleChange }
+                        value={ search.value }
                         name="typeId"
                         required >
-                        <option value="0">Please select ...</option>
-                        <option vlaue="1">All Providers</option>
-                        <option vlaue="2">All Invoices</option>
+                        <option value="0">Search ...</option>
+                        <option value="1">All Service Providers</option>
+                        <option value="2">All Invoices</option>
                     </select>
                 </div>
             </div>
             <button 
                 type="submit"
-                className="main__btn">
+                className="main__btn"
+                onClick={ handleSearch }>
                 Search
             </button>
         </>
