@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react"
 import { getAllProviders } from "./../../modules/ProviderManager"
-import { getInvoicesByProvider } from "./../../modules/InvoiceManager"
 import { ServiceProviderCard } from "./ServiceProviderCard";
+import { deleteProvider } from "./../../modules/ProviderManager"
+import "./ServiceProviderList.css"
 
 export const ServiceProviderList = () => {
     const [providers, setProviders] = useState([]);
@@ -15,17 +16,24 @@ export const ServiceProviderList = () => {
     useEffect(() => {
         getProviders()
     }, [])
-
+    
+    const handleDeleteProvider = (id) => {
+        deleteProvider(id)
+        .then(() => getAllProviders().then(setProviders));
+    };
 
     return (
         <>
-            <h2>All Service Providers</h2>
+        <h2 className="page__title">All Service Providers</h2>
+        <div className="provider__cards page__grid__center__list">
+            
             {providers.map(provider =>
             <ServiceProviderCard 
             key={provider.id}
-            provider={provider}/>
+            provider={provider}
+            handleDeleteProvider={handleDeleteProvider}/>
             )}
-            
+        </div>
         </>
     )
 }

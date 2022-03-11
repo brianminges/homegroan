@@ -8,7 +8,7 @@ import { InvoicesList } from "./components/invoices/InvoicesList"
 import { InvoicesCard } from "./components/invoices/InvoicesCard"
 import { AddServiceProvider } from "./components/providers/AddServiceProvider"
 import { ServiceProviderList } from "./components/providers/ServiceProviderList"
-import { ServiceProviderCard } from "./components/providers/ServiceProviderCard"
+import { ServiceProviderDetail } from "./components/providers/ServiceProviderDetail"
 import { Search } from "./components/search/Search"
 
 export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
@@ -57,9 +57,9 @@ export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
                     <ServiceProviderList />
                 // </PrivateRoute>
             } />
-            <Route exact path="/ServiceProviders/:serviceProviderId" element={
+            <Route exact path="/ServiceProviders/:providerId" element={
                 // <PrivateRoute>
-                    <ServiceProviderCard />
+                    <ServiceProviderDetail />
                 // </PrivateRoute>
             } />
             <Route exact path="/AddServiceProvider" element={
