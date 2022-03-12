@@ -14,7 +14,6 @@ export const getAllProviders = () => {
     .then(res => res.json())
 }
 
-
 export const getAllProvidersByType = () => {
     return fetch(`${URL}/providers?_expand=type`)
     .then(res => res.json())
@@ -25,6 +24,16 @@ export const getProviderById = (providerId) => {
     .then(res => res.json())
 }
 
+// Edits provider to database
+export const editProvider = (editedProvider) => {
+    return fetch(`${URL}/providers/${editedProvider.id}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON. stringify(editedProvider)
+    }).then(res => res.json())
+}
 
 
 // Posts new provider to database

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { getAllProviders } from "./../../modules/ProviderManager"
 import { ServiceProviderCard } from "./ServiceProviderCard";
-import { deleteProvider } from "./../../modules/ProviderManager"
+import { deleteProvider, editProvider } from "./../../modules/ProviderManager"
 import "./ServiceProviderList.css"
 
 export const ServiceProviderList = () => {
@@ -18,10 +18,17 @@ export const ServiceProviderList = () => {
         getProviders()
     }, [])
     
+    //Deletes selected user from database
     const handleDeleteProvider = (id) => {
         deleteProvider(id)
         .then(() => getAllProviders().then(setProviders));
     };
+
+    // //Edits selected user from database
+    // const handleEditProvider = (id) => {
+    //     editProvider(id)
+    //     .then(() => getAllProviders=().then(setProviders));
+    // }
 
     //Sorts list alphabetically
     useEffect(() => {

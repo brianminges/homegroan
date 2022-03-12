@@ -9,6 +9,7 @@ import { InvoicesCard } from "./components/invoices/InvoicesCard"
 import { AddServiceProvider } from "./components/providers/AddServiceProvider"
 import { ServiceProviderList } from "./components/providers/ServiceProviderList"
 import { ServiceProviderDetail } from "./components/providers/ServiceProviderDetail"
+import { EditServiceProvider } from "./components/providers/EditServiceProvider"
 import { Search } from "./components/search/Search"
 
 export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
@@ -65,6 +66,11 @@ export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
             <Route exact path="/AddServiceProvider" element={
                 <PrivateRoute>
                     <AddServiceProvider />
+                </PrivateRoute>
+            } />
+            <Route exact path="/ServiceProviders/:providerId/Edit" element={
+                <PrivateRoute>
+                    <EditServiceProvider />
                 </PrivateRoute>
             } />
 
