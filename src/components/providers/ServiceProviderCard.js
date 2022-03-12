@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import { getInvoicesByProvider } from "./../../modules/InvoiceManager"
-import { Link } from "react-router-dom"
 import "./ServiceProviderCard.css"
 import "./../HomeGroan.css"
 
-export const ServiceProviderCard = ({provider, handleDeleteProvider}) => {
+export const ServiceProviderCard = ({provider, handleDeleteProvider, handleEditProvider}) => {
     const [invoices, setInvoices] = useState([]);
+
+    const navigate = useNavigate();
 
     const getInvoices = () => {
         return getInvoicesByProvider().then(dataFromAPI => {
@@ -45,7 +47,17 @@ export const ServiceProviderCard = ({provider, handleDeleteProvider}) => {
                             <button id="provider__details__button">Details</button>
                         </Link>
                     </div>
-                    
+                    <div>
+                        {/* <Link to={`/EditServiceProvider/${provider.id}`}>
+                            <button id="provider__edit__button">Edit</button>
+                        </Link> */}
+                        <button
+                            id="provider__edit__button"
+                            onClick={() => {navigate(`/ServiceProviders/${provider.id}/Edit`)}} >
+                            Edit
+
+                        </button>
+                    </div>
                 </div>
             </div>
         {/* </div> */}

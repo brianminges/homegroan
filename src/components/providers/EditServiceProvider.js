@@ -1,24 +1,13 @@
 import React, { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
-import { getAllStates, addProvider } from "./../../modules/ProviderManager"
+import { useNavigate, useParams } from "react-router-dom"
+import { getAllStates, editProvider, getProviderById } from "./../../modules/ProviderManager"
 import { getAllTypes } from "./../../modules/TypeManager"
 import './../invoices/CreateInvoice.css'
 import './AddServiceProvider.css'
 import "./../HomeGroan.css"
 
-export const AddServiceProvider = () => {
-    const sessionUser = JSON.parse(window.sessionStorage.getItem("homegroan_user"))
-    const sessionUserId = sessionUser.id;
-
-    const navigate = useNavigate();
- 
-    const [states, setStates] = useState([])
-
-    const [types, setTypes] = useState([]);
-    const [sortedTypes, setSortedTypes] = useState([]);
-
+export const EditServiceProvider = () => {
     const [provider, setProvider] = useState ({
-        userId: sessionUserId,
         name: "",
         address: "",
         city: "",
@@ -29,8 +18,14 @@ export const AddServiceProvider = () => {
         emailaddress: "",
         twitter: "",
         facebook: "",
-        timestamp: new Date().toLocaleString()
     })
+
+    const [isLoading, setIsLoading] = useState(false);
+    const {providerId} = useParams();
+    const navigate = useNavigate();
+    const [states, setStates] = useState([])
+    const [types, setTypes] = useState([]);
+    const [sortedTypes, setSortedTypes] = useState([]);  
 
     // Sets states dropdown on load
     useEffect(() => {
@@ -51,31 +46,69 @@ export const AddServiceProvider = () => {
             setSortedTypes(tempTypes)}
     }, [types])
 
-    const handleInputChange = (event) => {
-        const newProvider = {...provider}
+    useEffect(() => {
+        getProviderById(providerId)
+            .then(provider => {
+                setProvider(provider);
+                setIsLoading(false);
+            })
+    }, [providerId]);
+
+
+    const handleFieldChange = (event) => {
+        const updatedProvider = {...provider}
         let selectedVal = event.target.value
         if (event.target.id.includes("Id")) {
             selectedVal = parseInt(selectedVal)
         }
-        newProvider[event.target.id] = selectedVal
-        setProvider(newProvider)
+        updatedProvider[event.target.id] = selectedVal
+        setProvider(updatedProvider)
     };
 
+
+
+
+
     // Checks for values in required fields
-    const handleSubmit = (event) => {
+    const checkNewProvider = (event) => {
         event.preventDefault()
         if ((provider.name === "") || (provider.typeId === "")) {
             window.alert('Name and Type are required fields')
         } else {
-            addProvider(provider)
-                .then(window.alert('Your provider has been added'))
+            editProvider(provider)
+                .then(window.alert(`'${provider.name} has been updated'`))
                 .then(() => navigate(-1))
         }
     };
 
+    const updateProvider = (event) => {
+        event.preventDefault()
+        setIsLoading(true);
+
+        const editedProvider = {
+
+            id: providerId,
+            name: provider.name,
+            address: provider.address,
+            city: provider.city,
+            state: provider.state,
+            zip: provider.zip,
+            typeId: provider.typeId,
+            phone: provider.phone,
+            emailaddress: provider.emailaddress,
+            twitter: provider.twitter,
+            facebook: provider.facebook,
+            edittimestamp: new Date().toLocaleString()
+        };
+
+        editProvider(editedProvider)
+            .then(() => navigate("/ServiceProviders")
+            )
+    }
+
     return (
         <>
-            <h2 className="page__title"> Add Service Provider</h2>
+            <h2 className="page__title"> Editing provider</h2>
             <div className="page__grid">
                 <div className="page__grid__left">
                     <picture>
@@ -100,7 +133,7 @@ export const AddServiceProvider = () => {
                                 type="text" 
                                 className="input__field__form" 
                                 id="name" 
-                                onChange={handleInputChange} 
+                                onChange={handleFieldChange} 
                                 value={provider.name}
                                 required >
                             </input>
@@ -116,7 +149,7 @@ export const AddServiceProvider = () => {
                                 type="text"
                                 className="input__field__form"
                                 id="address"
-                                onChange={handleInputChange} 
+                                onChange={handleFieldChange} 
                                 value={provider.address} >  
                             </input>
                         </fieldset>
@@ -132,7 +165,7 @@ export const AddServiceProvider = () => {
                                     type="text"
                                     className="input__field__form"
                                     id="city"
-                                    onChange={handleInputChange}
+                                    onChange={handleFieldChange}
                                     value={provider.city}
                                     required >
                                 </input>
@@ -147,7 +180,7 @@ export const AddServiceProvider = () => {
                                 <select 
                                     className="form__select"
                                     id="state"
-                                    onChange={handleInputChange}
+                                    onChange={handleFieldChange}
                                     value={provider.state}
                                     name="state"
                                     required >
@@ -169,7 +202,7 @@ export const AddServiceProvider = () => {
                                     type="text"
                                     className="input__field__form"
                                     id="zip"
-                                    onChange={handleInputChange}
+                                    onChange={handleFieldChange}
                                     value={provider.zip}
                                     required >
                                 </input>
@@ -185,7 +218,7 @@ export const AddServiceProvider = () => {
                             <select  
                                 className="form__select"
                                 id="typeId"
-                                onChange={handleInputChange}
+                                onChange={handleFieldChange}
                                 value={provider.typeId}
                                 name="typeId"
                                 required >
@@ -215,7 +248,7 @@ export const AddServiceProvider = () => {
                                             type="text" 
                                             className="input__field__form" 
                                             id="phone" 
-                                            onChange={handleInputChange} 
+                                            onChange={handleFieldChange} 
                                             value={provider.phone} 
                                             placeholder="555-555-5555">
                                         </input>
@@ -237,7 +270,7 @@ export const AddServiceProvider = () => {
                                             type="email" 
                                             className="input__field__form" 
                                             id="emailaddress" 
-                                            onChange={handleInputChange} 
+                                            onChange={handleFieldChange} 
                                             value={provider.email} 
                                             placeholder="example@email.com">
                                         </input>
@@ -260,7 +293,7 @@ export const AddServiceProvider = () => {
                                             type="text" 
                                             className="input__field__form" 
                                             id="twitter" 
-                                            onChange={handleInputChange} 
+                                            onChange={handleFieldChange} 
                                             value={provider.twitter} 
                                             placeholder="@handle">
                                         </input>
@@ -282,7 +315,7 @@ export const AddServiceProvider = () => {
                                             type="url" 
                                             className="input__field__form" 
                                             id="facebook" 
-                                            onChange={handleInputChange} 
+                                            onChange={handleFieldChange} 
                                             value={provider.facebook} 
                                             placeholder="/profile">
                                         </input>
@@ -295,8 +328,8 @@ export const AddServiceProvider = () => {
                             <button 
                                 type="submit"
                                 className="invoice__btn" 
-                                onClick={ handleSubmit} >
-                                Add new provider
+                                onClick={ checkNewProvider} >
+                                Update provider
                             </button>
                         </fieldset>
                     </form>
