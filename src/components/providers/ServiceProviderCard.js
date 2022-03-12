@@ -4,27 +4,13 @@ import { getInvoicesByProvider } from "./../../modules/InvoiceManager"
 import "./ServiceProviderCard.css"
 import "./../HomeGroan.css"
 
-export const ServiceProviderCard = ({provider, handleDeleteProvider, handleEditProvider}) => {
-    const [invoices, setInvoices] = useState([]);
+export const ServiceProviderCard = ({ provider, handleDeleteProvider }) => {
 
     const navigate = useNavigate();
-
-    const getInvoices = () => {
-        return getInvoicesByProvider().then(dataFromAPI => {
-            setInvoices(dataFromAPI)
-        });
-    };
-
-    useEffect(() => {
-        getInvoices()
-    }, [])
-
  
     return (
         <>
-
         <div className="provider__card">
-            {/* <div className="provider__card__textbox"> */}
                 <div>
                     <h3>{provider.name}</h3>
                     <p>{provider.address}</p>
@@ -48,21 +34,15 @@ export const ServiceProviderCard = ({provider, handleDeleteProvider, handleEditP
                         </Link>
                     </div>
                     <div>
-                        {/* <Link to={`/EditServiceProvider/${provider.id}`}>
-                            <button id="provider__edit__button">Edit</button>
-                        </Link> */}
                         <button
                             id="provider__edit__button"
                             onClick={() => {navigate(`/ServiceProviders/${provider.id}/Edit`)}} >
                             Edit
-
                         </button>
                     </div>
                 </div>
             </div>
-        {/* </div> */}
         </>
-
     )
 }
  

@@ -8,23 +8,25 @@ export const getAllStates = () => {
     .then(res => res.json())
 }
 
-// Gets providers
+// Gets all providers
 export const getAllProviders = () => {
     return fetch(`${URL}/providers`)
     .then(res => res.json())
 }
 
+// Gets all providers with type
 export const getAllProvidersByType = () => {
     return fetch(`${URL}/providers?_expand=type`)
     .then(res => res.json())
 }
 
+// Gets all providers by ID
 export const getProviderById = (providerId) => {
-    return fetch(`${URL}/providers/${providerId}?_expand=type`)
+    return fetch(`${URL}/providers/${providerId}`)
     .then(res => res.json())
 }
 
-// Edits provider to database
+// Edits provider in database
 export const editProvider = (editedProvider) => {
     return fetch(`${URL}/providers/${editedProvider.id}`, {
         method: "PATCH",
@@ -34,7 +36,6 @@ export const editProvider = (editedProvider) => {
         body: JSON. stringify(editedProvider)
     }).then(res => res.json())
 }
-
 
 // Posts new provider to database
 export const addProvider = (newProvider) => {

@@ -13,12 +13,12 @@ body {
 
 /* LINKS ********************  */
 a {
-    color: #1e4c92;
+    color: white;
     text-decoration: none;
 }
 
 a:visited {
-    color: #1e4c92;
+    color: white;
 }
 
 a:hover {

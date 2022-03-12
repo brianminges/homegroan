@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react"
 import { getAllProviders } from "./../../modules/ProviderManager"
 import { ServiceProviderCard } from "./ServiceProviderCard";
-import { deleteProvider, editProvider } from "./../../modules/ProviderManager"
+import { deleteProvider } from "./../../modules/ProviderManager"
 import "./ServiceProviderList.css"
 
 export const ServiceProviderList = () => {
     const [providers, setProviders] = useState([]);
     const [sortedProviders, setSortedProviders] = useState([]);
 
+    // Fetches all providers and sets in state
     const getProviders = () => {
         return getAllProviders().then(dataFromAPI => {
             setProviders(dataFromAPI)
@@ -23,12 +24,6 @@ export const ServiceProviderList = () => {
         deleteProvider(id)
         .then(() => getAllProviders().then(setProviders));
     };
-
-    // //Edits selected user from database
-    // const handleEditProvider = (id) => {
-    //     editProvider(id)
-    //     .then(() => getAllProviders=().then(setProviders));
-    // }
 
     //Sorts list alphabetically
     useEffect(() => {

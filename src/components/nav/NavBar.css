@@ -7,12 +7,6 @@
     justify-content: space-between;
 }
 
-.navbar__items {
-    display: flex;
-    justify-content: flex-end;
-    text-align: center;
-}
-
 .navbar__item {
     color: white;
     list-style: none;
@@ -20,9 +14,14 @@
     width: 150px;
 }
 
+.navbar__items {
+    display: flex;
+    justify-content: flex-end;
+    text-align: center;
+}
+
 .navbar__image {
     height: 30px;
     margin-left: 25px;   
 }
-
 

@@ -18,12 +18,15 @@ export const InvoicesList = () => {
 
     return (
         <>
-        <h2>All invoices</h2>
-        {invoices.map(invoice =>
-        <InvoicesCard 
-        key={invoice.id}
-        invoices={invoices} />
-        )}
+        <h2 className="page__title">All invoices</h2>
+        <div className="invoice__cards page__grid__center__list">
+
+            {invoices.map(invoice =>
+            <InvoicesCard 
+            key={invoice.id}
+            invoice={invoice} />
+            )}
+        </div>
         </>
     )
 }
