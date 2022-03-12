@@ -8,9 +8,12 @@ export const ServiceProviderList = () => {
     const [providers, setProviders] = useState([]);
     const [sortedProviders, setSortedProviders] = useState([]);
 
+    const sessionUser = JSON.parse(window.sessionStorage.getItem("homegroan_user"))
+    const sessionUserId = sessionUser.id
+
     // Fetches all providers and sets in state
     const getProviders = () => {
-        return getAllProviders().then(dataFromAPI => {
+        return getAllProviders(sessionUserId).then(dataFromAPI => {
             setProviders(dataFromAPI)
         });
     };

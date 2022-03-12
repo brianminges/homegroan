@@ -82,7 +82,7 @@ export const CreateInvoice = () => {
 
     // Sets providers dropdown on load
     useEffect(() => {
-        getAllProvidersByType()
+        getAllProvidersByType(sessionUserId)
             .then(setProviders)
     }, []);
 

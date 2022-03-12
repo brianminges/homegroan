@@ -17,10 +17,25 @@ export const ServiceProviderDetail = () => {
     }, [providerId]);
 
 
+    const changeDateFormat = (inputDate) => {
+      var date = new Date(inputDate);
+      
+      return date.toLocaleString('en-US', {
+          weekday: 'long', // long, short, narrow
+          day: 'numeric', // numeric, 2-digit
+          year: 'numeric', // numeric, 2-digit
+          month: 'long', // numeric, 2-digit, long, short, narrow
+          hour: 'numeric', // numeric, 2-digit
+          minute: 'numeric', // numeric, 2-digit
+          // second: 'numeric', // numeric, 2-digit
+      });
+     
+  }
+
     return (
         <>
         <h2 className="page__title">{provider.name}</h2>
-        <p className="detail__timestamp">Last modified: {provider.timestamp}</p>
+        <p className="detail__timestamp">Last modified on {changeDateFormat(provider.timestamp)}</p>
         <div className="detail__page__grid__center">
             <h3 className="detail__subhed">Address</h3> 
             <p>{provider.address}</p>
