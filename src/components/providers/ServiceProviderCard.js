@@ -22,23 +22,33 @@ export const ServiceProviderCard = ({provider, handleDeleteProvider}) => {
         <>
 
         <div className="provider__card">
-            <div className="test">
-                <h3>{provider.name}</h3>
-                <p>{provider.address}</p>
-                <p>{provider.city}, {provider.state} {provider.zip}</p>
-                <p>{provider.phone}</p>
-                <p>{provider.email}</p>
-                <p>{provider.twitter}</p>
-                <p>{provider.facebook}</p>
-                <button
-                    onClick={() => handleDeleteProvider(provider.id)}>
-                    Delete
-                </button>
-                <Link to={`/ServiceProviders/${provider.id}`}>
-                <button>Details</button>
-                </Link>
+            {/* <div className="provider__card__textbox"> */}
+                <div>
+                    <h3>{provider.name}</h3>
+                    <p>{provider.address}</p>
+                    <p>{provider.city}, {provider.state} {provider.zip}</p>
+                    <p>{provider.phone}</p>
+                    <p><a href={`mailto:${provider.emailaddress}`}>{provider.emailaddress}</a></p>
+                    <p><a href={`http://www.twitter.com/${provider.twitter}`} target="_blank" rel="noopener noreferrer">{provider.twitter}</a></p>
+                    <p><a href={`http://www.facebook.com${provider.facebook}`} target="_blank" rel="noopener noreferrer">FB profile</a></p>
+                </div>
+                <div className="provider__buttons">
+                    <div>
+                        <button
+                            id="provider__delete__button"
+                            onClick={() => handleDeleteProvider(provider.id)}>
+                            Delete
+                        </button>
+                    </div>
+                    <div>
+                        <Link to={`/ServiceProviders/${provider.id}`}>
+                            <button id="provider__details__button">Details</button>
+                        </Link>
+                    </div>
+                    
+                </div>
             </div>
-        </div>
+        {/* </div> */}
         </>
 
     )
