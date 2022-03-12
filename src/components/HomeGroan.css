@@ -18,7 +18,7 @@ a {
 }
 
 a:visited {
-    color: white;
+    color: #1e4c92;
 }
 
 a:hover {
@@ -38,7 +38,7 @@ fieldset {
 }
 
 .input__field {
-    border-radius: 25px;
+    border-radius: 5px;
     background-color: white;
     margin-left: auto;
     margin-right: auto;
@@ -47,9 +47,9 @@ fieldset {
 }
 
 .input__field:hover {
-    border-radius: 25px;
-    background-color: #1e4c92;
-    color: white;
+    border-radius: 5px;
+    /* background-color: #1e4c92;
+    color: white; */
     margin-left: auto;
     margin-right: auto;
     padding: .2rem .5rem;

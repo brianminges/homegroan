@@ -21,7 +21,7 @@ export const getAllProvidersByType = () => {
 }
 
 export const getProviderById = (providerId) => {
-    return fetch(`${URL}/providers/${providerId}`)
+    return fetch(`${URL}/providers/${providerId}?_expand=type`)
     .then(res => res.json())
 }
 

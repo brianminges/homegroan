@@ -6,6 +6,7 @@ import "./ServiceProviderList.css"
 
 export const ServiceProviderList = () => {
     const [providers, setProviders] = useState([]);
+    const [sortedProviders, setSortedProviders] = useState([]);
 
     const getProviders = () => {
         return getAllProviders().then(dataFromAPI => {
@@ -21,6 +22,13 @@ export const ServiceProviderList = () => {
         deleteProvider(id)
         .then(() => getAllProviders().then(setProviders));
     };
+
+    //Sorts list alphabetically
+    useEffect(() => {
+        if (providers.length > 0) {
+            const tempProviders = providers.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1)
+            setSortedProviders(tempProviders)}
+    }, [providers])
 
     return (
         <>
