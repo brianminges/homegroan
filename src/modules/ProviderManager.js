@@ -2,29 +2,32 @@ import React from "react";
 
 const URL = "http://localhost:8088"
 
+
 // Gets all states for address dropdown menu 
 export const getAllStates = () => {
     return fetch(`${URL}/states`)
     .then(res => res.json())
 }
 
-// Gets providers
-export const getAllProviders = () => {
-    return fetch(`${URL}/providers`)
+// Gets all providers
+export const getAllProviders = (sessionUserId) => {
+    return fetch(`${URL}/providers?userId=${sessionUserId}`)
     .then(res => res.json())
 }
 
-export const getAllProvidersByType = () => {
-    return fetch(`${URL}/providers?_expand=type`)
+// Gets all providers with type
+export const getAllProvidersByType = (sessionUserId) => {
+    return fetch(`${URL}/providers?userId=${sessionUserId}&_expand=type`)
     .then(res => res.json())
 }
 
+// Gets all providers by ID
 export const getProviderById = (providerId) => {
-    return fetch(`${URL}/providers/${providerId}?_expand=type`)
+    return fetch(`${URL}/providers/${providerId}`)
     .then(res => res.json())
 }
 
-// Edits provider to database
+// Edits provider in database
 export const editProvider = (editedProvider) => {
     return fetch(`${URL}/providers/${editedProvider.id}`, {
         method: "PATCH",
@@ -34,7 +37,6 @@ export const editProvider = (editedProvider) => {
         body: JSON. stringify(editedProvider)
     }).then(res => res.json())
 }
-
 
 // Posts new provider to database
 export const addProvider = (newProvider) => {

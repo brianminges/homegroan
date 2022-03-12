@@ -62,28 +62,33 @@ export const Register = ({setAuthUser}) => {
                 <h1 className="main__hed">Home Groan </h1>
                 <h2 className="main__subhed">Please register</h2>
                 <div className="name__inputs">
-                    <fieldset className="main__inputs name__input">
-                        {/* <label htmlFor="firstName"> First Name </label> */}
-                        <input ref={firstName} 
-                            type="text" 
-                            name="firstName" 
-                            className="input__field" 
-                            placeholder="First name" 
-                            required autoFocus />
-                    </fieldset>
-                    <fieldset className="main__input name__input">
-                        {/* <label htmlFor="lastName"> Last Name </label> */}
-                        <input ref={lastName} 
-                            type="text" 
-                            name="lastName" 
-                            className="input__field" 
-                            placeholder="Last name" 
-                            required />
-                    </fieldset>
+                        <div>
+                        <fieldset className="main__inputs name__input">
+                            {/* <label htmlFor="firstName"> First Name </label> */}
+                            <input ref={firstName} 
+                                type="text" 
+                                name="firstName" 
+                                className="input__field" 
+                                placeholder="First name" 
+                                required autoFocus />
+                        </fieldset>
+                        </div>
+                        <div>
+                        <fieldset className="main__input name__input">
+                            {/* <label htmlFor="lastName"> Last Name </label> */}
+                            <input ref={lastName} 
+                                type="text" 
+                                name="lastName" 
+                                className="input__field" 
+                                placeholder="Last name" 
+                                required />
+                        </fieldset>
+                        </div>
                 </div>
                 <fieldset className="main__input">
                     {/* <label htmlFor="inputEmail"> Email address </label> */}
-                    <input ref={email} 
+                    <input ref={email}
+                        id="email__register" 
                         type="email" 
                         name="email" 
                         className="input__field" 

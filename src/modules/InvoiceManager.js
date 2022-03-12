@@ -3,14 +3,8 @@ import React from "react";
 const URL = "http://localhost:8088"
 
 // Gets all invoices
-export const getAllInvoices = () => {
-    return fetch(`${URL}/invoices`)
-    .then(res => res.json())
-}
-
-// Gets all invoices with providers
-export const getInvoicesByProvider = () => {
-    return fetch(`${URL}/invoices?_expand=provider`)
+export const getAllInvoices = (sessionUserId) => { 
+    return fetch(`${URL}/invoices/?userId=${sessionUserId}&_expand=provider`)
     .then(res => res.json())
 }
 

@@ -37,14 +37,14 @@ export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
             } />
 
             <Route exact path="/Invoices" element={
-                // <PrivateRoute>
+                <PrivateRoute>
                     <InvoicesList />
-                // </PrivateRoute>
+                </PrivateRoute>
             } />
             <Route exact path="/Invoices/:invoicesId" element={
-                // <PrivateRoute>
+                <PrivateRoute>
                     <InvoicesCard />
-                // </PrivateRoute>
+                </PrivateRoute>
             } />
             <Route exact path="/CreateInvoice" element={
                 <PrivateRoute>
@@ -54,14 +54,14 @@ export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
 
             
             <Route exact path="/ServiceProviders" element={
-                // <PrivateRoute>
+                <PrivateRoute>
                     <ServiceProviderList />
-                // </PrivateRoute>
+                </PrivateRoute>
             } />
             <Route exact path="/ServiceProviders/:providerId" element={
-                // <PrivateRoute>
+                <PrivateRoute>
                     <ServiceProviderDetail />
-                // </PrivateRoute>
+                </PrivateRoute>
             } />
             <Route exact path="/AddServiceProvider" element={
                 <PrivateRoute>
@@ -75,9 +75,9 @@ export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
             } />
 
             <Route exact path="/Search" element={
-                // <PrivateRoute>
+                <PrivateRoute>
                     <Search />
-                // </PrivateRoute>
+                </PrivateRoute>
             } />
 
             </Routes>

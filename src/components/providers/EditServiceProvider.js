@@ -76,7 +76,7 @@ export const EditServiceProvider = () => {
             window.alert('Name and Type are required fields')
         } else {
             editProvider(provider)
-                .then(window.alert(`'${provider.name} has been updated'`))
+                .then(window.alert(`👍'${provider.name} has been updated'`))
                 .then(() => navigate(-1))
         }
     };
@@ -98,7 +98,7 @@ export const EditServiceProvider = () => {
             emailaddress: provider.emailaddress,
             twitter: provider.twitter,
             facebook: provider.facebook,
-            edittimestamp: new Date().toLocaleString()
+            timestamp: new Date().toLocaleString()
         };
 
         editProvider(editedProvider)

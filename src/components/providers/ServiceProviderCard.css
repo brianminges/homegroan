@@ -1,31 +1,30 @@
 .provider__card {
-    background-color: rgba(255,255,255, 0.3);
+    align-content: space-between;
+    background-color: rgba(30, 77, 148, 0.3);
     border-radius: 10px;
-    width: 300px;
-    height: 300px;
-    margin: 20px;
-    padding: 20px;
-    overflow-x: auto;
+    box-shadow: 3px 3px 10px black;
     display: flex;
     flex-direction: column;
-    align-content: space-between;
+    height: 300px;
+    margin: 20px;
+    overflow-x: auto;
+    padding: 20px;
+    width: 300px;
 }
 
-
 .provider__buttons {
-    margin-top: auto;
     display: flex;
     flex-direction: row;
     justify-content: center;
     margin-left: auto;
     margin-right: auto;
+    margin-top: auto;
     width: 95%;
 }
 
 #provider__delete__button {
     background-color: #1e4c92;
     border-radius: 25px 0 0 25px;
-    box-shadow: 1px 1px 20px white;
     color: white;
     font-size: .75rem;
     padding: 3px 0;

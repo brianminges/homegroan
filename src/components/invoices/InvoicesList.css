@@ -4,7 +4,7 @@
     width: 1200px;
 }
 
-.provider__cards {
+.invoice__cards {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;

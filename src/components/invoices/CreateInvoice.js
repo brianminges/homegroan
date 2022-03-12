@@ -5,7 +5,6 @@ import { getAllTypes, getAllProviders } from "./../../modules/TypeManager"
 import { getAllProvidersByType } from "./../../modules/ProviderManager"
 import "./CreateInvoice.css"
 import "./../HomeGroan.css"
-import { getInvoicesByProvider } from "./../../modules/InvoiceManager"
 
 export const CreateInvoice = () => {
     const sessionUser = JSON.parse(window.sessionStorage.getItem("homegroan_user"))
@@ -83,7 +82,7 @@ export const CreateInvoice = () => {
 
     // Sets providers dropdown on load
     useEffect(() => {
-        getAllProvidersByType()
+        getAllProvidersByType(sessionUserId)
             .then(setProviders)
     }, []);
 
