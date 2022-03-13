@@ -50,6 +50,12 @@
     margin-top: auto;
 }
 
+.invoice__card__title ~ p {
+    /* background-color: red; */
+    margin-top: 10px;
+    font-size: 1.1rem;
+}
+
 /* BUTTONS **************** */
 #invoice__delete__button {
     background-color: #1e4c92;
@@ -109,17 +115,20 @@
 /* COST CHART **************** */
 .invoice__card__right p {
     font-weight: bold;
-    
-    margin-bottom: 5px;
+    margin-bottom: 5.6px;
+
+
 }
 
 .tabs {
     border-bottom: 1px dotted black;
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
 }
 
 #costTotal {
     border-bottom: none;
     font-weight: bold;
+    margin-top: 5px;
 }

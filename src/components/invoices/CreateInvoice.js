@@ -33,13 +33,13 @@ export const CreateInvoice = () => {
         providerId: "",
         timestamp: new Date().toLocaleString()
     });
- 
+
     const handleInputChange = (event) => {
         const newInvoice = {...invoice}
         let selectedVal = event.target.value
-        if (event.target.id.includes("Id")) {
-            selectedVal = parseInt(selectedVal)
-        }
+        //Checks for strings that need to be stored as integers
+        if (event.target.id.includes("Id") || (event.target.id.includes("cost")) ) {
+            selectedVal = parseFloat(selectedVal) }
         newInvoice[event.target.id] = selectedVal
         setInvoice(newInvoice)
     };
@@ -92,6 +92,16 @@ export const CreateInvoice = () => {
             const tempProviders = providers.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1)
             setSortedProviders(tempProviders)}
     }, [providers])
+
+
+
+
+   
+    // const calcCosts = () => {
+    //     const total = invoice.costService + invoice.costParts + invoice.costLabor + invoice.costMisc + invoice.costTax
+    //     return total
+    // }
+ 
 
     return (
         <>
@@ -244,6 +254,7 @@ export const CreateInvoice = () => {
                             </label>
                             <input 
                                 type="number" 
+                                step="0.01"
                                 className="form__input__input__calc" 
                                 id="costParts"
                                 placeholder="$0.00" 
@@ -260,7 +271,8 @@ export const CreateInvoice = () => {
                                 Cost (labor)
                             </label>
                             <input 
-                                type="number" 
+                                type="number"
+                                step="0.01" 
                                 className="form__input__input__calc" 
                                 id="costLabor"
                                 placeholder="$0.00"
@@ -277,7 +289,8 @@ export const CreateInvoice = () => {
                                 Cost (misc.)
                             </label>
                             <input 
-                                type="number" 
+                                type="number"
+                                step="0.01" 
                                 className="form__input__input__calc" 
                                 id="costMisc" 
                                 placeholder="$0.00"
@@ -294,7 +307,8 @@ export const CreateInvoice = () => {
                                 Cost (tax)
                             </label>
                             <input 
-                                type="number" 
+                                type="number"
+                                step="0.01" 
                                 className="form__input__input__calc" 
                                 id="costTax" 
                                 placeholder="$0.00" 
@@ -308,10 +322,11 @@ export const CreateInvoice = () => {
                             <label 
                                 htmlFor="costTotal"
                                 className="form__input__label__calc">
-                                TOTAL COST
+                                TOTAL 
                             </label>
                             <input 
-                                type="number" 
+                                type="number"
+                                step="0.01" 
                                 className="form__input__input__calc" 
                                 id="costTotal" 
                                 placeholder="$0.00" 
