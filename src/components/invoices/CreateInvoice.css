@@ -20,7 +20,7 @@
 
 .page__grid__center {
     width: 1000px;
-    padding: 10px;
+    /* padding: 10px; */
 }
 
 .page__grid__right {
@@ -94,14 +94,21 @@ textarea {
 }
 
 /* CALCULATOR FORM LINKS ******************** */
+.form__input__fieldset__calc {
+    display: flex;
+    flex-direction: column;
+}
+
 .form__input__label__calc {
     font-weight: bold;
 }
 
 .form__input__input__calc {
+    /* border: none; */
     border-radius: 5px;
     padding: 5px;
     margin-top: 3px;
+    text-align: right;
 }
  
 /* BUTTONS ******************** */

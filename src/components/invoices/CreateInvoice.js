@@ -42,6 +42,7 @@ export const CreateInvoice = () => {
             selectedVal = parseFloat(selectedVal) }
         newInvoice[event.target.id] = selectedVal
         setInvoice(newInvoice)
+        calcCosts()
     };
 
     // Checks for values in required fields
@@ -55,7 +56,8 @@ export const CreateInvoice = () => {
                                 (invoice.costLabor === "") ||
                                     (invoice.costMisc === "") ||
                                         (invoice.costTax === "") ||
-                                            (invoice.costTotal === "") ||
+                                            (calculatedTotal === null) ||
+                                            // (invoice.costTotal === "") ||
                                                 (invoice.typeId === "") ||
                                                     (invoice.providerId === "")) {
                                                              window.alert('All fields must be filled in')
@@ -97,11 +99,19 @@ export const CreateInvoice = () => {
 
 
    
-    // const calcCosts = () => {
-    //     const total = invoice.costService + invoice.costParts + invoice.costLabor + invoice.costMisc + invoice.costTax
-    //     return total
+    const calcCosts = () => {
+        const total = (invoice.costService *100) + (invoice.costParts *100 + (invoice.costLabor *100) + (invoice.costMisc *100) + (invoice.costTax *100))
+        invoice.costTotal = total/100
+            return total /100
+    }
+
+    const calculatedTotal = calcCosts()
+    console.log(calculatedTotal)
+
+    // const bonusFunction = () => {
+    //     handleInputChange()
+    //     calcCosts()
     // }
- 
 
     return (
         <>
@@ -229,7 +239,7 @@ export const CreateInvoice = () => {
                     <form>
                     <h3>Cost calculator</h3>
 
-                        <fieldset>
+                        <fieldset className="form__input__fieldset__calc">
                             <label 
                                 htmlFor="costService"
                                 className="form__input__label__calc">
@@ -246,7 +256,7 @@ export const CreateInvoice = () => {
                             </input>
                         </fieldset>
 
-                        <fieldset>
+                        <fieldset  className="form__input__fieldset__calc">
                             <label 
                                 htmlFor="costParts"
                                 className="form__input__label__calc">
@@ -264,7 +274,7 @@ export const CreateInvoice = () => {
                             </input>
                         </fieldset>
 
-                        <fieldset>
+                        <fieldset  className="form__input__fieldset__calc">
                             <label 
                                 htmlFor="costLabor"
                                 className="form__input__label__calc">
@@ -282,7 +292,7 @@ export const CreateInvoice = () => {
                             </input>
                         </fieldset>
 
-                        <fieldset>
+                        <fieldset  className="form__input__fieldset__calc">
                             <label 
                                 htmlFor="costMisc"
                                 className="form__input__label__calc">
@@ -300,7 +310,7 @@ export const CreateInvoice = () => {
                             </input>
                         </fieldset>
 
-                        <fieldset>
+                        <fieldset  className="form__input__fieldset__calc">
                             <label 
                                 htmlFor="costTax"
                                 className="form__input__label__calc">
@@ -318,7 +328,7 @@ export const CreateInvoice = () => {
                             </input>
                         </fieldset>
 
-                        <fieldset>
+                        <fieldset  className="form__input__fieldset__calc">
                             <label 
                                 htmlFor="costTotal"
                                 className="form__input__label__calc">
@@ -331,7 +341,9 @@ export const CreateInvoice = () => {
                                 id="costTotal" 
                                 placeholder="$0.00" 
                                 onChange={handleInputChange}
-                                value={invoice.costTotal}
+                                // onChange={bonusFunction}
+                                // value={invoice.costTotal}
+                                value={calcCosts()}
                                 required >
                             </input>
                         </fieldset>
