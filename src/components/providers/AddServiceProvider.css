@@ -10,10 +10,10 @@
     width: 25%;
 }
 
-.form__input__fieldset {
+/* .form__input__fieldset {
     display: flex;
     align-items: center;
-}
+} */
 
 .label__input__align {
     display: flex;
