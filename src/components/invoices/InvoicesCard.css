@@ -1,4 +1,125 @@
+/* ALIGNMENT **************** */
 .invoice__card{
-    /* background-color: red; */
-    margin: 50px 0;
+    align-content: space-between;
+    background-color: rgba(30, 77, 148, 0.3);
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px black;
+    display: flex;
+    flex-direction: column;
+    height: 275px;
+    margin: 20px;
+    overflow-x: auto;
+    overflow-y: auto;
+    padding: 20px;
+    width: 1000px;
+}
+
+.invoice__card__body {
+    display: flex;
+    height: 250px;
+    justify-content: space-between;
+}
+
+.invoice__card__left {
+    width: 750px;
+}
+
+/* .invoice__card__center {
+    background-color: white;
+    border-radius: 10px;
+    
+    margin: 0 20px;
+    padding: 20px;
+    width: 200px;
+
+} */
+
+.invoice__card__right {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    width: 200px;
+}
+
+.invoice__buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+}
+
+/* BUTTONS **************** */
+#invoice__delete__button {
+    background-color: #1e4c92;
+    border-radius: 25px 0 0 25px;
+    color: white;
+    font-size: .75rem;
+    padding: 3px 0;
+    width: 80px;
+}
+
+#invoice__delete__button:hover {
+    background-color: lightgray;
+    border-radius: 25px 0 0 25px;
+    box-shadow: 1px 1px 20px #1e4c92;
+    color: #1e4c92;
+    font-size: .75rem;
+    padding: 3px 0;
+    width: 80px;
+}
+
+#invoice__details__button {
+    background-color: #1e4c92;
+    color: white;
+    font-size: .75rem;
+    padding: 3px 0;
+    width: 80px;
+}
+
+#invoice__details__button:hover {
+    background-color: lightgray;
+    box-shadow: 1px 1px 20px #1e4c92;
+    color: #1e4c92;
+    font-size: .75rem;
+    padding: 3px 0;
+    width: 80px;
+}
+
+#invoice__edit__button {
+    background-color: #1e4c92;
+    border-radius: 0 25px 25px 0;
+    color: white;
+    font-size: .75rem;
+    padding: 3px 0;
+    width: 80px;
+}
+
+#invoice__edit__button:hover {
+    background-color: lightgray;
+    border-radius: 0 25px 25px 0;
+    box-shadow: 1px 1px 20px #1e4c92;
+    color: #1e4c92;
+    font-size: .75rem;
+    padding: 3px 0;
+    width: 80px;
+}
+
+/* COST CHART **************** */
+.invoice__card__right p {
+    font-weight: bold;
+    
+    margin-bottom: 5px;
+}
+
+.tabs {
+    border-bottom: 1px dotted black;
+    display: flex;
+    justify-content: space-between;
+}
+
+#costTotal {
+    border-bottom: none;
+    font-weight: bold;
 }

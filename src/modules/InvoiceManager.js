@@ -18,4 +18,10 @@ export const addInvoice = (newInvoice) => {
         body: JSON.stringify(newInvoice)
     }).then(res => res.json())
 }
- 
+
+// Deletes invoice from database
+export const deleteInvoice = (id) => {
+    return fetch(`${URL}/invoices/${id}`, {
+        method: "DELETE"
+    }).then(res => res.json())
+}
