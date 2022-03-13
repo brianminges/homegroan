@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react"
-import { getAllInvoices } from "./../../modules/InvoiceManager"
+import { getAllInvoices, deleteInvoice } from "./../../modules/InvoiceManager"
 import { InvoicesCard } from "./InvoicesCard"
+import "./InvoicesList.css"
 
 export const InvoicesList = () => {
-    const [invoices, setInvoices] = useState([])
-
+    //Gets current user ID
     const sessionUser = JSON.parse(window.sessionStorage.getItem("homegroan_user"))
     const sessionUserId = sessionUser.id
 
+    const [invoices, setInvoices] = useState([])
+
+    //Fetches invoices on page load and sets to hook above
     const getInvoices = () => {
         return getAllInvoices(sessionUserId).then(dataFromAPI => {
             setInvoices(dataFromAPI)
@@ -28,6 +31,12 @@ export const InvoicesList = () => {
             setSortedInvoices(tempInvoices)}
     }, [invoices])
 
+    //Executes the delete function and re-renders page
+    const handleDeleteInvoice = (id) => {
+        deleteInvoice(id)
+        .then(getInvoices());
+    };
+
     return (
         <>
         <h2 className="page__title">All invoices</h2>
@@ -36,7 +45,8 @@ export const InvoicesList = () => {
             {invoices.map(invoice =>
             <InvoicesCard 
             key={invoice.id}
-            invoice={invoice} />
+            invoice={invoice} 
+            handleDeleteInvoice={handleDeleteInvoice}/>
             )}
         </div>
         </>
