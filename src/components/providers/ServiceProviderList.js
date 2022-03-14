@@ -25,7 +25,7 @@ export const ServiceProviderList = () => {
     //Deletes selected user from database
     const handleDeleteProvider = (id) => {
         deleteProvider(id)
-        .then(() => getAllProviders().then(setProviders));
+        .then(() => getAllProviders(sessionUserId).then(setProviders));
     };
 
     //Sorts list alphabetically

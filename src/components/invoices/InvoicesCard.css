@@ -6,7 +6,7 @@
     box-shadow: 3px 3px 10px black;
     display: flex;
     flex-direction: column;
-    height: 275px;
+    height: 290px;
     margin: 20px;
     overflow-x: auto;
     overflow-y: auto;
@@ -16,12 +16,14 @@
 
 .invoice__card__body {
     display: flex;
-    height: 250px;
+    height: 210px;
     justify-content: space-between;
+
 }
 
 .invoice__card__left {
     width: 750px;
+    overflow-y: auto;
 }
 
 /* .invoice__card__center {
@@ -39,6 +41,7 @@
     border-radius: 10px;
     padding: 20px;
     width: 200px;
+    height: 210px;
 }
 
 .invoice__buttons {
@@ -115,20 +118,30 @@
 /* COST CHART **************** */
 .invoice__card__right p {
     font-weight: bold;
-    margin-bottom: 5.6px;
+    margin-bottom: 7px;
+}
 
-
+.invoice__card__right span {
+    margin-bottom: 6px;
 }
 
 .tabs {
     border-bottom: 1px dotted black;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
 }
 
-#costTotal {
+.tabs p:nth-child(5) {
+    background-color: red;
+}
+
+
+#chart__costTotal {
     border-bottom: none;
     font-weight: bold;
     margin-top: 5px;
+}
+
+#chart__costTax {
+    border-bottom: 2px solid black;
 }

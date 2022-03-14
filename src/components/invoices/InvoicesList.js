@@ -34,7 +34,7 @@ export const InvoicesList = () => {
     //Executes the delete function and re-renders page
     const handleDeleteInvoice = (id) => {
         deleteInvoice(id)
-        .then(getInvoices());
+        .then(() => getAllInvoices(sessionUserId).then(setInvoices));
     };
 
     return (

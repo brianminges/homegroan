@@ -1,8 +1,11 @@
 import React from "react"
+import { useParams, Link } from "react-router-dom"
 import "./InvoicesCard.css"
 
 export const InvoicesCard = ({ invoice, handleDeleteInvoice }) => {
      
+    const {providerId} = useParams();
+
     // Changes date from yyyy-MM-dd to weekday, month date, year
     const changeDateFormat = (inputDate) => {
         let date = new Date(inputDate);
@@ -31,14 +34,13 @@ export const InvoicesCard = ({ invoice, handleDeleteInvoice }) => {
             <div className="invoice__card__body">
                 <div className="invoice__card__left">
                     <h3 className="invoice__card__title">{invoice.title}</h3>
-                    <p><strong>Provider: </strong> {invoice.provider.name}</p> 
+                    <p><strong>Provider: </strong>{invoice.provider.name}</p> 
                     <p><strong>Date: </strong> {changeDateFormat(invoice.date)}</p>
                     <p><strong>Details:</strong> {invoice.details}</p>  
                 </div>
                 <div className="invoice__card__right">
-
                     <div className="tabs">
-                        <div>
+                        <div className="test">
                             <p><strong>Service fee</strong> </p>
                         </div>
                         <div>
@@ -69,7 +71,7 @@ export const InvoicesCard = ({ invoice, handleDeleteInvoice }) => {
                             <span>${changeCurrencyFormat(invoice.costMisc)}</span>
                         </div>
                     </div>
-                    <div className="tabs">
+                    <div className="tabs" id="chart__costTax">
                         <div>
                             <p><strong>Tax</strong> </p>
                         </div>
@@ -78,7 +80,7 @@ export const InvoicesCard = ({ invoice, handleDeleteInvoice }) => {
                         </div>
                     </div>
 
-                    <div className="tabs" id="costTotal">
+                    <div className="tabs" id="chart__costTotal">
                         <div >
                             <p><strong>TOTAL</strong> </p>
                         </div>
