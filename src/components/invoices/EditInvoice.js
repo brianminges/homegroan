@@ -1,25 +1,14 @@
 import React, { useState, useEffect } from "react"
-import { useNavigate, Link } from "react-router-dom"
-import { addInvoice } from "./../../modules/InvoiceManager"
-import { getAllTypes, getAllProviders } from "./../../modules/TypeManager"
+import { useNavigate, Link, useParams } from "react-router-dom"
+import { editInvoice, getAllInvoices, getAllInvoicesById } from "./../../modules/InvoiceManager"
+import { getAllTypes } from "./../../modules/TypeManager"
 import { getAllProvidersByType } from "./../../modules/ProviderManager"
 import "./CreateInvoice.css"
 import "./../HomeGroan.css"
 
-export const CreateInvoice = () => {
-    const sessionUser = JSON.parse(window.sessionStorage.getItem("homegroan_user"))
-    const sessionUserId = sessionUser.id;
-
-    const navigate = useNavigate();
-
-    const [types, setTypes] = useState([]);
-    const [sortedTypes, setSortedTypes] = useState([]);
-
-    const [providers, setProviders] = useState([]);
-    const [sortedProviders, setSortedProviders] = useState({});
-
+export const EditInvoice = () => {
     const [invoice, setInvoice] = useState({
-        userId: sessionUserId,
+        // userId: sessionUserId,
         title: "",
         details: "",
         date: "",
@@ -34,44 +23,32 @@ export const CreateInvoice = () => {
         timestamp: new Date().toLocaleString()
     });
 
-    const handleInputChange = (event) => {
-        const newInvoice = {...invoice}
-        let selectedVal = event.target.value
-        //Checks for strings that need to be stored as integers
-        if (event.target.id.includes("Id") || (event.target.id.includes("cost")) ) {
-            selectedVal = parseFloat(selectedVal) }
-        newInvoice[event.target.id] = selectedVal
-        setInvoice(newInvoice)
-        calcCosts()
-    };
+    const sessionUser = JSON.parse(window.sessionStorage.getItem("homegroan_user"))
+    const sessionUserId = sessionUser.id;
+    const [isLoading, setIsLoading] = useState(false);
+    const {invoiceId} = useParams();
+    const navigate = useNavigate();
+   
+    const [types, setTypes] = useState([]);
+    const [sortedTypes, setSortedTypes] = useState([]);
 
-    // Checks for values in required fields
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        if ((invoice.title === "") || 
-                (invoice.details === "") || 
-                    (invoice.date === "") || 
-                        (invoice.costService === "") || 
-                            (invoice.costParts === "") ||
-                                (invoice.costLabor === "") ||
-                                    (invoice.costMisc === "") ||
-                                        (invoice.costTax === "") ||
-                                            (calculatedTotal === null) ||
-                                            // (invoice.costTotal === "") ||
-                                                (invoice.typeId === "") ||
-                                                    (invoice.providerId === "")) {
-                                                             window.alert('All fields must be filled in')
-        } else {
-            addInvoice(invoice)
-                .then(window.alert('Your invoice has been submitted'))
-                .then(() => navigate("/"))
-        }
-    };
+    const [providers, setProviders] = useState([]);
+    const [sortedProviders, setSortedProviders] = useState({});
+
+
+    //Sets invoices on load
+    useEffect(() => {
+        getAllInvoicesById(invoiceId)
+            .then(invoice => {
+                setInvoice(invoice);
+                setIsLoading(false);
+            })
+    }, [invoiceId])
 
      
     // Sets types dropdown on load
     useEffect(() => {
-        getAllTypes()
+        getAllTypes(sessionUserId)
             .then(setTypes)
     }, []);
 
@@ -106,9 +83,69 @@ export const CreateInvoice = () => {
 
     const calculatedTotal = calcCosts()
 
+    const handleFieldChange = (event) => {
+        const updatedInvoice = {...invoice}
+        let selectedVal = event.target.value
+        //Checks for strings that need to be stored as integers
+        if (event.target.id.includes("Id") || (event.target.id.includes("cost")) ) {
+            selectedVal = parseFloat(selectedVal) }
+        updatedInvoice[event.target.id] = selectedVal
+        setInvoice(updatedInvoice)
+        calcCosts()
+    }; 
+
+    // Checks for values in required fields
+    const checkNewInvoice = (event) => {
+        event.preventDefault()
+        if ((invoice.title === "") || 
+                (invoice.details === "") || 
+                    (invoice.date === "") || 
+                        (invoice.costService === "") || 
+                            (invoice.costParts === "") ||
+                                (invoice.costLabor === "") ||
+                                    (invoice.costMisc === "") ||
+                                        (invoice.costTax === "") ||
+                                            (calculatedTotal === null) ||
+                                            // (invoice.costTotal === "") ||
+                                                (invoice.typeId === "") ||
+                                                    (invoice.providerId === "")) {
+                                                             window.alert('All fields must be filled in')
+        } else {
+            editInvoice(invoice)
+                .then(window.alert(`👍'${invoice.title} has been updated'`))
+                .then(() => navigate("/Invoices"))
+        }
+    };
+
+    // const updateInvoice = (event) => {
+    //     // event.prevent.Default()
+    //     setIsLoading(true);
+
+    //     const editedInvoice = {
+    //         userId: sessionUserId,
+    //         title: invoice.title,
+    //         details: invoice.details,
+    //         date: invoice.date,
+    //         costService: invoice.costService,
+    //         costParts: invoice.costParts,
+    //         costLabor: invoice.costLabor,
+    //         costMisc: invoice.costMisc,
+    //         costTax: invoice.costTax,
+    //         costTotal: invoice.costTotal,
+    //         typeId: invoice.typeId,
+    //         providerId: invoice.providerId,
+    //         timestamp: new Date().toLocaleString()
+    //     }
+
+    //     editInvoice(editedInvoice)
+    //         .then(() => navigate("/Invoices")
+    //         )
+    // }
+
+
     return (
         <>
-            <h2 className="page__title"> Create New Invoice</h2>
+            <h2 className="page__title"> Editing Invoice</h2>
             <div className="page__grid">
                 <div className="page__grid__left">
                     <picture>
@@ -133,7 +170,7 @@ export const CreateInvoice = () => {
                                 type="text" 
                                 className="input__field__form" 
                                 id="title" 
-                                onChange={handleInputChange} 
+                                onChange={handleFieldChange} 
                                 value={invoice.title}
                                 required autoFocus>
                             </input>
@@ -148,7 +185,7 @@ export const CreateInvoice = () => {
                             <textarea 
                                 className="input__field__form"
                                 id="details"
-                                onChange={handleInputChange} 
+                                onChange={handleFieldChange} 
                                 value={invoice.details}
                                 required >  
                             </textarea>
@@ -163,7 +200,7 @@ export const CreateInvoice = () => {
                             <input 
                                 type="date"
                                 id="date"
-                                onChange={handleInputChange}
+                                onChange={handleFieldChange}
                                 value={invoice.date}
                                 required >
                             </input>
@@ -178,7 +215,7 @@ export const CreateInvoice = () => {
                             <select  
                                 className="form__select"
                                 id="typeId"
-                                onChange={handleInputChange}
+                                onChange={handleFieldChange}
                                 value={invoice.typeId}
                                 name="typeId"
                                 required >
@@ -199,7 +236,7 @@ export const CreateInvoice = () => {
                             <select 
                                 className="form__select"
                                 id="providerId"
-                                onChange={handleInputChange}
+                                onChange={handleFieldChange}
                                 value={invoice.providerId}
                                 name="providerId"
                                 required >
@@ -220,7 +257,7 @@ export const CreateInvoice = () => {
                             <button 
                                 type="submit"
                                 className="invoice__btn"
-                                onClick={handleSubmit} >
+                                onClick={checkNewInvoice} >
                                 Submit invoice
                             </button>
                         </fieldset>
@@ -243,7 +280,7 @@ export const CreateInvoice = () => {
                                 className="form__input__input__calc" 
                                 id="costService"
                                 placeholder="$0.00" 
-                                onChange={handleInputChange}
+                                onChange={handleFieldChange}
                                 value={invoice.costService}
                                 required >
                             </input>
@@ -261,7 +298,7 @@ export const CreateInvoice = () => {
                                 className="form__input__input__calc" 
                                 id="costParts"
                                 placeholder="$0.00" 
-                                onChange={handleInputChange}
+                                onChange={handleFieldChange}
                                 value={invoice.costParts}
                                 required >
                             </input>
@@ -279,7 +316,7 @@ export const CreateInvoice = () => {
                                 className="form__input__input__calc" 
                                 id="costLabor"
                                 placeholder="$0.00"
-                                onChange={handleInputChange}
+                                onChange={handleFieldChange}
                                 value={invoice.costLabor}
                                 required >
                             </input>
@@ -297,7 +334,7 @@ export const CreateInvoice = () => {
                                 className="form__input__input__calc" 
                                 id="costMisc" 
                                 placeholder="$0.00"
-                                onChange={handleInputChange}
+                                onChange={handleFieldChange}
                                 value={invoice.costMisc}
                                 required >
                             </input>
@@ -315,7 +352,7 @@ export const CreateInvoice = () => {
                                 className="form__input__input__calc" 
                                 id="costTax" 
                                 placeholder="$0.00" 
-                                onChange={handleInputChange}
+                                onChange={handleFieldChange}
                                 value={invoice.costTax}
                                 required >
                             </input>
@@ -333,7 +370,7 @@ export const CreateInvoice = () => {
                                 className="form__input__input__calc" 
                                 id="costTotal" 
                                 placeholder="$0.00" 
-                                onChange={handleInputChange}
+                                onChange={handleFieldChange}
                                 // onChange={bonusFunction}
                                 // value={invoice.costTotal}
                                 value={calcCosts()}

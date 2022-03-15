@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { getAllInvoices, deleteInvoice } from "./../../modules/InvoiceManager"
+import { getAllInvoices, deleteInvoice, editInvoice } from "./../../modules/InvoiceManager"
 import { InvoicesCard } from "./InvoicesCard"
 import "./InvoicesList.css"
 
@@ -7,6 +7,7 @@ export const InvoicesList = () => {
     //Gets current user ID
     const sessionUser = JSON.parse(window.sessionStorage.getItem("homegroan_user"))
     const sessionUserId = sessionUser.id
+
 
     const [invoices, setInvoices] = useState([])
 

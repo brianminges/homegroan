@@ -23,8 +23,11 @@ export const EditServiceProvider = () => {
     const [isLoading, setIsLoading] = useState(false);
     const {providerId} = useParams();
     const navigate = useNavigate();
+
     const [states, setStates] = useState([])
+    
     const [types, setTypes] = useState([]);
+
     const [sortedTypes, setSortedTypes] = useState([]);  
 
     // Sets states dropdown on load
@@ -81,30 +84,30 @@ export const EditServiceProvider = () => {
         }
     };
 
-    const updateProvider = (event) => {
-        event.preventDefault()
-        setIsLoading(true);
+    // const updateProvider = (event) => {
+    //     event.preventDefault()
+    //     setIsLoading(true);
 
-        const editedProvider = {
+    //     const editedProvider = {
 
-            id: providerId,
-            name: provider.name,
-            address: provider.address,
-            city: provider.city,
-            state: provider.state,
-            zip: provider.zip,
-            typeId: provider.typeId,
-            phone: provider.phone,
-            emailaddress: provider.emailaddress,
-            twitter: provider.twitter,
-            facebook: provider.facebook,
-            timestamp: new Date().toLocaleString()
-        };
+    //         id: providerId,
+    //         name: provider.name,
+    //         address: provider.address,
+    //         city: provider.city,
+    //         state: provider.state,
+    //         zip: provider.zip,
+    //         typeId: provider.typeId,
+    //         phone: provider.phone,
+    //         emailaddress: provider.emailaddress,
+    //         twitter: provider.twitter,
+    //         facebook: provider.facebook,
+    //         timestamp: new Date().toLocaleString()
+    //     };
 
-        editProvider(editedProvider)
-            .then(() => navigate("/ServiceProviders")
-            )
-    }
+    //     editProvider(editedProvider)
+    //         .then(() => navigate("/ServiceProviders")
+    //         )
+    // }
 
     return (
         <>

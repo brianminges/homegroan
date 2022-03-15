@@ -1,10 +1,11 @@
 import React from "react"
-import { useParams, Link } from "react-router-dom"
+import { useParams, Link, useNavigate } from "react-router-dom"
 import "./InvoicesCard.css"
 
-export const InvoicesCard = ({ invoice, handleDeleteInvoice }) => {
+export const InvoicesCard = ({ invoice, handleDeleteInvoice, handleEditInvoice }) => {
      
     const {providerId} = useParams();
+    const navigate = useNavigate();
 
     // Changes date from yyyy-MM-dd to weekday, month date, year
     const changeDateFormat = (inputDate) => {
@@ -104,8 +105,8 @@ export const InvoicesCard = ({ invoice, handleDeleteInvoice }) => {
                 </button> */}
                 <button
                     id="invoice__edit__button"
-                    onClick={() => handleDeleteInvoice(invoice.id)}>
-                    Edit
+                    onClick={() => {navigate(`/Invoices/${invoice.id}/Edit`)}} >
+                    Edit  
                 </button>
             </div>
         </div>

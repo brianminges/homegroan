@@ -33,14 +33,16 @@ export const Login = ({setAuthUser}) => {
     return (
         <main>
             <dialog className="dialog" ref={existDialog}>
-                <div className="dialog__login">Psst ... That user doesn't exist.</div>
+                <div className="dialog__login">Enter a valid user.</div>
                 <button className="dialog__btn" onClick={e => existDialog.current.close()}>Close</button>
             </dialog>
 
             <section>
                 <form className="form__login" onSubmit={handleLogin}>
                     <picture>
-                        <img className="main__image" src={'./../../images/house.png'} alt="Computer-generated 3D house" />
+                        <img className="main__image" id="house1" src={'./../../images/house1.png'} alt="Computer-generated 3D house" />
+                        {/* <img className="main__image" id="house2" src={'./../../images/house2.png'} alt="Computer-generated 3D house" /> */}
+                        {/* <img className="main__image" id="house3" src={'./../../images/house3.png'} alt="Computer-generated 3D house" /> */}
                     </picture>
                     <h1 className="main__hed">Home Groan</h1>
                     <h2 className="main__subhed">Please sign in</h2>
