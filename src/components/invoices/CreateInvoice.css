@@ -97,25 +97,34 @@ textarea {
 /* FORM LINKS ******************** */
 .form__textlinks {
     display: flex;
+    font-size: .8rem;
     justify-content: space-between;
 }
 
-.form__textlinks {
+/* .form__textlinks {
     font-size: .8rem;
-    margin-top: -5px;
-    width: 275px;
+
+} */
+
+.form__textlinks__div {
+    display: flex;
+    flex-direction: column;
+    
 }
 
 .form__textlink__left {
     margin-left: 75px;
-    margin-top: 3px;
+    /* margin-top: 10px; */
     font-weight: bold;
 }
 
 .form__textlink__right {
-    /* margin-left: 75px; */
-    margin-top: 3px;
+
     font-weight: bold;
+}
+
+.test {
+    display: flex;
 }
 
 /* CALCULATOR FORM LINKS ******************** */

@@ -206,55 +206,60 @@ export const CreateInvoice = () => {
                         </div>
 
                         <div className="form__inputs">
-                        <fieldset  className="form__input__fieldset">
-                            <label
-                                htmlFor="typeId" 
-                                className="form__input__label">
-                                Type
-                            </label>
-                            <select  
-                                className="form__select"
-                                id="typeId"
-                                onChange={handleInputChange}
-                                value={invoice.typeId}
-                                name="typeId"
-                                required >
-                                <option value="0">Please select ...</option>
-                                {types.map(
-                                    type => (
-                                        <option key={type.id} value={type.id}>{type.name}</option>
-                                    ))}
-                            </select>
+                        <fieldset>
+                            <div className="form__input__fieldset">
+                                <label
+                                    htmlFor="typeId" 
+                                    className="form__input__label">
+                                    Type
+                                </label>
+                                <select  
+                                    className="form__select"
+                                    id="typeId"
+                                    onChange={handleInputChange}
+                                    value={invoice.typeId}
+                                    name="typeId"
+                                    required >
+                                    <option value="0">Please select ...</option>
+                                    {types.map(
+                                        type => (
+                                            <option key={type.id} value={type.id}>{type.name}</option>
+                                        ))}
+                                </select>
+                            </div>
+                            <div  className="form__textlinks">
+                                {/* <div className="form__textlink form__textlink__left"> <Link to="/AddServiceProvider">Add new type</Link></div>
+                                <div className="form__textlink form__textlink__left"> Edit </div> */}
+                            </div>
                         </fieldset>
 
-                        <fieldset className="form__input__fieldset">
-                            <label 
-                                htmlFor="provider"
-                                className="form__input__label">
-                                Provider
-                            </label>
-                            <select 
-                                className="form__select"
-                                id="providerId"
-                                onChange={handleInputChange}
-                                value={invoice.providerId}
-                                name="providerId"
-                                required >
-                                <option value="0">Please select ... </option>
-                                {providers.map(
-                                    provider => (
-                                        <option key={provider.id} value={provider.id}>{provider.name}</option>
-                                    ))} 
-                            </select>
-                            {/* <div  className="form__textlinks">
-                                <div className="form__textlink form__textlink__left"> <Link to="/AddServiceProvider">Add provider</Link></div>
+                        <fieldset >
+                            <div className="form__input__fieldset">
+                                <label 
+                                    htmlFor="provider"
+                                    className="form__input__label">
+                                    Provider
+                                </label>
+                                <select 
+                                    className="form__select"
+                                    id="providerId"
+                                    onChange={handleInputChange}
+                                    value={invoice.providerId}
+                                    name="providerId"
+                                    required >
+                                    <option value="0">Please select ... </option>
+                                    {providers.map(
+                                        provider => (
+                                            <option key={provider.id} value={provider.id}>{provider.name}</option>
+                                        ))} 
+                                </select>
+                            </div>
+                            <div  className="form__textlinks">
+                                <div className="form__textlink form__textlink__left"> <Link to="/AddServiceProvider">Add new provider</Link></div>
                                 <div className="form__textlink form__textlink__left"> Edit </div>
-                            </div> */}
+                            </div>
+ 
                         </fieldset>
-                            {/* <div  className="form__textlinks">
-                                <div className="form__textlink form__textlink__left"> <Link to="/AddServiceProvider">Add provider</Link></div>
-                                <div className="form__textlink form__textlink__left"> Edit </div>
-                            </div> */}
                         </div>
                         </form>
                     </div> 
