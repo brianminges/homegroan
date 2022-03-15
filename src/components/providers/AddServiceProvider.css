@@ -2,6 +2,8 @@
 .form__inputs {
     display: flex;
     justify-content: space-between;
+    /* background-color: red; */
+    width: 814.6px;
 }
 
 #city, 
@@ -27,3 +29,4 @@
     margin-left: auto;
     margin-right: auto;
 }
+

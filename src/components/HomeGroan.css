@@ -49,8 +49,6 @@ fieldset {
 
 .input__field:hover {
     border-radius: 5px;
-    /* background-color: #1e4c92;
-    color: white; */
     margin-left: auto;
     margin-right: auto;
     padding: .2rem .5rem;

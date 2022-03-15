@@ -23,6 +23,8 @@ export const CreateInvoice = () => {
         title: "",
         details: "",
         date: "",
+        invoiceNumber: "",
+        accountNumber: "",
         costService: "",
         costParts: "",
         costLabor: "",
@@ -120,9 +122,9 @@ export const CreateInvoice = () => {
                 </div>
 
                 <div className="page__grid__center">
-                    <form>
+                    <div>
+                        <form>
                         <h3>Basic information</h3>
- 
                         <fieldset className="form__input__fieldset">
                             <label 
                                 htmlFor="title" 
@@ -154,21 +156,56 @@ export const CreateInvoice = () => {
                             </textarea>
                         </fieldset>
                         
-                        <fieldset  className="form__input__fieldset">
-                            <label
-                                htmlFor="date" 
-                                className="form__input__label">
-                                Date
-                            </label>
-                            <input 
-                                type="date"
-                                id="date"
-                                onChange={handleInputChange}
-                                value={invoice.date}
-                                required >
-                            </input>
-                        </fieldset>
+                        <div className="form__inputs">
+                            <fieldset  className="form__input__fieldset form__input__triple">
+                                <label
+                                    htmlFor="date" 
+                                    className="form__input__label">
+                                    Date
+                                </label>
+                                <input 
+                                    type="date"
+                                    id="date"
+                                    onChange={handleInputChange}
+                                    value={invoice.date}
+                                    required >
+                                </input>
+                            </fieldset>
 
+                            <fieldset  className="form__input__fieldset form__input__triple">
+                                <label
+                                    htmlFor="text" 
+                                    className="form__input__label">
+                                    Invoice number
+                                </label>
+                                <input 
+                                    type="text"
+                                    className="input__field__form"
+                                    id="date"
+                                    onChange={handleInputChange}
+                                    value={invoice.invoiceNumber}
+                                    required >
+                                </input>
+                            </fieldset>
+
+                            <fieldset  className="form__input__fieldset  form__input__triple">
+                                <label
+                                    htmlFor="text" 
+                                    className="form__input__label">
+                                    Account number
+                                </label>
+                                <input 
+                                    type="text"
+                                    className="input__field__form"
+                                    id="date"
+                                    onChange={handleInputChange}
+                                    value={invoice.accountNumber}
+                                    required >
+                                </input>
+                            </fieldset>
+                        </div>
+
+                        <div className="form__inputs">
                         <fieldset  className="form__input__fieldset">
                             <label
                                 htmlFor="typeId" 
@@ -209,14 +246,21 @@ export const CreateInvoice = () => {
                                         <option key={provider.id} value={provider.id}>{provider.name}</option>
                                     ))} 
                             </select>
+                            {/* <div  className="form__textlinks">
+                                <div className="form__textlink form__textlink__left"> <Link to="/AddServiceProvider">Add provider</Link></div>
+                                <div className="form__textlink form__textlink__left"> Edit </div>
+                            </div> */}
                         </fieldset>
-                            <div  className="form__textlinks">
-                                <div className="form__textlink form__textlink__left"> <Link to="/AddServiceProvider">Add new provider</Link></div>
-                                {/* <div className="form__textlink"> Edit service provider</div> */}
-                            </div>
-                         
-
-                        <fieldset>
+                            {/* <div  className="form__textlinks">
+                                <div className="form__textlink form__textlink__left"> <Link to="/AddServiceProvider">Add provider</Link></div>
+                                <div className="form__textlink form__textlink__left"> Edit </div>
+                            </div> */}
+                        </div>
+                        </form>
+                    </div> 
+                     
+                    <div>
+                        <fieldset className="fieldset__button">
                             <button 
                                 type="submit"
                                 className="invoice__btn"
@@ -224,8 +268,7 @@ export const CreateInvoice = () => {
                                 Submit invoice
                             </button>
                         </fieldset>
-
-                    </form>
+                    </div>
                 </div>
 
                 <div className="page__grid__right">
@@ -343,6 +386,7 @@ export const CreateInvoice = () => {
                     </form>
                 </div>
             </div>
+
         </>
     )
 }
