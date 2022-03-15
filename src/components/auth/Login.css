@@ -36,3 +36,21 @@
 input[id=email] {
     text-align: center;
 }
+
+#house1 {
+
+}
+
+
+@keyframes home {
+    0% {background-color: #4A412A;}
+    25% {background-color: #F0BE03}
+    50% {background-color: olive;}
+    75% {background-color: #F0BE03}
+    100% {background-color: purple;}
+}
+
+#badbackground {
+    background: blue;
+    animation: home 10s infinite ease;
+}

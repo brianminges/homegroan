@@ -6,6 +6,7 @@ import { Home } from "./Home"
 import { CreateInvoice } from "./components/invoices/CreateInvoice"
 import { InvoicesList } from "./components/invoices/InvoicesList"
 import { InvoicesCard } from "./components/invoices/InvoicesCard"
+import { EditInvoice } from "./components/invoices/EditInvoice"
 import { AddServiceProvider } from "./components/providers/AddServiceProvider"
 import { ServiceProviderList } from "./components/providers/ServiceProviderList"
 import { ServiceProviderDetail } from "./components/providers/ServiceProviderDetail"
@@ -36,6 +37,11 @@ export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
                 </PrivateRoute>
             } />
 
+            <Route exact path="/CreateInvoice" element={
+                <PrivateRoute>
+                    <CreateInvoice />
+                </PrivateRoute>
+            } />
             <Route exact path="/Invoices" element={
                 <PrivateRoute>
                     <InvoicesList />
@@ -46,9 +52,9 @@ export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
                     <InvoicesCard />
                 </PrivateRoute>
             } />
-            <Route exact path="/CreateInvoice" element={
+            <Route exact path="/Invoices/:invoiceId/Edit" element={
                 <PrivateRoute>
-                    <CreateInvoice />
+                    <EditInvoice />
                 </PrivateRoute>
             } />
 

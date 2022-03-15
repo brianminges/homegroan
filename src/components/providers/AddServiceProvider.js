@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { getAllStates, addProvider } from "./../../modules/ProviderManager"
 import { getAllTypes } from "./../../modules/TypeManager"
-import './../invoices/CreateInvoice.css'
+// import './../invoices/CreateInvoice.css'
 import './AddServiceProvider.css'
 import "./../HomeGroan.css"
 
@@ -81,7 +81,7 @@ export const AddServiceProvider = () => {
                     <picture>
                         <img 
                             className="main__image" 
-                            src={'./../../images/orangewide.png'} 
+                            src={'./../../images/black.png'} 
                             alt="Computer-generated figure holding a large wrench" />
                     </picture>
                 </div>
