@@ -118,30 +118,12 @@ export const CreateInvoice = () => {
         }
     }
 
-//???????????????????????????????????????????????????????????????????
-    // const [type, setType] = useState({
-    //             name: "",
-    //         })
+    
+    const [popup, setPopup] = useState(false)
 
-    // const handleTypeInputChange = (event) => {
-    //     const newType = {...type}
-    //     let selectedVal = event.target.value
-    //     newType[event.target.id] = selectedVal
-    //     setType(newType)
-    // };
-
-    // const handleTypeSubmit = () => {
-    //     addType(type)
-    //         .then(() => navigate(-1))
-
-    // }
- //???????????????????????????????????????????????????????????????????
-   
 
     const providerDialog = useRef()
     const fieldsDialog = useRef()
-    // const typesDialog = useRef()//???????????????????????????????????????????????????????????????????
-
  
     return (
         <>
@@ -154,25 +136,11 @@ export const CreateInvoice = () => {
                 <div className="dialog__login">Fill in all required fields.</div>
                 <button className="dialog__btn" onClick={e => fieldsDialog.current.close()}>Close</button>
             </dialog>
-{/* 
-            <dialog className="dialog" ref={typesDialog}>
-                <div className="dialog__login">Add a name for your new type.</div>
-                <input 
-                    type="text"
-                    className="input__field__form"
-                    id="name"
-                    onChange={handleTypeInputChange}
-                    value={addType.accountNumber} >
-                </input>
-            <button 
-                type="submit"
-                onClick={handleTypeSubmit} >
-                Submit type
-            </button>
-                <button className="dialog__btn" onClick={e => typesDialog.current.close()}>Close</button>
-            </dialog> */}
 
             <h2 className="page__title"> Create New Invoice</h2>
+
+            <AddType trigger={popup} setTrigger={setPopup} />
+
             <div className="page__grid">
                 <div className="page__grid__left">
                     <picture>
@@ -295,8 +263,8 @@ export const CreateInvoice = () => {
 
                                 {/* onClick={typesDialog.current.showModal()} */}
 
-                                <div className="form__textlink form__textlink__left__small"> <span>Add new type</span> </div>
- 
+                                <div className="form__textlink form__textlink__left__small"> <span onClick={() => setPopup(true)}>Add new type</span> </div>
+                                
                             </div>
                         </fieldset>
 
