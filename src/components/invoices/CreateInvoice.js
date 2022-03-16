@@ -75,7 +75,7 @@ export const CreateInvoice = () => {
     useEffect(() => {
         getAllTypes()
             .then(setTypes)
-    }, []);
+    }, [types]);
 
     // Alphabetizes types dropdown
     useEffect(() => {
@@ -138,9 +138,7 @@ export const CreateInvoice = () => {
             </dialog>
 
             <h2 className="page__title"> Create New Invoice</h2>
-
-            <AddType trigger={popup} setTrigger={setPopup} />
-
+            
             <div className="page__grid">
                 <div className="page__grid__left">
                     <picture>
@@ -257,14 +255,8 @@ export const CreateInvoice = () => {
                                 </select>
                             </div>
                             <div  className="form__textlinks">
-                                {/* <div className="form__textlink form__textlink__left__small"> <Link to="/AddServiceProvider">Add new type</Link></div> */}
-                                {/* <div className="form__textlink form__textlink__left"> Edit </div> */}
-
-
-                                {/* onClick={typesDialog.current.showModal()} */}
-
                                 <div className="form__textlink form__textlink__left__small"> <span onClick={() => setPopup(true)}>Add new type</span> </div>
-                                
+                                <AddType trigger={popup} setTrigger={setPopup} />
                             </div>
                         </fieldset>
 

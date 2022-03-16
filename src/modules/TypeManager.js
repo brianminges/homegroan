@@ -15,7 +15,7 @@ export const getAllProviders = () => {
 }
 
 //Posts a new type 
-export const addType = (newType) => {
+export const addNewType = (newType) => {
     return fetch(`${URL}/types`, {
         method: "POST",
         headers: {
