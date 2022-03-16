@@ -13,3 +13,17 @@ export const getAllProviders = () => {
     return fetch(`${URL}/providers`)
     .then(res => res.json())
 }
+
+//Posts a new type 
+export const addType = (newType) => {
+    return fetch(`${URL}/types`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(newType)
+    }).then(res => res.json())
+}
+
+
+

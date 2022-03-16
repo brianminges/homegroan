@@ -13,17 +13,35 @@ body {
 
 /* LINKS ********************  */
 a {
-    color: white;
+    color: #1e4c92;
+    cursor: pointer;
     text-decoration: none;
 }
 
 a:visited {
     color: white;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 a:hover {
     color: black;
+    cursor: pointer;
+    text-decoration: none;
 }
+
+/* .form__textlink {
+    color: 
+    cursor: pointer;
+}
+
+.form__textlink:visited {
+    cursor: pointer;
+}
+
+.form__textlink:hover {
+    cursor: pointer;
+} */
 
 /* LAYOUT ********************  */
 fieldset {

@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import { addInvoice } from "./../../modules/InvoiceManager"
-import { getAllTypes, getAllProviders } from "./../../modules/TypeManager"
+import { getAllTypes, getAllProviders, addType } from "./../../modules/TypeManager"
 import { getAllProvidersByType } from "./../../modules/ProviderManager"
+import { AddType } from "./../types/CreateType"
 import "./CreateInvoice.css"
 import "./../HomeGroan.css"
 
@@ -11,7 +12,7 @@ export const CreateInvoice = () => {
     const sessionUserId = sessionUser.id;
 
     const navigate = useNavigate();
-
+   
     const [types, setTypes] = useState([]);
     const [sortedTypes, setSortedTypes] = useState([]);
 
@@ -62,11 +63,10 @@ export const CreateInvoice = () => {
                                             // (invoice.costTotal === "") ||
                                                 (invoice.typeId === "") ||
                                                     (invoice.providerId === "")) {
-                                                             window.alert('All fields must be filled in')
+                                                             fieldsDialog.current.showModal()
         } else {
             addInvoice(invoice)
-                .then(window.alert('Your invoice has been submitted'))
-                .then(() => navigate("/"))
+                .then(() => navigate("/invoices"))
         }
     };
 
@@ -105,11 +105,73 @@ export const CreateInvoice = () => {
         invoice.costTotal = total/100
             return total /100
     }
-
     const calculatedTotal = calcCosts()
 
+
+    // Checks to make sure a provider is selected before routing to edit form
+    const editThisInvoice = () => {
+        console.log(invoice)
+        if (invoice.providerId === "") {
+            providerDialog.current.showModal()
+        } else {
+            navigate(`/ServiceProviders/${invoice.providerId}/Edit`)
+        }
+    }
+
+//???????????????????????????????????????????????????????????????????
+    // const [type, setType] = useState({
+    //             name: "",
+    //         })
+
+    // const handleTypeInputChange = (event) => {
+    //     const newType = {...type}
+    //     let selectedVal = event.target.value
+    //     newType[event.target.id] = selectedVal
+    //     setType(newType)
+    // };
+
+    // const handleTypeSubmit = () => {
+    //     addType(type)
+    //         .then(() => navigate(-1))
+
+    // }
+ //???????????????????????????????????????????????????????????????????
+   
+
+    const providerDialog = useRef()
+    const fieldsDialog = useRef()
+    // const typesDialog = useRef()//???????????????????????????????????????????????????????????????????
+
+ 
     return (
         <>
+            <dialog className="dialog" ref={providerDialog}>
+                <div className="dialog__login">Select a provider from the menu before clicking Edit.</div>
+                <button className="dialog__btn" onClick={e => providerDialog.current.close()}>Close</button>
+            </dialog>
+
+            <dialog className="dialog" ref={fieldsDialog}>
+                <div className="dialog__login">Fill in all required fields.</div>
+                <button className="dialog__btn" onClick={e => fieldsDialog.current.close()}>Close</button>
+            </dialog>
+{/* 
+            <dialog className="dialog" ref={typesDialog}>
+                <div className="dialog__login">Add a name for your new type.</div>
+                <input 
+                    type="text"
+                    className="input__field__form"
+                    id="name"
+                    onChange={handleTypeInputChange}
+                    value={addType.accountNumber} >
+                </input>
+            <button 
+                type="submit"
+                onClick={handleTypeSubmit} >
+                Submit type
+            </button>
+                <button className="dialog__btn" onClick={e => typesDialog.current.close()}>Close</button>
+            </dialog> */}
+
             <h2 className="page__title"> Create New Invoice</h2>
             <div className="page__grid">
                 <div className="page__grid__left">
@@ -125,11 +187,12 @@ export const CreateInvoice = () => {
                     <div>
                         <form>
                         <h3>Basic information</h3>
+                        <p>*required</p>
                         <fieldset className="form__input__fieldset">
                             <label 
                                 htmlFor="title" 
                                 className="form__input__label">
-                                Title
+                                Title*
                             </label>
                             <input 
                                 type="text" 
@@ -145,7 +208,7 @@ export const CreateInvoice = () => {
                             <label 
                                 htmlFor="details"
                                 className="form__input__label">
-                                Details
+                                Details*
                             </label>
                             <textarea 
                                 className="input__field__form"
@@ -161,7 +224,7 @@ export const CreateInvoice = () => {
                                 <label
                                     htmlFor="date" 
                                     className="form__input__label">
-                                    Date
+                                    Date*
                                 </label>
                                 <input 
                                     type="date"
@@ -174,33 +237,31 @@ export const CreateInvoice = () => {
 
                             <fieldset  className="form__input__fieldset form__input__triple">
                                 <label
-                                    htmlFor="text" 
+                                    htmlFor="invoiceNumber" 
                                     className="form__input__label">
                                     Invoice number
                                 </label>
                                 <input 
                                     type="text"
                                     className="input__field__form"
-                                    id="date"
+                                    id="invoiceNumber"
                                     onChange={handleInputChange}
-                                    value={invoice.invoiceNumber}
-                                    required >
+                                    value={invoice.invoiceNumber} >
                                 </input>
                             </fieldset>
 
                             <fieldset  className="form__input__fieldset  form__input__triple">
                                 <label
-                                    htmlFor="text" 
+                                    htmlFor="accountNumber" 
                                     className="form__input__label">
                                     Account number
                                 </label>
                                 <input 
                                     type="text"
                                     className="input__field__form"
-                                    id="date"
+                                    id="accountNumber"
                                     onChange={handleInputChange}
-                                    value={invoice.accountNumber}
-                                    required >
+                                    value={invoice.accountNumber} >
                                 </input>
                             </fieldset>
                         </div>
@@ -211,7 +272,7 @@ export const CreateInvoice = () => {
                                 <label
                                     htmlFor="typeId" 
                                     className="form__input__label">
-                                    Type
+                                    Type*
                                 </label>
                                 <select  
                                     className="form__select"
@@ -228,17 +289,24 @@ export const CreateInvoice = () => {
                                 </select>
                             </div>
                             <div  className="form__textlinks">
-                                {/* <div className="form__textlink form__textlink__left"> <Link to="/AddServiceProvider">Add new type</Link></div>
-                                <div className="form__textlink form__textlink__left"> Edit </div> */}
+                                {/* <div className="form__textlink form__textlink__left__small"> <Link to="/AddServiceProvider">Add new type</Link></div> */}
+                                {/* <div className="form__textlink form__textlink__left"> Edit </div> */}
+
+
+                                {/* onClick={typesDialog.current.showModal()} */}
+
+                                <div className="form__textlink form__textlink__left__small"> <span>Add new type</span> </div>
+ 
                             </div>
                         </fieldset>
 
                         <fieldset >
                             <div className="form__input__fieldset">
                                 <label 
-                                    htmlFor="provider"
-                                    className="form__input__label">
-                                    Provider
+                                    htmlFor="providerId"
+                                    className="form__input__label wide__label"
+                                    id="provider__label">
+                                    Provider*
                                 </label>
                                 <select 
                                     className="form__select"
@@ -256,7 +324,7 @@ export const CreateInvoice = () => {
                             </div>
                             <div  className="form__textlinks">
                                 <div className="form__textlink form__textlink__left"> <Link to="/AddServiceProvider">Add new provider</Link></div>
-                                <div className="form__textlink form__textlink__left"> Edit </div>
+                                <div className="form__textlink form__textlink__left" onClick={() => editThisInvoice()}> Edit </div>
                             </div>
  
                         </fieldset>
@@ -279,12 +347,12 @@ export const CreateInvoice = () => {
                 <div className="page__grid__right">
                     <form>
                     <h3>Cost calculator</h3>
-
+                    <p> Enter 0 if no cost</p>
                         <fieldset className="form__input__fieldset__calc">
                             <label 
                                 htmlFor="costService"
                                 className="form__input__label__calc">
-                                Service fee
+                                Service fee*
                             </label>
                             <input 
                                 type="number" 
@@ -301,7 +369,7 @@ export const CreateInvoice = () => {
                             <label 
                                 htmlFor="costParts"
                                 className="form__input__label__calc">
-                                Parts
+                                Parts*
                             </label>
                             <input 
                                 type="number" 
@@ -319,7 +387,7 @@ export const CreateInvoice = () => {
                             <label 
                                 htmlFor="costLabor"
                                 className="form__input__label__calc">
-                                Labor
+                                Labor*
                             </label>
                             <input 
                                 type="number"
@@ -337,7 +405,7 @@ export const CreateInvoice = () => {
                             <label 
                                 htmlFor="costMisc"
                                 className="form__input__label__calc">
-                                Misc. 
+                                Misc.* 
                             </label>
                             <input 
                                 type="number"
@@ -355,7 +423,7 @@ export const CreateInvoice = () => {
                             <label 
                                 htmlFor="costTax"
                                 className="form__input__label__calc">
-                                Tax
+                                Tax*
                             </label>
                             <input 
                                 type="number"
@@ -373,7 +441,7 @@ export const CreateInvoice = () => {
                             <label 
                                 htmlFor="costTotal"
                                 className="form__input__label__calc">
-                                TOTAL 
+                                TOTAL* 
                             </label>
                             <input 
                                 type="number"
@@ -385,7 +453,7 @@ export const CreateInvoice = () => {
                                 // onChange={bonusFunction}
                                 // value={invoice.costTotal}
                                 value={calcCosts()}
-                                required >
+                                required readOnly>
                             </input>
                         </fieldset>
                     </form>

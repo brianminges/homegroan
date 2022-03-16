@@ -86,13 +86,20 @@ textarea {
 }
 
 
-#date {
+#date, 
+#invoiceNumber, 
+#accountNumber {
     border: 2px solid black;
     font-family: inherit;
     font-size: .9rem;
     width: 150px;
     height: 32.67px;
 }
+
+.wide__label {
+    width: 90px;
+}
+
 
 /* FORM LINKS ******************** */
 .form__textlinks {
@@ -101,30 +108,36 @@ textarea {
     justify-content: space-between;
 }
 
-/* .form__textlinks {
-    font-size: .8rem;
-
-} */
-
-.form__textlinks__div {
-    display: flex;
-    flex-direction: column;
-    
+.form__textlink__left {
+    margin-left: 90px;
+    font-weight: bold;
 }
 
-.form__textlink__left {
+.form__textlink__left__small {
     margin-left: 75px;
-    /* margin-top: 10px; */
     font-weight: bold;
 }
 
 .form__textlink__right {
-
     font-weight: bold;
 }
 
-.test {
-    display: flex;
+.form__textlink {
+    color: #1e4c92;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.form__textlink:visited {
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.form__textlink:hover {
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 /* CALCULATOR FORM LINKS ******************** */
@@ -170,3 +183,4 @@ textarea {
 .fieldset__button {
     padding-bottom: 0;
 }
+
