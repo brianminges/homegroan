@@ -20,7 +20,9 @@
 
 .page__grid__center {
     width: 1000px;
-    /* padding: 10px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .page__grid__right {
@@ -41,27 +43,26 @@ input[type=date] {
 }
 
 select {
-    border: none;
+    border: 2px solid black;
     border-radius: 5px;
     padding: 5px;
-    width: 200px;
+    width: 250px;
+    height: 32.67px;
 }
 
 textarea {
+    border: 2px solid black;
     height: 200px;
     font-family: inherit;
     font-size: inherit;
 }
- 
-#date {
-    font-family: inherit;
-    font-size: .9rem;
-}
+
 
 .form__input__fieldset {
     display: flex;
     align-items: center;
 }
+
 
 .form__input__label {
     align-items: center;
@@ -73,29 +74,71 @@ textarea {
 }
 
 .input__field__form {
-    border: none;
+    /* border: none; */
     border-radius: 5px;
     font-size: 1rem;
     padding: 5px;
     width: 85%;
 }
 
+.form__input__triple {
+    width: 150px;
+}
+
+
+#date, 
+#invoiceNumber, 
+#accountNumber {
+    border: 2px solid black;
+    font-family: inherit;
+    font-size: .9rem;
+    width: 150px;
+    height: 32.67px;
+}
+
+.wide__label {
+    width: 90px;
+}
+
+
 /* FORM LINKS ******************** */
 .form__textlinks {
     display: flex;
+    font-size: .8rem;
     justify-content: space-between;
 }
 
-.form__textlinks {
-    font-size: .8rem;
-    margin-top: -5px;
-    width: 275px;
+.form__textlink__left {
+    margin-left: 90px;
+    font-weight: bold;
 }
 
-.form__textlink__left {
+.form__textlink__right {
     margin-left: 75px;
-    margin-top: 3px;
     font-weight: bold;
+}
+
+.form__textlink__left__type {
+    margin-left: 75px;
+    font-weight: bold;
+}
+
+.form__textlink {
+    color: #1e4c92;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.form__textlink:visited {
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.form__textlink:hover {
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 /* CALCULATOR FORM LINKS ******************** */
@@ -114,21 +157,31 @@ textarea {
     padding: 5px;
     margin-top: 3px;
     text-align: right;
+    height: 32.67px;
+    font-weight: bold;
 }
  
 /* BUTTONS ******************** */
 .invoice__btn {
-    background-color: white;
+    background-color: #1e4c92;
     border-radius: 25px;
+    box-shadow: 5px 5px 20px white;
+    color: white;
     display: block;
     margin-left: auto;
     margin-right: auto;
     padding: .2rem;
-    width: 400px;
+    width: 200px;
 }
 
 .invoice__btn:hover {
-    background-color: #1e4c92;
-    box-shadow: 5px 5px 20px white;
-    color: white;
+    background-color: lightgray;
+    box-shadow: 5px 5px 20px #1e4c92;
+    color: #1e4c92;
+    font-weight: bold;
 }
+
+.fieldset__button {
+    padding-bottom: 0;
+}
+

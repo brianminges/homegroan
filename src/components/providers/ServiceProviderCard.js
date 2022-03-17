@@ -15,7 +15,8 @@ export const ServiceProviderCard = ({ provider, handleDeleteProvider }) => {
                     <h3>{provider.name}</h3>
                     <p>{provider.address}</p>
                     <p>{provider.city}, {provider.state} {provider.zip}</p>
-                    <p>{provider.phone}</p>
+                    <p>Office: {provider.officePhone}</p> <p>Cell: {provider.officePhone}</p>
+                    <p><a href={`http://www.${provider.website}`} target="_blank" rel="noopener noreferrer">Website</a></p>
                     <p><a href={`mailto:${provider.emailaddress}`}>{provider.emailaddress}</a></p>
                     <p><a href={`http://www.twitter.com/${provider.twitter}`} target="_blank" rel="noopener noreferrer">{provider.twitter}</a></p>
                     <p><a href={`http://www.facebook.com${provider.facebook}`} target="_blank" rel="noopener noreferrer">FB profile</a></p>

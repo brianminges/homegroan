@@ -1,24 +1,22 @@
-
 .form__inputs {
     display: flex;
     justify-content: space-between;
+    width: 814.6px;
 }
 
-#city, 
-#state, 
-#zip {
-    width: 25%;
-}
-
-/* .form__input__fieldset {
-    display: flex;
+/* .form__input__label {
     align-items: center;
+    display: inline-block;
+    font-weight: bold;
+    margin-right: 0px;
+    text-align: left;
+    width: 75px;
 } */
 
-.label__input__align {
+/* .label__input__align {
     display: flex;
 
-}
+} */
 
 .subhed__hr {
     border: 1px ridge white;
@@ -26,4 +24,49 @@
     width: 500px;
     margin-left: auto;
     margin-right: auto;
+}
+
+#label__city {
+    width: 75px;
+}
+
+#city {
+    border: 2px solid black;
+    height: 32.67px;
+    width: 400px;
+}
+
+#state {
+    border: 2px solid black;
+    height: 32.67px;
+    width: 65px;
+}
+
+#emailaddress,
+#website {
+    width: 300px;
+}
+
+#zip {
+    width: 100px;
+}
+
+#label__state,
+#label__email,
+#label__cellPhone {
+    padding-right: 15px;
+    text-align: right;
+}
+
+
+
+
+
+
+
+
+
+
+.provider__contact {
+    width: 125px;
 }

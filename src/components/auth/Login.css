@@ -1,6 +1,7 @@
 .dialog {
     background-color: #1e4c92;
-    border-radius: 25px;
+    
+    border-radius: 10px;
     color: white;
     font-weight: bold;
     margin-left: auto;
@@ -8,7 +9,8 @@
     margin-top: auto;
     margin-bottom: auto;
     padding: 1rem;
-    width: 270px;
+    /* width: 270px;
+    height: 270px; */
 }
 
 .dialog__login {
@@ -17,6 +19,21 @@
 
 .dialog__btn {
     background-color: white;
+    /* box-shadow: 3px 3px 5px white; */
+    border-radius: 25px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    padding: .2rem;
+    width: 100px;
+}
+
+.dialog__btn:hover {
+    background-color: lightgray;
+    color: #1e4c92;
+    font-weight: bold;
+    /* box-shadow: 3px 3px 5px white; */
     border-radius: 25px;
     display: block;
     margin-left: auto;
@@ -37,7 +54,7 @@ input[id=email] {
     text-align: center;
 }
 
-#house1 {
+/* #house1 {
 
 }
 
@@ -53,4 +70,4 @@ input[id=email] {
 #badbackground {
     background: blue;
     animation: home 10s infinite ease;
-}
+} */

@@ -38,9 +38,9 @@ export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
             } />
 
             <Route exact path="/CreateInvoice" element={
-                <PrivateRoute>
+                // <PrivateRoute>
                     <CreateInvoice />
-                </PrivateRoute>
+                // </PrivateRoute>
             } />
             <Route exact path="/Invoices" element={
                 <PrivateRoute>
