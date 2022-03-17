@@ -3,8 +3,8 @@ import React from "react"
 const URL = "http://localhost:8088"
 
 // Gets all types of services
-export const getAllTypes = () => {
-    return fetch(`${URL}/types`)
+export const getAllTypes = (sessionUserId) => {
+    return fetch(`${URL}/types/?userId=${sessionUserId}`)
     .then(res => res.json())
 }
 
@@ -25,5 +25,10 @@ export const addNewType = (newType) => {
     }).then(res => res.json())
 }
 
-
-
+// Deletes type from database
+export const deleteType = (id) => {
+    return fetch(`${URL}/types/${id}`, {
+        method: "DELETE"
+    }).then(res => res.json())
+}
+ 

@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useRef } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import { addInvoice } from "./../../modules/InvoiceManager"
-import { getAllTypes, getAllProviders, addType } from "./../../modules/TypeManager"
+import { getAllTypes } from "./../../modules/TypeManager"
 import { getAllProvidersByType } from "./../../modules/ProviderManager"
 import { AddType } from "./../types/CreateType"
+import { EditType } from "./../types/EditType"
 import "./CreateInvoice.css"
 import "./../HomeGroan.css"
+import { type } from "@testing-library/user-event/dist/type"
 
 export const CreateInvoice = () => {
+    //Gets logged-in user info 
     const sessionUser = JSON.parse(window.sessionStorage.getItem("homegroan_user"))
     const sessionUserId = sessionUser.id;
 
@@ -17,7 +20,7 @@ export const CreateInvoice = () => {
     const [sortedTypes, setSortedTypes] = useState([]);
 
     const [providers, setProviders] = useState([]);
-    const [sortedProviders, setSortedProviders] = useState({});
+    const [sortedProviders, setSortedProviders] = useState([]);
 
     const [invoice, setInvoice] = useState({
         userId: sessionUserId,
@@ -37,6 +40,7 @@ export const CreateInvoice = () => {
         timestamp: new Date().toLocaleString()
     });
 
+    //Stores input values then sets them in state then runs cost calculator
     const handleInputChange = (event) => {
         const newInvoice = {...invoice}
         let selectedVal = event.target.value
@@ -52,18 +56,17 @@ export const CreateInvoice = () => {
     const handleSubmit = (event) => {
         event.preventDefault()
         if ((invoice.title === "") || 
-                (invoice.details === "") || 
-                    (invoice.date === "") || 
-                        (invoice.costService === "") || 
-                            (invoice.costParts === "") ||
-                                (invoice.costLabor === "") ||
-                                    (invoice.costMisc === "") ||
-                                        (invoice.costTax === "") ||
-                                            (calculatedTotal === null) ||
-                                            // (invoice.costTotal === "") ||
-                                                (invoice.typeId === "") ||
-                                                    (invoice.providerId === "")) {
-                                                             fieldsDialog.current.showModal()
+            (invoice.details === "") || 
+            (invoice.date === "") || 
+            (invoice.costService === "") || 
+            (invoice.costParts === "") ||
+            (invoice.costLabor === "") ||
+            (invoice.costMisc === "") ||
+            (invoice.costTax === "") ||
+            (calculatedTotal === null) ||
+            (invoice.typeId === "") ||
+            (invoice.providerId === "")) {
+                fieldsDialog.current.showModal()
         } else {
             addInvoice(invoice)
                 .then(() => navigate("/invoices"))
@@ -73,9 +76,9 @@ export const CreateInvoice = () => {
      
     // Sets types dropdown on load
     useEffect(() => {
-        getAllTypes()
+        getAllTypes(sessionUserId)
             .then(setTypes)
-    }, [types]);
+    }, []);
 
     // Alphabetizes types dropdown
     useEffect(() => {
@@ -118,8 +121,25 @@ export const CreateInvoice = () => {
         }
     }
 
+
+    const editThisType = () => {
+        console.log(invoice)
+        if (invoice.typeId === "") {
+            providerDialog.current.showModal()
+        } else {
+            console.log(invoice)
+            setEditTypePopup(true)
+        }
+    }
+
     
-    const [popup, setPopup] = useState(false)
+ 
+
+    //Sets state of 'Add new type' popup to false on load
+    const [typePopup, setTypePopup] = useState(false)
+
+    //Sets state of 'Edit new type' popup to false on load
+    const [editTypePopup, setEditTypePopup] = useState(false)
 
 
     const providerDialog = useRef()
@@ -128,7 +148,7 @@ export const CreateInvoice = () => {
     return (
         <>
             <dialog className="dialog" ref={providerDialog}>
-                <div className="dialog__login">Select a provider from the menu before clicking Edit.</div>
+                <div className="dialog__login">Select from the menu before clicking Edit.</div>
                 <button className="dialog__btn" onClick={e => providerDialog.current.close()}>Close</button>
             </dialog>
 
@@ -138,7 +158,6 @@ export const CreateInvoice = () => {
             </dialog>
 
             <h2 className="page__title"> Create New Invoice</h2>
-            
             <div className="page__grid">
                 <div className="page__grid__left">
                     <picture>
@@ -216,7 +235,7 @@ export const CreateInvoice = () => {
                                 </input>
                             </fieldset>
 
-                            <fieldset  className="form__input__fieldset  form__input__triple">
+                            <fieldset  className="form__input__fieldset form__input__triple">
                                 <label
                                     htmlFor="accountNumber" 
                                     className="form__input__label">
@@ -255,8 +274,11 @@ export const CreateInvoice = () => {
                                 </select>
                             </div>
                             <div  className="form__textlinks">
-                                <div className="form__textlink form__textlink__left__small"> <span onClick={() => setPopup(true)}>Add new type</span> </div>
-                                <AddType trigger={popup} setTrigger={setPopup} />
+                                <div className="form__textlink form__textlink__left__type"> <span onClick={() => setTypePopup(true)}>Add new type</span> </div>
+                                <div className="form__textlink form__textlink__right"> <span onClick={() => editThisType()}>Edit</span> </div>
+
+                                <AddType types={types} setTypes={setTypes} typeTrigger={typePopup} setTypeTrigger={setTypePopup} />
+                                <EditType invoice={invoice} types={types} setTypes={setTypes} editTypePopup={editTypePopup} setEditTypePopup={setEditTypePopup} />
                             </div>
                         </fieldset>
 
@@ -284,7 +306,7 @@ export const CreateInvoice = () => {
                             </div>
                             <div  className="form__textlinks">
                                 <div className="form__textlink form__textlink__left"> <Link to="/AddServiceProvider">Add new provider</Link></div>
-                                <div className="form__textlink form__textlink__left" onClick={() => editThisInvoice()}> Edit </div>
+                                <div className="form__textlink form__textlink__right" onClick={() => editThisInvoice()}> Edit </div>
                             </div>
  
                         </fieldset>
@@ -410,8 +432,6 @@ export const CreateInvoice = () => {
                                 id="costTotal" 
                                 placeholder="$0.00" 
                                 onChange={handleInputChange}
-                                // onChange={bonusFunction}
-                                // value={invoice.costTotal}
                                 value={calcCosts()}
                                 required readOnly>
                             </input>

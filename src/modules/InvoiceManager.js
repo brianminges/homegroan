@@ -4,7 +4,7 @@ const URL = "http://localhost:8088"
 
 // Gets all invoices
 export const getAllInvoices = (sessionUserId) => { 
-    return fetch(`${URL}/invoices/?userId=${sessionUserId}&_expand=provider`)
+    return fetch(`${URL}/invoices/?userId=${sessionUserId}&_expand=provider&_expand=type`)
     .then(res => res.json())
 }
 

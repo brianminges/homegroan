@@ -25,8 +25,10 @@ export const AddServiceProvider = () => {
         state: "",
         zip: "",
         typeId: "",
-        phone: "",
+        officePhone: "",
+        cellPhone: "",
         emailaddress: "",
+        website: "",
         twitter: "",
         facebook: "",
         timestamp: new Date().toLocaleString()
@@ -40,7 +42,7 @@ export const AddServiceProvider = () => {
 
     // Sets types dropdown on load
     useEffect(() => {
-        getAllTypes()
+        getAllTypes(sessionUserId)
             .then(setTypes)
     }, []);
 
@@ -76,7 +78,7 @@ export const AddServiceProvider = () => {
     return (
         <>
             <h2 className="page__title"> Add Service Provider</h2>
-            <div className="page__grid">
+                        <div className="page__grid">
                 <div className="page__grid__left">
                     <picture>
                         <img 
@@ -89,12 +91,12 @@ export const AddServiceProvider = () => {
                 <div className="page__grid__center">
                     <form>
                         <h3>Basic information</h3>
-
+                        <p>*required</p>
                         <fieldset className="form__input__fieldset">
                             <label 
                                 htmlFor="name" 
                                 className="form__input__label">
-                                Name
+                                Name*
                             </label>
                             <input 
                                 type="text" 
@@ -102,7 +104,7 @@ export const AddServiceProvider = () => {
                                 id="name" 
                                 onChange={handleInputChange} 
                                 value={provider.name}
-                                required >
+                                required autoFocus>
                             </input>
                         </fieldset>
 
@@ -122,10 +124,11 @@ export const AddServiceProvider = () => {
                         </fieldset>
 
                         <div className="form__inputs">
-                            <fieldset  className="form__input__fieldset">
+                            <fieldset className="form__input__fieldset">
                                 <label
                                     htmlFor="city" 
-                                    className="form__input__label">
+                                    className="form__input__label"
+                                    id="label__city">
                                     City
                                 </label>
                                 <input 
@@ -141,7 +144,8 @@ export const AddServiceProvider = () => {
                             <fieldset className="form__input__fieldset">
                                 <label 
                                     htmlFor="state"
-                                    className="form__input__label">
+                                    className="form__input__label"
+                                    id="label__state">
                                     State
                                 </label>
                                 <select 
@@ -151,7 +155,7 @@ export const AddServiceProvider = () => {
                                     value={provider.state}
                                     name="state"
                                     required >
-                                    <option value="0">Please select ... </option>
+                                    <option value="0"></option>
                                     {states.map(
                                         state => (
                                                 <option key={state.id} value={state.abbreviation}>{state.abbreviation}</option>
@@ -159,10 +163,11 @@ export const AddServiceProvider = () => {
                                 </select>
                             </fieldset>
 
-                            <fieldset className="form__input__fieldset">
+                            <fieldset className="form__input__fieldset ">
                                 <label
                                     htmlFor="zip" 
-                                    className="form__input__label">
+                                    className="form__input__label"
+                                    id="label__zip">
                                     ZIP code
                                 </label>
                                 <input 
@@ -179,8 +184,8 @@ export const AddServiceProvider = () => {
                         <fieldset className="form__input__fieldset">
                             <label
                                 htmlFor="typeId" 
-                                className="form__input__label">
-                                Type
+                                className="form__input__label" >
+                                Type*
                             </label>
                             <select  
                                 className="form__select"
@@ -201,106 +206,120 @@ export const AddServiceProvider = () => {
 
                         <h3>Contact information</h3>
                         <div className="form__inputs">
-                            <fieldset>
-                                <div className="label__input__align form__input__fieldset">
-                                    <div>
-                                        <label 
-                                            htmlFor="phone" 
-                                            className="form__input__label">
-                                            Phone
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <input 
-                                            type="text" 
-                                            className="input__field__form" 
-                                            id="phone" 
-                                            onChange={handleInputChange} 
-                                            value={provider.phone} 
-                                            placeholder="555-555-5555">
-                                        </input>
-                                    </div>
-                                </div>
+                            <fieldset className="form__input__fieldset">
+                                <label 
+                                    htmlFor="officePhone" 
+                                    className="form__input__label"
+                                    id="label__officePhone">
+                                    Office 
+                                </label>
+                                <input 
+                                    type="text" 
+                                    className="input__field__form provider__contact" 
+                                    id="officePhone" 
+                                    onChange={handleInputChange} 
+                                    value={provider.officePhone} 
+                                    placeholder="555-555-5555">
+                                </input>
                             </fieldset>
 
-                            <fieldset>
-                                <div className="label__input__align form__input__fieldset">
-                                    <div>
-                                        <label 
-                                            htmlFor="emailaddress" 
-                                            className="form__input__label">
-                                            Email
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <input 
-                                            type="email" 
-                                            className="input__field__form" 
-                                            id="emailaddress" 
-                                            onChange={handleInputChange} 
-                                            value={provider.email} 
-                                            placeholder="example@email.com">
-                                        </input>
-                                    </div>
-                                </div>
+                            <fieldset className="form__input__fieldset">
+                                <label 
+                                    htmlFor="cellPhone" 
+                                    className="form__input__label"
+                                    id="label__cellPhone">
+                                    Cellular
+                                </label>
+                                <input 
+                                    type="text" 
+                                    className="input__field__form provider__contact" 
+                                    id="cellPhone" 
+                                    onChange={handleInputChange} 
+                                    value={provider.cellPhone} 
+                                    placeholder="555-555-5555">
+                                </input>
+                            </fieldset>
+
+                            <fieldset className="form__input__fieldset">
+                                <label 
+                                    htmlFor="emailaddress" 
+                                    className="form__input__label"
+                                    id="label__email">
+                                    Email
+                                </label>
+                                <input 
+                                    type="email" 
+                                    className="input__field__form" 
+                                    id="emailaddress" 
+                                    onChange={handleInputChange} 
+                                    value={provider.email} 
+                                    placeholder="email@email.com">
+                                </input>
                             </fieldset>
                         </div>
+
                         <div className="form__inputs">
-                            <fieldset>
-                                <div className="label__input__align form__input__fieldset">
-                                    <div>
-                                        <label 
-                                            htmlFor="twitter" 
-                                            className="form__input__label">
-                                            Twitter
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <input 
-                                            type="text" 
-                                            className="input__field__form" 
-                                            id="twitter" 
-                                            onChange={handleInputChange} 
-                                            value={provider.twitter} 
-                                            placeholder="@handle">
-                                        </input>
-                                    </div>
-                                </div>
+                            <fieldset className="form__input__fieldset form">
+                                <label 
+                                    htmlFor="twitter" 
+                                    className="form__input__label">
+                                    Twitter
+                                </label>
+                                <input 
+                                    type="text" 
+                                    className="input__field__form provider__contact" 
+                                    id="twitter" 
+                                    onChange={handleInputChange} 
+                                    value={provider.twitter} 
+                                    placeholder="@twitter">
+                                </input>
                             </fieldset>
 
-                            <fieldset>
-                                <div className="label__input__align">
-                                    <div>
-                                        <label 
-                                            htmlFor="facebook" 
-                                            className="form__input__label form__input__fieldset">
-                                            Facebook
-                                        </label>
-                                        </div>
-                                        <div>
-                                        <input 
-                                            type="url" 
-                                            className="input__field__form" 
-                                            id="facebook" 
-                                            onChange={handleInputChange} 
-                                            value={provider.facebook} 
-                                            placeholder="/profile">
-                                        </input>
-                                    </div>
-                                </div>
+                            <fieldset className="form__input__fieldset form">
+                                <label 
+                                    htmlFor="facebook" 
+                                    className="form__input__label">
+                                    Facebook
+                                </label>
+                                <input 
+                                    type="url" 
+                                    className="input__field__form provider__contact" 
+                                    id="facebook" 
+                                    onChange={handleInputChange} 
+                                    value={provider.facebook} 
+                                    placeholder="/facebook">
+                                </input>
+                            </fieldset>
+
+                            <fieldset className="form__input__fieldset form">
+                                <label 
+                                    htmlFor="website" 
+                                    className="form__input__label">
+                                    Web site
+                                </label>
+                                <input 
+                                    type="url" 
+                                    className="input__field__form" 
+                                    id="website" 
+                                    onChange={handleInputChange} 
+                                    value={provider.website} 
+                                    placeholder="Website.com">
+                                </input>
                             </fieldset>
                         </div>
+                        </form>
 
-                        <fieldset>
-                            <button 
-                                type="submit"
-                                className="invoice__btn" 
-                                onClick={ handleSubmit} >
-                                Add new provider
-                            </button>
-                        </fieldset>
-                    </form>
-                </div>
+                        <div>
+                            <fieldset className="fieldset__button">
+                                <button 
+                                    type="submit"
+                                    className="invoice__btn"
+                                    onClick={handleSubmit} >
+                                    Submit invoice
+                                </button>
+                            </fieldset>
+                        </div>
+                    </div>
 
                 <div className="page__grid__right">
                     <h3>Other providers</h3>

@@ -113,12 +113,13 @@ textarea {
     font-weight: bold;
 }
 
-.form__textlink__left__small {
+.form__textlink__right {
     margin-left: 75px;
     font-weight: bold;
 }
 
-.form__textlink__right {
+.form__textlink__left__type {
+    margin-left: 75px;
     font-weight: bold;
 }
 
