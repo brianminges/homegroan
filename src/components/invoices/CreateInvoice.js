@@ -7,7 +7,6 @@ import { AddType } from "./../types/CreateType"
 import { EditType } from "./../types/EditType"
 import "./CreateInvoice.css"
 import "./../HomeGroan.css"
-import { type } from "@testing-library/user-event/dist/type"
 
 export const CreateInvoice = () => {
     //Gets logged-in user info 
@@ -83,7 +82,7 @@ export const CreateInvoice = () => {
     // Alphabetizes types dropdown
     useEffect(() => {
         if (types.length > 0) {
-            const tempTypes = types.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1)
+            const tempTypes = types.sort((a,b) => (a.name?.toLowerCase() > b.name?.toLowerCase()) ? 1 : -1)
             setSortedTypes(tempTypes)}
     }, [types])
 
@@ -97,7 +96,7 @@ export const CreateInvoice = () => {
     // Alphabetizes providers dropdown 
     useEffect(() => {
         if (providers.length > 0) {
-            const tempProviders = providers.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1)
+            const tempProviders = providers.sort((a,b) => (a.name?.toLowerCase() > b.name?.toLowerCase()) ? 1 : -1)
             setSortedProviders(tempProviders)}
     }, [providers])
 
@@ -113,7 +112,6 @@ export const CreateInvoice = () => {
 
     // Checks to make sure a provider is selected before routing to edit form
     const editThisInvoice = () => {
-        console.log(invoice)
         if (invoice.providerId === "") {
             providerDialog.current.showModal()
         } else {
@@ -123,11 +121,9 @@ export const CreateInvoice = () => {
 
 
     const editThisType = () => {
-        console.log(invoice)
         if (invoice.typeId === "") {
             providerDialog.current.showModal()
         } else {
-            console.log(invoice)
             setEditTypePopup(true)
         }
     }
@@ -320,7 +316,7 @@ export const CreateInvoice = () => {
                                 type="submit"
                                 className="invoice__btn"
                                 onClick={handleSubmit} >
-                                Submit invoice
+                                Submit 
                             </button>
                         </fieldset>
                     </div>

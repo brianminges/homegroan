@@ -31,7 +31,7 @@ export const ServiceProviderList = () => {
     //Sorts list alphabetically
     useEffect(() => {
         if (providers.length > 0) {
-            const tempProviders = providers.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1)
+            const tempProviders = providers.sort((a,b) => (a.name?.toLowerCase() > b.name?.toLowerCase()) ? 1 : -1)
             setSortedProviders(tempProviders)}
     }, [providers])
 
