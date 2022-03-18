@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { getAllStates, addProvider } from "./../../modules/ProviderManager"
+import { getAllStates, addProvider, getAllProviders } from "./../../modules/ProviderManager"
 import { getAllTypes } from "./../../modules/TypeManager"
+import { RecentProviders } from "./RecentProviders"
+
 // import './../invoices/CreateInvoice.css'
 import './AddServiceProvider.css'
 import "./../HomeGroan.css"
@@ -33,6 +35,41 @@ export const AddServiceProvider = () => {
         facebook: "",
         timestamp: new Date().toLocaleString()
     })
+
+
+// *****************************************************************************
+    const [providers, setProviders] = useState([]);
+    const [sortedProviders, setSortedProviders] = useState([]);
+
+
+    // Fetches all providers and sets in state
+    const getProviders = () => {
+        return getAllProviders(sessionUserId).then(dataFromAPI => {
+            setProviders(dataFromAPI)
+        });
+    };
+
+    useEffect(() => {
+        getProviders()
+    }, [])
+
+    useEffect(() => {
+        if (providers.length > 0) {
+            const tempProviders = providers.sort((a,b) => (a.date?.toLowerCase() > b.date?.toLowerCase()) ? 1 : -1)
+            setSortedProviders(tempProviders)}
+    }, [providers])
+
+// *****************************************************************************
+
+
+
+
+
+
+
+
+
+
 
     // Sets states dropdown on load
     useEffect(() => {
@@ -315,14 +352,20 @@ export const AddServiceProvider = () => {
                                     type="submit"
                                     className="invoice__btn"
                                     onClick={handleSubmit} >
-                                    Submit invoice
+                                    Submit
                                 </button>
                             </fieldset>
                         </div>
                     </div>
 
                 <div className="page__grid__right">
-                    <h3>Other providers</h3>
+                    <h3>Recently added</h3>
+                    {providers.slice(0,5).map(provider =>
+                    <RecentProviders 
+                    key={provider.id}
+                    provider={provider}/>
+                    )}
+
                 </div>
             </div>
         </>
