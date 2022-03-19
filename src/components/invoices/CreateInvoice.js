@@ -21,6 +21,8 @@ export const CreateInvoice = () => {
     const [providers, setProviders] = useState([]);
     const [sortedProviders, setSortedProviders] = useState([]);
 
+    const [typeObject, setTypeObject] = useState("");
+
     const [invoice, setInvoice] = useState({
         userId: sessionUserId,
         title: "",
@@ -46,6 +48,12 @@ export const CreateInvoice = () => {
         //Checks for strings that need to be stored as integers
         if (event.target.id.includes("Id") || (event.target.id.includes("cost")) ) {
             selectedVal = parseFloat(selectedVal) }
+        if (event.target.id.includes("type")) {
+            const selectedType = types.filter((type) => {
+                return type.id === parseInt(selectedVal)
+            })
+            setTypeObject(selectedType[0])
+        }
         newInvoice[event.target.id] = selectedVal
         setInvoice(newInvoice)
         calcCosts()
@@ -119,7 +127,7 @@ export const CreateInvoice = () => {
         }
     }
 
-
+    // Checks to make sure a type is selected before routing to edit popup
     const editThisType = () => {
         if (invoice.typeId === "") {
             providerDialog.current.showModal()
@@ -277,7 +285,7 @@ export const CreateInvoice = () => {
                                 <div className="form__textlink form__textlink__right"> <span onClick={() => editThisType()}>Edit</span> </div>
 
                                 <AddType types={types} setTypes={setTypes} typeTrigger={typePopup} setTypeTrigger={setTypePopup} handleInputChange={handleInputChange}/>
-                                <EditType invoice={invoice} types={types} setTypes={setTypes} editTypePopup={editTypePopup} setEditTypePopup={setEditTypePopup} />
+                                <EditType invoice={invoice} type={typeObject} setTypes={setTypes} editTypePopup={editTypePopup} setEditTypePopup={setEditTypePopup} />
                             </div>
                         </fieldset>
 

@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
-import {getAllTypes, deleteType } from "./../../modules/TypeManager"
+import { useParams } from "react-router-dom";
+import {getAllTypes, deleteType, editType } from "./../../modules/TypeManager"
 import "./EditType.css"
 
-export const EditType = ({invoice, types, setTypes, editTypePopup, setEditTypePopup}) => {
+export const EditType = ({invoice, type, setTypes, editTypePopup, setEditTypePopup}) => {
     //Gets logged-in user info 
     const sessionUser = JSON.parse(window.sessionStorage.getItem("homegroan_user"))
     const sessionUserId = sessionUser.id;
 
-    const [editedType, setEditedType] = useState([]);
+    const [editedType, setEditedType] = useState({...type});
+
+    const{typeId} = useParams()
 
     // const [sortedTypes, setSortedTypes] = useState([]);
 
@@ -27,13 +30,20 @@ export const EditType = ({invoice, types, setTypes, editTypePopup, setEditTypePo
 
 
     //Executes the delete function and re-renders page
-    const handleDeleteType = (id) => {
-        deleteType(id)
+    const handleDeleteType = (e) => {
+        e.preventDefault()
+        deleteType(type.id)
         .then(() => getAllTypes(sessionUserId).then(setTypes));
     };
 
+    const handleEditType = (e) => {
+        e.preventDefault()
+        editType(editedType)
+        .then(() => getAllTypes(sessionUserId).then(setTypes));
+    }
+
     const handleInputChange = (event) => {
-        const newTypes = {...editedType}
+        const newTypes = {...type}
         let selectedVal = event.target.value
         //Need to check for empty string
  
@@ -49,15 +59,16 @@ export const EditType = ({invoice, types, setTypes, editTypePopup, setEditTypePo
                 <input 
                     type="text"
                     className="input__field__form overlay__input"
-                    id="typeId"
+                    id="name"
                     onChange={handleInputChange} 
-                    value={invoice.typeId}
+                    value={editedType.name}
+                    defaultValue={type.name}
                     autoFocus>
                 </input>
                 <div className="type__btns">
-                    <button className="type__delete__btn" onClick={() => handleDeleteType()}>Delete type</button>
+                    <button className="type__delete__btn" onClick={(e) => handleDeleteType(e)}>Delete</button>
                     <button className="type__cancel__btn" onClick={() => setEditTypePopup(false)}>Cancel</button> 
-                    <button className="type__edit__btn" >Save edit</button>
+                    <button className="type__edit__btn" onClick={(e) => handleEditType(e)}>Save</button>
                     
             </div>
             </div>
