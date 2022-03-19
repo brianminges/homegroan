@@ -60,7 +60,12 @@
 
 
 
-
+.form__textlinks__provider {
+    display: flex;
+    font-size: .8rem;
+    justify-content: space-between;
+    width: 325px;
+}
 
 
 
