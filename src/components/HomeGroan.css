@@ -98,6 +98,15 @@ fieldset {
     margin-top: 4%;
 }
 
+.main__image:hover {
+    display: block;
+    height: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4%;
+
+}
+
 /* HEADINGS ********************  */
 .main__hed {
     color: #1e4c92;
@@ -148,4 +157,7 @@ h3 {
     margin-right: auto;
     margin-top: 40px;
 }
+ 
+
+
  

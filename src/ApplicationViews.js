@@ -67,7 +67,7 @@ export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
             <Route exact path="/ServiceProviders/:providerId" element={
                 <PrivateRoute>
                     <ServiceProviderDetail />
-                </PrivateRoute>
+                </PrivateRoute>  
             } />
             <Route exact path="/AddServiceProvider" element={
                 <PrivateRoute>

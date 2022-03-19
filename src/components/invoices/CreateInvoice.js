@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react"
 import { useNavigate, Link } from "react-router-dom"
-import { addInvoice } from "./../../modules/InvoiceManager"
+import { addInvoice, getAllInvoices } from "./../../modules/InvoiceManager"
 import { getAllTypes } from "./../../modules/TypeManager"
 import { getAllProvidersByType } from "./../../modules/ProviderManager"
 import { AddType } from "./../types/CreateType"
@@ -140,6 +140,9 @@ export const CreateInvoice = () => {
 
     const providerDialog = useRef()
     const fieldsDialog = useRef()
+
+   
+
  
     return (
         <>
@@ -273,7 +276,7 @@ export const CreateInvoice = () => {
                                 <div className="form__textlink form__textlink__left__type"> <span onClick={() => setTypePopup(true)}>Add new type</span> </div>
                                 <div className="form__textlink form__textlink__right"> <span onClick={() => editThisType()}>Edit</span> </div>
 
-                                <AddType types={types} setTypes={setTypes} typeTrigger={typePopup} setTypeTrigger={setTypePopup} />
+                                <AddType types={types} setTypes={setTypes} typeTrigger={typePopup} setTypeTrigger={setTypePopup} handleInputChange={handleInputChange}/>
                                 <EditType invoice={invoice} types={types} setTypes={setTypes} editTypePopup={editTypePopup} setEditTypePopup={setEditTypePopup} />
                             </div>
                         </fieldset>
