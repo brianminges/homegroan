@@ -32,3 +32,13 @@ export const deleteType = (id) => {
     }).then(res => res.json())
 }
  
+// Edits types in database
+export const editType = (editedType) => {
+    return fetch(`${URL}/types/${editedType.id}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(editedType)
+    }).then(res => res.json())
+}
