@@ -1,14 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { getProviderById, deleteProvider, getAllProviders } from "./../../modules/ProviderManager"
+import { getAllInvoices } from "./../../modules/InvoiceManager"
 import "./ServiceProviderDetail.css"
 
 export const ServiceProviderDetail = () => {
-  
+  //Gets logged-in user info
+  const sessionUser = JSON.parse(window.sessionStorage.getItem("homegroan_user"))
+  const sessionUserId = sessionUser.id
   const navigate = useNavigate();
 
-  const [provider, setProvider] = useState({ id: null, name: "", address: "" });
 
+  const [invoices, setInvoices] = useState([])
+
+  //Fetches invoices on page load and sets to hook 
+  const getInvoices = () => {
+    return getAllInvoices(sessionUserId).then(dataFromAPI => {
+        setInvoices(dataFromAPI)
+    });
+  };
+
+  useEffect(() => {
+      getInvoices()
+  }, []);
+
+  
+
+
+  
+  
+
+  //Fetches providers on page load and sets to hook 
+  const [provider, setProvider] = useState({ id: null, name: "", address: "" });
   const {providerId} = useParams();
 
   useEffect(() => {
@@ -19,8 +42,12 @@ export const ServiceProviderDetail = () => {
   }, [providerId]);
 
 
+
+
+
+
   const changeDateFormat = (inputDate) => {
-    var date = new Date(inputDate);
+    let date = new Date(inputDate);
     
     return date.toLocaleString('en-US', {
         weekday: 'long', // long, short, narrow
@@ -31,25 +58,86 @@ export const ServiceProviderDetail = () => {
         minute: 'numeric', // numeric, 2-digit
         // second: 'numeric', // numeric, 2-digit
     });
-     
   }
 
-  //Deletes selected user from database
-  // const sessionUser = JSON.parse(window.sessionStorage.getItem("homegroan_user"))
-  // const sessionUserId = sessionUser.id
 
-  // const [providers, setProviders] = useState([]);
 
-  // const handleDeleteProvider = (id) => {
-  //   deleteProvider(id)
-  //   .then(() => getAllProviders(sessionUserId).then(setProviders))
-  //   .then(navigate(-1));
-  // };
+ 
+
+  //Gets current year
+  const currentDate = new Date()
+  const currentYear = currentDate.getFullYear()
+
+
+  const getInvoiceYear = (inputDate) => {
+    let date = new Date(inputDate);
+    
+    return date.toLocaleString('en-US', {
+      year: 'numeric', // numeric, 2-digit
+    });
+  }
+
+  useEffect(() => {
+    const invoiceYear = getInvoiceYear(invoices.date)
+    console.log(invoiceYear)
+  }, [invoices])
+  
+
+  const arrayOfParts = []
+  // useEffect(() => {
+  //     invoices.forEach(invoice => {
+  //       if (currentYear == invoiceYear) {
+  //         arrayOfParts.push(invoice)
+  //         console.log(arrayOfParts)
+  //       }
+        
+  // })}, [invoices]);
+
+  // useEffect(() => {
+  //   let sum = 0
+  //   for (let i = 0; i < arrayOfParts.length; i++) {
+  //     sum += arrayOfParts[i]}
+  //     console.log('sum', sum)
+  // }, [arrayOfParts])
+
+  useEffect(() => {
+    calcTotalOfArray()
+    // console.log('sum in useEffect', sum)
+  }, [arrayOfParts])
+
+
+  let sum = 0
+  const calcTotalOfArray = () => {
+    for (let i = 0; i < arrayOfParts.length; i++) {
+      sum += arrayOfParts[i]}
+    // console.log('sum in calcTotalOfArray', sum)
+  }
+
+
+
+
+  const getYear = (inputDate) => {
+    let date = new Date(inputDate);
+    
+    return date.toLocaleString('en-US', {
+        hour: 'numeric', // numeric, 2-digit
+    });
+  }
+
+  let year = ""
+  useEffect(() => {
+    year = getYear(invoices.timestamp) 
+    // console.log(year)
+  }, [invoices])
+ 
+
 
   return (
     <>
     <h2 className="page__title">{provider.name}</h2>
     <p className="detail__timestamp">Last modified on {changeDateFormat(provider.timestamp)}</p>
+ 
+
     <div className="detail__page__grid__center">
         <h3 className="detail__subhed">Address</h3> 
         <p>{provider.address}</p>

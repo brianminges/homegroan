@@ -7,7 +7,7 @@ export const EditType = ({invoice, types, setTypes, editTypePopup, setEditTypePo
     const sessionUser = JSON.parse(window.sessionStorage.getItem("homegroan_user"))
     const sessionUserId = sessionUser.id;
 
-    const [typesX, setTypesX] = useState([]);
+    const [editedType, setEditedType] = useState([]);
 
     // const [sortedTypes, setSortedTypes] = useState([]);
 
@@ -33,12 +33,12 @@ export const EditType = ({invoice, types, setTypes, editTypePopup, setEditTypePo
     };
 
     const handleInputChange = (event) => {
-        const newTypes = {...typesX}
+        const newTypes = {...editedType}
         let selectedVal = event.target.value
         //Need to check for empty string
  
         newTypes[event.target.id] = selectedVal
-        setTypesX(newTypes)
+        setEditedType(newTypes)
     };
 
     //Checks if popup link was selected and then pops up new window

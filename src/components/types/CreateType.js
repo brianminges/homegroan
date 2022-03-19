@@ -26,6 +26,8 @@ export const AddType = ({types, setTypes, typeTrigger, setTypeTrigger}) => {
         setType(newType)
     };
 
+    
+
     //Checks that popup input is filled in, then saves to database, alerts, clears popup and routes user back to Create Invoice page
     const handleNewType = (event) => {
         if (type.name === "") {
@@ -33,12 +35,9 @@ export const AddType = ({types, setTypes, typeTrigger, setTypeTrigger}) => {
         } else {
             addNewType(type)
                 .then(window.alert("A new type has been added"))
+                .then(setType({name: "", userId: sessionUserId}))
+                .then(getAllTypes(sessionUserId).then(setTypes))
                 .then(setTypeTrigger(false))
-
-                // .then(() => (getAllTypes(sessionUserId)))
-                // .then(getAllTypes(sessionUserId))
-                
-                // .then(() => {navigate("/CreateInvoice")})
         }
     }
 

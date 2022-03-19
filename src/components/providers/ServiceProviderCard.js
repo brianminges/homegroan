@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { getInvoicesByProvider } from "./../../modules/InvoiceManager"
+
 import "./ServiceProviderCard.css"
 import "./../HomeGroan.css"
 
 export const ServiceProviderCard = ({ provider, handleDeleteProvider }) => {
-
+    
     const navigate = useNavigate();
+
+
+
  
     return (
         <>
