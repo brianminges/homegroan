@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import { getAllStates, addProvider, getAllProviders } from "./../../modules/ProviderManager"
 import { getAllTypes } from "./../../modules/TypeManager"
 import { RecentProviders } from "./RecentProviders"
+import { AddType } from "./../types/CreateType"
+import { EditType } from "./../types/EditType"
 
 // import './../invoices/CreateInvoice.css'
 import './AddServiceProvider.css'
@@ -36,12 +38,28 @@ export const AddServiceProvider = () => {
         timestamp: new Date().toLocaleString()
     })
 
+    const [typeObject, setTypeObject] = useState("");
+
+
+    //Sets state of 'Add new type' popup to false on load
+    const [typePopup, setTypePopup] = useState(false)
+
+    //Sets state of 'Edit new type' popup to false on load
+    const [editTypePopup, setEditTypePopup] = useState(false)
+
 
 // *****************************************************************************
     const [providers, setProviders] = useState([]);
     const [sortedProviders, setSortedProviders] = useState([]);
 
-
+    // Checks to make sure a type is selected before routing to edit popup
+    const editThisType = () => {
+        if (provider.typeId === "") {
+            providerDialog.current.showModal()
+        } else {
+            setEditTypePopup(true)
+        }
+    }
     // Fetches all providers and sets in state
     const getProviders = () => {
         return getAllProviders(sessionUserId).then(dataFromAPI => {
@@ -96,6 +114,12 @@ export const AddServiceProvider = () => {
         if (event.target.id.includes("Id")) {
             selectedVal = parseInt(selectedVal)
         }
+        if (event.target.id.includes("type")) {
+            const selectedType = types.filter((type) => {
+                return type.id === parseInt(selectedVal)
+            })
+            setTypeObject(selectedType[0])
+        }
         newProvider[event.target.id] = selectedVal
         setProvider(newProvider)
     };
@@ -112,8 +136,15 @@ export const AddServiceProvider = () => {
         }
     };
 
+    const providerDialog = useRef()
+
     return (
         <>
+            <dialog className="dialog" ref={providerDialog}>
+                <div className="dialog__login">Select from the menu before clicking Edit.</div>
+                <button className="dialog__btn" onClick={e => providerDialog.current.close()}>Close</button>
+            </dialog>
+
             <h2 className="page__title"> Add Service Provider</h2>
                         <div className="page__grid">
                 <div className="page__grid__left">
@@ -218,25 +249,34 @@ export const AddServiceProvider = () => {
                             </fieldset>
                         </div>
 
-                        <fieldset className="form__input__fieldset">
-                            <label
-                                htmlFor="typeId" 
-                                className="form__input__label" >
-                                Type*
-                            </label>
-                            <select  
-                                className="form__select"
-                                id="typeId"
-                                onChange={handleInputChange}
-                                value={provider.typeId}
-                                name="typeId"
-                                required >
-                                <option value="0">Please select ...</option>
-                                {types.map(
-                                    type => (
-                                        <option key={type.id} value={type.id}>{type.name}</option>
-                                    ))}
-                            </select>
+                        <fieldset>
+                            <div className="form__input__fieldset">
+                                <label
+                                    htmlFor="typeId" 
+                                    className="form__input__label">
+                                    Type*
+                                </label>
+                                <select  
+                                    className="form__select"
+                                    id="typeId"
+                                    onChange={handleInputChange}
+                                    value={provider.typeId}
+                                    name="typeId"
+                                    required >
+                                    <option value="0">Please select ...</option>
+                                    {types.map(
+                                        type => (
+                                            <option key={type.id} value={type.id}>{type.name}</option>
+                                        ))}
+                                </select>
+                            </div>
+                            <div  className="form__textlinks__provider">
+                                <div className="form__textlink form__textlink__left__type"> <span onClick={() => setTypePopup(true)}>Add new type</span> </div>
+                                <div className="form__textlink form__textlink__right"> <span onClick={() => editThisType()}>Edit</span> </div>
+
+                                <AddType types={types} setTypes={setTypes} typeTrigger={typePopup} setTypeTrigger={setTypePopup} handleInputChange={handleInputChange}/>
+                                <EditType type={typeObject} setTypes={setTypes} editTypePopup={editTypePopup} setEditTypePopup={setEditTypePopup} />
+                            </div>
                         </fieldset>
 
                         <div className="subhed__hr"></div>

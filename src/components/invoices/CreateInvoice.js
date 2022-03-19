@@ -113,7 +113,8 @@ export const CreateInvoice = () => {
     const calcCosts = () => {
         const total = (invoice.costService *100) + (invoice.costParts *100 + (invoice.costLabor *100) + (invoice.costMisc *100) + (invoice.costTax *100))
         invoice.costTotal = total/100
-            return total /100
+        const formmatedTotal = total.toFixed(2)
+        return formmatedTotal /100
     }
     const calculatedTotal = calcCosts()
 

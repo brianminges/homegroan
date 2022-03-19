@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import {getAllTypes, deleteType, editType } from "./../../modules/TypeManager"
 import "./EditType.css"
 
-export const EditType = ({invoice, type, setTypes, editTypePopup, setEditTypePopup}) => {
+export const EditType = ({type, setTypes, editTypePopup, setEditTypePopup}) => {
     //Gets logged-in user info 
     const sessionUser = JSON.parse(window.sessionStorage.getItem("homegroan_user"))
     const sessionUserId = sessionUser.id;
@@ -12,21 +12,11 @@ export const EditType = ({invoice, type, setTypes, editTypePopup, setEditTypePop
 
     const{typeId} = useParams()
 
-    // const [sortedTypes, setSortedTypes] = useState([]);
-
     //Sets types on load
     useEffect(() => {
         getAllTypes(sessionUserId)
             .then(setTypes)
     }, []);
-
-    
-    // // Alphabetizes types  
-    // useEffect(() => {
-    //     if (types.length > 0) {
-    //         const tempTypes = types.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1)
-    //         setSortedTypes(tempTypes)}
-    // }, [types])
 
 
     //Executes the delete function and re-renders page
@@ -34,12 +24,16 @@ export const EditType = ({invoice, type, setTypes, editTypePopup, setEditTypePop
         e.preventDefault()
         deleteType(type.id)
         .then(() => getAllTypes(sessionUserId).then(setTypes));
+        setEditTypePopup(false)
     };
 
+    //Executes the edit function and re-renders page
     const handleEditType = (e) => {
         e.preventDefault()
         editType(editedType)
         .then(() => getAllTypes(sessionUserId).then(setTypes));
+        setEditedType("")
+        setEditTypePopup(false)
     }
 
     const handleInputChange = (event) => {
@@ -63,6 +57,7 @@ export const EditType = ({invoice, type, setTypes, editTypePopup, setEditTypePop
                     onChange={handleInputChange} 
                     value={editedType.name}
                     defaultValue={type.name}
+                    // defaultValue={"Enter new name"}
                     autoFocus>
                 </input>
                 <div className="type__btns">
