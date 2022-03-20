@@ -10,26 +10,6 @@ export const ServiceProviderDetail = () => {
   const sessionUserId = sessionUser.id
   const navigate = useNavigate();
 
-
-  const [invoices, setInvoices] = useState([])
-
-  //Fetches invoices on page load and sets to hook 
-  const getInvoices = () => {
-    return getAllInvoices(sessionUserId).then(dataFromAPI => {
-        setInvoices(dataFromAPI)
-    });
-  };
-
-  useEffect(() => {
-      getInvoices()
-  }, []);
-
-  
-
-
-  
-  
-
   //Fetches providers on page load and sets to hook 
   const [provider, setProvider] = useState({ id: null, name: "", address: "" });
   const {providerId} = useParams();
@@ -40,6 +20,43 @@ export const ServiceProviderDetail = () => {
         setProvider(provider);
       });
   }, [providerId]);
+
+  //Fetches invoices on page load and sets to hook 
+  const [invoices, setInvoices] = useState([])
+
+  const getInvoices = () => {
+    return getAllInvoices(sessionUserId).then(dataFromAPI => {
+        setInvoices(dataFromAPI)
+    });
+  };
+
+  useEffect(() => {
+      getInvoices() 
+  }, []);
+
+  const arrayOfInvoicesByProvider = []
+  const setProviderArray = () => {
+    invoices.map(invoice => {
+      if (invoice.providerId === providerId) {
+        console.log(invoice.providerId)
+        console.log(providerId)
+        arrayOfInvoicesByProvider.push(invoice)
+      }
+    })
+  }
+
+  useEffect(() => {
+    console.log(invoices)
+  }, [invoices]);
+  
+  useEffect(() => {
+    setProviderArray()
+  }, [invoices]);
+
+  
+  
+
+  
 
 
 
@@ -77,55 +94,9 @@ export const ServiceProviderDetail = () => {
     });
   }
 
-  useEffect(() => {
-    const invoiceYear = getInvoiceYear(invoices.date)
-    console.log(invoiceYear)
-  }, [invoices])
-  
 
-  const arrayOfParts = []
-  // useEffect(() => {
-  //     invoices.forEach(invoice => {
-  //       if (currentYear == invoiceYear) {
-  //         arrayOfParts.push(invoice)
-  //         console.log(arrayOfParts)
-  //       }
-        
-  // })}, [invoices]);
-
-  // useEffect(() => {
-  //   let sum = 0
-  //   for (let i = 0; i < arrayOfParts.length; i++) {
-  //     sum += arrayOfParts[i]}
-  //     console.log('sum', sum)
-  // }, [arrayOfParts])
-
-  useEffect(() => {
-    calcTotalOfArray()
-    // console.log('sum in useEffect', sum)
-  }, [arrayOfParts])
-
-
-  let sum = 0
-  const calcTotalOfArray = () => {
-    for (let i = 0; i < arrayOfParts.length; i++) {
-      sum += arrayOfParts[i]}
-    // console.log('sum in calcTotalOfArray', sum)
-  }
-
-
-
-
-  const getYear = (inputDate) => {
-    let date = new Date(inputDate);
-    
-    return date.toLocaleString('en-US', {
-        hour: 'numeric', // numeric, 2-digit
-    });
-  }
-
-
-
+ 
+ 
 
   return (
     <>
@@ -166,6 +137,7 @@ export const ServiceProviderDetail = () => {
             </button>
         </div>
     </div> */}
+
     </>
   )
 }

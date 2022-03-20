@@ -27,6 +27,7 @@ export const getProviderById = (providerId) => {
     .then(res => res.json())
 }
 
+
 // Edits provider in database
 export const editProvider = (editedProvider) => {
     return fetch(`${URL}/providers/${editedProvider.id}`, {
