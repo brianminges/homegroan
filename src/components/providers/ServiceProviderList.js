@@ -40,7 +40,7 @@ export const ServiceProviderList = () => {
         <h2 className="page__title">All Service Providers</h2>
         <div className="provider__cards page__grid__center__list">
             
-            {providers.map(provider =>
+            {sortedProviders.map(provider =>
             <ServiceProviderCard 
             key={provider.id}
             provider={provider}

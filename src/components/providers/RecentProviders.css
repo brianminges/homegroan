@@ -8,3 +8,7 @@
     border: none;
 
 }
+
+.recent__card__date {
+    font-size: .8rem;
+}

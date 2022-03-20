@@ -9,11 +9,28 @@ import "./CreateInvoice.css"
 import "./../HomeGroan.css"
 
 export const EditInvoice = () => {
+    //Gets logged-in user info 
+    const sessionUser = JSON.parse(window.sessionStorage.getItem("homegroan_user"))
+    const sessionUserId = sessionUser.id;
+
+    const navigate = useNavigate();
+
+    const [types, setTypes] = useState([]);
+    const [sortedTypes, setSortedTypes] = useState([]);
+
+    const [providers, setProviders] = useState([]);
+    const [sortedProviders, setSortedProviders] = useState({});
+
+    //Sets state for type object 
+    const [typeObject, setTypeObject] = useState("");
+
     const [invoice, setInvoice] = useState({
-        // userId: sessionUserId,
+        userId: sessionUserId,
         title: "",
         details: "",
         date: "",
+        invoiceNumber: "",
+        accountNumber: "",
         costService: "",
         costParts: "",
         costLabor: "",
@@ -21,23 +38,55 @@ export const EditInvoice = () => {
         costTax: "",
         costTotal: "",
         typeId: "",
-        providerId: "",
-        timestamp: new Date().toLocaleString()
+        providerId: ""
     });
 
-    const sessionUser = JSON.parse(window.sessionStorage.getItem("homegroan_user"))
-    const sessionUserId = sessionUser.id;
+    //Stores edited values then sets them in state then runs cost calculator
+    const handleFieldChange = (event) => {
+        const updatedInvoice = {...invoice}
+        let selectedVal = event.target.value
+        //Checks for strings that need to be stored as integers
+        if (event.target.id.includes("Id") || (event.target.id.includes("cost")) ) {
+            selectedVal = parseFloat(selectedVal) }
+        
+        if (event.target.id.includes("type")) {
+            const selectedType = types.filter((type) => {
+                return type.id === parseInt(selectedVal)
+            })
+            setTypeObject(selectedType[0])
+        }
+
+        updatedInvoice[event.target.id] = selectedVal
+        setInvoice(updatedInvoice)
+        calcCosts()
+    }; 
+    
+    // Checks for values in required fields
+    const handleNewInvoice = (event) => {
+        event.preventDefault()
+        if ((invoice.title === "") || 
+            (invoice.details === "") || 
+            (invoice.date === "") || 
+            (invoice.costService === "") || 
+            (invoice.costParts === "") ||
+            (invoice.costLabor === "") ||
+            (invoice.costMisc === "") ||
+            (invoice.costTax === "") ||
+            (calculatedTotal === null) ||
+            (invoice.typeId === "") ||
+            (invoice.providerId === "")) {
+                fieldsDialog.current.showModal()
+        } else {
+            editInvoice(invoice)
+                .then(() => navigate("/Invoices"))
+        }
+    };
+
     const [isLoading, setIsLoading] = useState(false);
     const {invoiceId} = useParams();
-    const navigate = useNavigate();
+    
    
-    const [types, setTypes] = useState([]);
-    const [sortedTypes, setSortedTypes] = useState([]);
-
-    const [providers, setProviders] = useState([]);
-    const [sortedProviders, setSortedProviders] = useState({});
-
-    const [typeObject, setTypeObject] = useState("");
+    
     
     //Sets invoices on load
     useEffect(() => {
@@ -77,76 +126,13 @@ export const EditInvoice = () => {
     }, [providers])
 
 
-   
-
-    const handleFieldChange = (event) => {
-        const updatedInvoice = {...invoice}
-        let selectedVal = event.target.value
-        //Checks for strings that need to be stored as integers
-        if (event.target.id.includes("Id") || (event.target.id.includes("cost")) ) {
-            selectedVal = parseFloat(selectedVal) }
-        updatedInvoice[event.target.id] = selectedVal
-        setInvoice(updatedInvoice)
-        calcCosts()
-    }; 
-
-    // Checks for values in required fields
-    const handleNewInvoice = (event) => {
-        event.preventDefault()
-        if ((invoice.title === "") || 
-            (invoice.details === "") || 
-            (invoice.date === "") || 
-            (invoice.costService === "") || 
-            (invoice.costParts === "") ||
-            (invoice.costLabor === "") ||
-            (invoice.costMisc === "") ||
-            (invoice.costTax === "") ||
-            (calculatedTotal === null) ||
-            (invoice.typeId === "") ||
-            (invoice.providerId === "")) {
-                fieldsDialog.current.showModal()
-        } else {
-            editInvoice(invoice)
-                // .then(window.alert(`👍'${invoice.title} has been updated'`))
-                .then(() => navigate("/Invoices"))
-        }
-    };
-
-    // Sets types dropdown on load
-    useEffect(() => {
-        getAllTypes(sessionUserId)
-            .then(setTypes)
-    }, []);
-
-    // Alphabetizes types dropdown
-    useEffect(() => {
-        if (types.length > 0) {
-            const tempTypes = types.sort((a,b) => (a.name?.toLowerCase() > b.name?.toLowerCase()) ? 1 : -1)
-            setSortedTypes(tempTypes)}
-    }, [types])
-
-
-    // Sets providers dropdown on load
-    useEffect(() => {
-        getAllProvidersByType(sessionUserId)
-            .then(setProviders)
-    }, []);
-
-    // Alphabetizes providers dropdown 
-    useEffect(() => {
-        if (providers.length > 0) {
-            const tempProviders = providers.sort((a,b) => (a.name?.toLowerCase() > b.name?.toLowerCase()) ? 1 : -1)
-            setSortedProviders(tempProviders)}
-    }, [providers])
-
     //Adds costs and displays dynamically in the Total Cost input field
     const calcCosts = () => {
         const total = (invoice.costService *100) + (invoice.costParts *100 + (invoice.costLabor *100) + (invoice.costMisc *100) + (invoice.costTax *100))
         invoice.costTotal = total/100
-        const formmatedTotal = total.toFixed(2)
-        return formmatedTotal /100
+        const formattedTotal = total.toFixed(2)
+        return formattedTotal /100
     }
-
     const calculatedTotal = calcCosts()
 
 
@@ -311,8 +297,8 @@ export const EditInvoice = () => {
                                 <div className="form__textlink form__textlink__left__type"> <span onClick={() => setTypePopup(true)}>Add new type</span> </div>
                                 <div className="form__textlink form__textlink__right"> <span onClick={() => editThisType()}>Edit</span> </div>
 
-                                <AddType types={types} setTypes={setTypes} typeTrigger={typePopup} setTypeTrigger={setTypePopup} handleInputChange={handleFieldChange}/>
-                                <EditType invoice={invoice} type={typeObject} setTypes={setTypes} editTypePopup={editTypePopup} setEditTypePopup={setEditTypePopup} />
+                                <AddType types={types} setTypes={setTypes} typeTrigger={typePopup} setTypeTrigger={setTypePopup} />
+                                <EditType type={typeObject} setTypes={setTypes} editTypePopup={editTypePopup} setEditTypePopup={setEditTypePopup} />
                             </div>
                         </fieldset>
 
@@ -477,3 +463,4 @@ export const EditInvoice = () => {
         </>
     )
 }
+

@@ -27,6 +27,7 @@ export const Search = () => {
             navigate('/Invoices')
         } 
     }
+
  
 
     return (

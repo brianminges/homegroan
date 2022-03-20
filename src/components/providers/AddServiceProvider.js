@@ -35,7 +35,8 @@ export const AddServiceProvider = () => {
         website: "",
         twitter: "",
         facebook: "",
-        timestamp: new Date().toLocaleString()
+        timestamp: new Date()
+        // .toLocaleString()
     })
 
     const [typeObject, setTypeObject] = useState("");
@@ -48,9 +49,7 @@ export const AddServiceProvider = () => {
     const [editTypePopup, setEditTypePopup] = useState(false)
 
 
-// *****************************************************************************
-    const [providers, setProviders] = useState([]);
-    const [sortedProviders, setSortedProviders] = useState([]);
+
 
     // Checks to make sure a type is selected before routing to edit popup
     const editThisType = () => {
@@ -60,6 +59,11 @@ export const AddServiceProvider = () => {
             setEditTypePopup(true)
         }
     }
+
+// *****************************************************************************
+    const [providers, setProviders] = useState([]);
+    const [sortedProviders, setSortedProviders] = useState([]);
+
     // Fetches all providers and sets in state
     const getProviders = () => {
         return getAllProviders(sessionUserId).then(dataFromAPI => {
@@ -73,7 +77,7 @@ export const AddServiceProvider = () => {
 
     useEffect(() => {
         if (providers.length > 0) {
-            const tempProviders = providers.sort((a,b) => (a.date?.toLowerCase() > b.date?.toLowerCase()) ? 1 : -1)
+            const tempProviders = providers.sort((a,b) => (parseInt(a.timestamp) > parseInt(b.timestamp)) ? 1 : -1)
             setSortedProviders(tempProviders)}
     }, [providers])
 
@@ -329,7 +333,7 @@ export const AddServiceProvider = () => {
                                     className="input__field__form" 
                                     id="emailaddress" 
                                     onChange={handleInputChange} 
-                                    value={provider.email} 
+                                    value={provider.emailaddress} 
                                     placeholder="email@email.com">
                                 </input>
                             </fieldset>
