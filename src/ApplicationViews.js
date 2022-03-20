@@ -75,9 +75,9 @@ export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
                 </PrivateRoute>
             } />
             <Route exact path="/ServiceProviders/:providerId/Edit" element={
-                <PrivateRoute>
+                // <PrivateRoute>
                     <EditServiceProvider />
-                </PrivateRoute>
+                // </PrivateRoute>
             } />
 
             <Route exact path="/Search" element={

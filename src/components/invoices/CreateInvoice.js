@@ -21,6 +21,7 @@ export const CreateInvoice = () => {
     const [providers, setProviders] = useState([]);
     const [sortedProviders, setSortedProviders] = useState([]);
 
+    //Sets state for type object 
     const [typeObject, setTypeObject] = useState("");
 
     const [invoice, setInvoice] = useState({
@@ -113,8 +114,8 @@ export const CreateInvoice = () => {
     const calcCosts = () => {
         const total = (invoice.costService *100) + (invoice.costParts *100 + (invoice.costLabor *100) + (invoice.costMisc *100) + (invoice.costTax *100))
         invoice.costTotal = total/100
-        const formmatedTotal = total.toFixed(2)
-        return formmatedTotal /100
+        const formattedTotal = total.toFixed(2)
+        return formattedTotal /100
     }
     const calculatedTotal = calcCosts()
 
@@ -137,9 +138,7 @@ export const CreateInvoice = () => {
         }
     }
 
-    
  
-
     //Sets state of 'Add new type' popup to false on load
     const [typePopup, setTypePopup] = useState(false)
 
@@ -150,9 +149,7 @@ export const CreateInvoice = () => {
     const providerDialog = useRef()
     const fieldsDialog = useRef()
 
-   
 
- 
     return (
         <>
             <dialog className="dialog" ref={providerDialog}>
@@ -286,7 +283,7 @@ export const CreateInvoice = () => {
                                 <div className="form__textlink form__textlink__right"> <span onClick={() => editThisType()}>Edit</span> </div>
 
                                 <AddType types={types} setTypes={setTypes} typeTrigger={typePopup} setTypeTrigger={setTypePopup} handleInputChange={handleInputChange}/>
-                                <EditType invoice={invoice} type={typeObject} setTypes={setTypes} editTypePopup={editTypePopup} setEditTypePopup={setEditTypePopup} />
+                                <EditType type={typeObject} setTypes={setTypes} editTypePopup={editTypePopup} setEditTypePopup={setEditTypePopup} />
                             </div>
                         </fieldset>
 
