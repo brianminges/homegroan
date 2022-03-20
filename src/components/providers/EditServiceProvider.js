@@ -485,7 +485,7 @@ export const EditServiceProvider = () => {
                     )} */}
 
                     <h3>Recently updated</h3>
-                    {providers.slice(0,5).map(provider => {
+                    {providers.slice(0,6).map(provider => {
                         if (provider.updatedTimestamp) {
                             return <RecentProvidersUpdated 
                             key={provider.id}

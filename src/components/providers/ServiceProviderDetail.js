@@ -124,12 +124,6 @@ export const ServiceProviderDetail = () => {
     });
   }
 
-  let year = ""
-  useEffect(() => {
-    year = getYear(invoices.timestamp) 
-    // console.log(year)
-  }, [invoices])
- 
 
 
 
@@ -137,8 +131,7 @@ export const ServiceProviderDetail = () => {
     <>
     <h2 className="page__title">{provider.name}</h2>
     <p className="detail__timestamp__added">Added on {changeDateFormat(provider.timestamp)}</p>
-    <p className="detail__timestamp__updated">Last updated on {changeDateFormat(provider.updatedTimestamp)}</p>
-    
+   
 
     <div className="detail__page__grid__center">
         <h3 className="detail__subhed">Address</h3> 
