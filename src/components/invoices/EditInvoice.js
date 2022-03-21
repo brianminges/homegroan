@@ -75,7 +75,8 @@ export const EditInvoice = () => {
             (calculatedTotal === null) ||
             (invoice.typeId === "") ||
             (invoice.providerId === "")) {
-                fieldsDialog.current.showModal()
+                // fieldsDialog.current.showModal()
+                window.alert("You must fill in all required fields")
         } else {
             editInvoice(invoice)
                 .then(() => navigate("/Invoices"))
@@ -139,7 +140,8 @@ export const EditInvoice = () => {
     // Checks to make sure a provider is selected before routing to edit form
     const editThisInvoice = () => {
         if (invoice.providerId === "") {
-            providerDialog.current.showModal()
+            // providerDialog.current.showModal()
+            window.alert("Select from the menu before clicking edit")
         } else {
             navigate(`/ServiceProviders/${invoice.providerId}/Edit`)
         }
@@ -148,7 +150,8 @@ export const EditInvoice = () => {
     // Checks to make sure a type is selected before routing to edit popup
     const editThisType = () => {
         if (invoice.typeId === "") {
-            providerDialog.current.showModal()
+            // providerDialog.current.showModal()
+            window.alert("Select from the menu before clicking edit")
         } else {
             setEditTypePopup(true)
         }
@@ -161,13 +164,13 @@ export const EditInvoice = () => {
     const [editTypePopup, setEditTypePopup] = useState(false)
 
 
-    const providerDialog = useRef()
-    const fieldsDialog = useRef()
+    // const providerDialog = useRef()
+    // const fieldsDialog = useRef()
 
 
     return (
         <>
-            <dialog className="dialog" ref={providerDialog}>
+            {/* <dialog className="dialog" ref={providerDialog}>
                 <div className="dialog__login">Select from the menu before clicking Edit.</div>
                 <button className="dialog__btn" onClick={e => providerDialog.current.close()}>Close</button>
             </dialog>
@@ -175,7 +178,7 @@ export const EditInvoice = () => {
             <dialog className="dialog" ref={fieldsDialog}>
                 <div className="dialog__login">Fill in all required fields.</div>
                 <button className="dialog__btn" onClick={e => fieldsDialog.current.close()}>Close</button>
-            </dialog>
+            </dialog> */}
 
             <h2 className="page__title"> Editing Invoice</h2>
             <div className="page__grid">
@@ -224,7 +227,7 @@ export const EditInvoice = () => {
                             </textarea>
                         </fieldset>
                         
-                        <div className="form__inputs">
+                        <div className="form__inputs form__firstrow">
                             <fieldset  className="form__input__fieldset form__input__triple">
                                 <label
                                     htmlFor="date" 
@@ -271,7 +274,7 @@ export const EditInvoice = () => {
                             </fieldset>
                         </div>
 
-                        <div className="form__inputs">
+                        <div className="form__inputs form__secondrow">
                         <fieldset>
                             <div className="form__input__fieldset">
                                 <label

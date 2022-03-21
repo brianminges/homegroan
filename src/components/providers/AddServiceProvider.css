@@ -1,7 +1,8 @@
 .form__inputs {
     display: flex;
     justify-content: space-between;
-    width: 814.6px;
+    /* width: 814.6px; */
+    /* width: 925px; */
 }
 
 /* .form__input__label {

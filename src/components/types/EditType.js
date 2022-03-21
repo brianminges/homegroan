@@ -32,7 +32,7 @@ export const EditType = ({type, setTypes, editTypePopup, setEditTypePopup}) => {
         e.preventDefault()
         editType(editedType)
         .then(() => getAllTypes(sessionUserId).then(setTypes));
-        setEditedType("")
+        setEditedType({name: "", userId: sessionUserId})
         setEditTypePopup(false)
     }
 

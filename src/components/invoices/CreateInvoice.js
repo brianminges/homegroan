@@ -6,7 +6,7 @@ import { getAllProvidersByType } from "./../../modules/ProviderManager"
 import { AddType } from "./../types/CreateType"
 import { EditType } from "./../types/EditType"
 import "./CreateInvoice.css"
-import "./../HomeGroan.css"
+// import "./../HomeGroan.css"
 
 export const CreateInvoice = () => {
     //Gets logged-in user info 
@@ -209,7 +209,7 @@ export const CreateInvoice = () => {
                             </textarea>
                         </fieldset>
                         
-                        <div className="form__inputs">
+                        <div className="form__inputs form__firstrow">
                             <fieldset  className="form__input__fieldset form__input__triple">
                                 <label
                                     htmlFor="date" 
@@ -256,7 +256,7 @@ export const CreateInvoice = () => {
                             </fieldset>
                         </div>
 
-                        <div className="form__inputs">
+                        <div className="form__inputs form__secondrow">
                         <fieldset>
                             <div className="form__input__fieldset">
                                 <label
@@ -310,7 +310,8 @@ export const CreateInvoice = () => {
                                 </select>
                             </div>
                             <div  className="form__textlinks">
-                                <div className="form__textlink form__textlink__left"> <Link to="/AddServiceProvider">Add new provider</Link></div>
+                                <div className="form__textlink form__textlink__left"> <Link 
+                                to="/AddServiceProvider">Add new provider</Link></div>
                                 <div className="form__textlink form__textlink__right" onClick={() => editThisInvoice()}> Edit </div>
                             </div>
  
