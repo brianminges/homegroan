@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom"
 
 import "./InvoicesCard.css"
 
+
 export const InvoicesCard = ({ invoice, handleDeleteInvoice, handleEditInvoice }) => {
     
 

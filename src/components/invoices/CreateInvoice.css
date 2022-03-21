@@ -83,6 +83,9 @@ textarea {
     padding: 5px;
 }
 
+.wide__label {
+    width: 90px;
+}
 /* .form__input__triple {
     width: 150px;
 } */
@@ -97,9 +100,10 @@ textarea {
     width: 150px;
 }
 
-.wide__label {
-    width: 90px;
+#title {
+    width: 925px;
 }
+
 
 
 /* FORM TEXT LINKS ******************** */
@@ -186,8 +190,6 @@ textarea {
     padding-bottom: 0;
 }
 
-
-
 /* MEDIA QUERIES ******************** */
 @media only screen and (max-width: 1540px) {
     .page__grid__right {
@@ -200,7 +202,7 @@ textarea {
         margin-top: 20px;
         margin-left: 0;
     }
-    
+
     .form__firstrow {
     display: flex; 
     flex-direction: row;
@@ -225,6 +227,10 @@ textarea {
         font-size: inherit;
         width: 825px;
     }
+
+    #title {
+        width: 825px;
+    }
 }
 
 @media only screen and (max-width: 925px) {
@@ -233,6 +239,10 @@ textarea {
         height: 200px;
         font-family: inherit;
         font-size: inherit;
+        width: 625px;
+    }
+
+    #title {
         width: 625px;
     }
 }
@@ -250,7 +260,11 @@ textarea {
         display: flex; 
         flex-direction: column;
         flex-wrap: wrap;
-        }
+    }
+
+    #title {
+        width: 425px;
+    }
 }
 
 @media only screen and (max-width: 520px) {
@@ -259,6 +273,10 @@ textarea {
         height: 200px;
         font-family: inherit;
         font-size: inherit;
+        width: 300px;
+    }
+
+    #title {
         width: 300px;
     }
 }
