@@ -1,28 +1,26 @@
 .page__title {
-    text-align: center;
     margin: 50px 0;
+    text-align: center;
 }
 
 /* PAGE GRID ******************** */
 .page__grid {
     display: flex;
     flex-direction: row;
-    width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .page__grid__left {
-    padding-right: 20px;
+    margin-right: 40px;
     padding-top: 70px;
-    width: 300px;
 }
 
 .page__grid__center {
-    width: 1000px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    width: 1000px;
 }
 
 .page__grid__right {
@@ -30,13 +28,19 @@
     border-radius: 5px;
     box-shadow: 5px 5px 15px black;
     padding: 20px;
-    width: 300px;
-
+    margin-left: 40px;
 }
+
+.form__firstrow,
+.form__secondrow {
+    display: flex; 
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
 
 /* MAIN FORM INPUT FIELDS ******************** */
 input[type=date] {
-    border: none;
     border-radius: 5px;
     padding: 5px;
     width: 200px;
@@ -45,22 +49,22 @@ input[type=date] {
 select {
     border: 2px solid black;
     border-radius: 5px;
+    height: 32.67px;
     padding: 5px;
     width: 250px;
-    height: 32.67px;
 }
 
 textarea {
     border: 2px solid black;
-    height: 200px;
     font-family: inherit;
     font-size: inherit;
+    height: 200px;
+    width: 925px;
 }
 
-
 .form__input__fieldset {
-    display: flex;
     align-items: center;
+    display: flex;
 }
 
 
@@ -74,17 +78,14 @@ textarea {
 }
 
 .input__field__form {
-    /* border: none; */
     border-radius: 5px;
     font-size: 1rem;
     padding: 5px;
-    width: 85%;
 }
 
-.form__input__triple {
+/* .form__input__triple {
     width: 150px;
-}
-
+} */
 
 #date, 
 #invoiceNumber, 
@@ -92,8 +93,8 @@ textarea {
     border: 2px solid black;
     font-family: inherit;
     font-size: .9rem;
-    width: 150px;
     height: 32.67px;
+    width: 150px;
 }
 
 .wide__label {
@@ -101,7 +102,7 @@ textarea {
 }
 
 
-/* FORM LINKS ******************** */
+/* FORM TEXT LINKS ******************** */
 .form__textlinks {
     display: flex;
     font-size: .8rem;
@@ -109,18 +110,19 @@ textarea {
 }
 
 .form__textlink__left {
-    margin-left: 90px;
+    color: #1e4c92;
     font-weight: bold;
+    margin-left: 90px;
 }
 
 .form__textlink__right {
-    margin-left: 75px;
     font-weight: bold;
+    margin-left: 75px;
 }
 
 .form__textlink__left__type {
-    margin-left: 75px;
     font-weight: bold;
+    margin-left: 75px;
 }
 
 .form__textlink {
@@ -152,13 +154,12 @@ textarea {
 }
 
 .form__input__input__calc {
-    /* border: none; */
     border-radius: 5px;
-    padding: 5px;
+    font-weight: bold;
+    height: 32.67px;
     margin-top: 3px;
     text-align: right;
-    height: 32.67px;
-    font-weight: bold;
+    padding: 5px;
 }
  
 /* BUTTONS ******************** */
@@ -185,3 +186,79 @@ textarea {
     padding-bottom: 0;
 }
 
+
+
+/* MEDIA QUERIES ******************** */
+@media only screen and (max-width: 1540px) {
+    .page__grid__right {
+        margin-top: 20px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .page__grid__right {
+        margin-top: 20px;
+        margin-left: 0;
+    }
+    
+    .form__firstrow {
+    display: flex; 
+    flex-direction: row;
+    flex-wrap: wrap;
+    }
+
+    .wide__label {
+        width: 75px;
+    }
+
+    .form__textlink__left {
+        margin-left: 75px;
+        font-weight: bold;
+    }
+}
+
+@media only screen and (max-width: 1020px) {
+    textarea {
+        border: 2px solid black;
+        height: 200px;
+        font-family: inherit;
+        font-size: inherit;
+        width: 825px;
+    }
+}
+
+@media only screen and (max-width: 925px) {
+    textarea {
+        border: 2px solid black;
+        height: 200px;
+        font-family: inherit;
+        font-size: inherit;
+        width: 625px;
+    }
+}
+
+@media only screen and (max-width: 720px) {
+    textarea {
+        border: 2px solid black;
+        height: 200px;
+        font-family: inherit;
+        font-size: inherit;
+        width: 425px;
+    }
+
+    .form__firstrow {
+        display: flex; 
+        flex-direction: column;
+        flex-wrap: wrap;
+        }
+}
+
+@media only screen and (max-width: 520px) {
+    textarea {
+        border: 2px solid black;
+        height: 200px;
+        font-family: inherit;
+        font-size: inherit;
+        width: 300px;
+    }
+}
