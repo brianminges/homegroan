@@ -218,272 +218,265 @@ export const EditServiceProvider = () => {
 
     return (
         <>
-            <dialog className="dialog" ref={providerDialog}>
-                <div className="dialog__login">Select from the menu before clicking Edit.</div>
-                <button className="dialog__btn" onClick={e => providerDialog.current.close()}>Close</button>
-            </dialog>
+        <dialog className="dialog" ref={providerDialog}>
+            <div className="dialog__login">Select from the menu before clicking Edit.</div>
+            <button className="dialog__btn" onClick={e => providerDialog.current.close()}>Close</button>
+        </dialog>
 
-            <h2 className="page__title"> Edit Service Provider</h2>
-                        <div className="page__grid">
-                <div className="page__grid__left">
-                    <picture>
-                        <img 
-                            className="main__image" 
-                            src={'./../../images/black.png'} 
-                            alt="Computer-generated figure holding a large wrench" />
-                    </picture>
-                </div>
+        <h2 className="page__title"> Add Service Provider</h2>
+        <div className="page__grid">
+            <div className="page__grid__left">
+                <picture>
+                    <img 
+                        className="main__image" 
+                        src={'./../../images/black.png'} 
+                        alt="Computer-generated figure holding a large wrench" />
+                </picture>
+            </div>
 
-                <div className="page__grid__center">
-                    <form>
-                        <h3>Basic information</h3>
-                        <p>*required</p>
+            <div className="page__grid__center">
+                <form>
+                    <h3>Basic information</h3>
+                    <p>*required</p>
+                    <fieldset className="form__input__fieldset">
+                        <label 
+                            htmlFor="name" 
+                            className="form__input__label">
+                            Name*
+                        </label>
+                        <input 
+                            type="text" 
+                            className="input__field__form" 
+                            id="name" 
+                            onChange={handleFieldChange} 
+                            value={provider.name}
+                            required autoFocus>
+                        </input>
+                    </fieldset>
+
+                    <fieldset  className="form__input__fieldset">
+                        <label 
+                            htmlFor="address"
+                            className="form__input__label">
+                            Address
+                        </label>
+                        <input 
+                            type="text"
+                            className="input__field__form"
+                            id="address"
+                            onChange={handleFieldChange} 
+                            value={provider.address} >  
+                        </input>
+                    </fieldset>
+
+                    <div className="form__inputs form__firstrow">
                         <fieldset className="form__input__fieldset">
-                            <label 
-                                htmlFor="name" 
-                                className="form__input__label">
-                                Name*
-                            </label>
-                            <input 
-                                type="text" 
-                                className="input__field__form" 
-                                id="name" 
-                                onChange={handleFieldChange} 
-                                value={provider.name}
-                                required autoFocus>
-                            </input>
-                        </fieldset>
-
-                        <fieldset  className="form__input__fieldset">
-                            <label 
-                                htmlFor="address"
-                                className="form__input__label">
-                                Address
+                            <label
+                                htmlFor="city" 
+                                className="form__input__label"
+                                id="label__city">
+                                City
                             </label>
                             <input 
                                 type="text"
                                 className="input__field__form"
-                                id="address"
-                                onChange={handleFieldChange} 
-                                value={provider.address} >  
+                                id="city"
+                                onChange={handleFieldChange}
+                                value={provider.city}
+                                required >
                             </input>
                         </fieldset>
 
-                        <div className="form__inputs">
-                            <fieldset className="form__input__fieldset">
-                                <label
-                                    htmlFor="city" 
-                                    className="form__input__label"
-                                    id="label__city">
-                                    City
-                                </label>
-                                <input 
-                                    type="text"
-                                    className="input__field__form"
-                                    id="city"
-                                    onChange={handleFieldChange}
-                                    value={provider.city}
-                                    required >
-                                </input>
-                            </fieldset>
-
-                            <fieldset className="form__input__fieldset">
-                                <label 
-                                    htmlFor="state"
-                                    className="form__input__label"
-                                    id="label__state">
-                                    State
-                                </label>
-                                <select 
-                                    className="form__select"
-                                    id="state"
-                                    onChange={handleFieldChange}
-                                    value={provider.state}
-                                    name="state"
-                                    required >
-                                    <option value="0"></option>
-                                    {states.map(
-                                        state => (
-                                                <option key={state.id} value={state.abbreviation}>{state.abbreviation}</option>
-                                        ))}
-                                </select>
-                            </fieldset>
-
-                            <fieldset className="form__input__fieldset ">
-                                <label
-                                    htmlFor="zip" 
-                                    className="form__input__label"
-                                    id="label__zip">
-                                    ZIP code
-                                </label>
-                                <input 
-                                    type="text"
-                                    className="input__field__form"
-                                    id="zip"
-                                    onChange={handleFieldChange}
-                                    value={provider.zip}
-                                    required >
-                                </input>
-                            </fieldset>
-                        </div>
-
-                        <fieldset>
-                            <div className="form__input__fieldset">
-                                <label
-                                    htmlFor="typeId" 
-                                    className="form__input__label">
-                                    Type*
-                                </label>
-                                <select  
-                                    className="form__select"
-                                    id="typeId"
-                                    onChange={handleFieldChange}
-                                    value={provider.typeId}
-                                    name="typeId"
-                                    required >
-                                    <option value="0">Please select ...</option>
-                                    {types.map(
-                                        type => (
-                                            <option key={type.id} value={type.id}>{type.name}</option>
-                                        ))}
-                                </select>
-                            </div>
-                            <div  className="form__textlinks__provider">
-                                <div className="form__textlink form__textlink__left__type"> <span onClick={() => setTypePopup(true)}>Add new type</span> </div>
-                                <div className="form__textlink form__textlink__right"> <span onClick={() => editThisType()}>Edit</span> </div>
-
-                                <AddType types={types} setTypes={setTypes} typeTrigger={typePopup} setTypeTrigger={setTypePopup} handleFieldChange={handleFieldChange}/>
-                                <EditType type={typeObject} setTypes={setTypes} editTypePopup={editTypePopup} setEditTypePopup={setEditTypePopup} />
-                            </div>
+                        <fieldset className="form__input__fieldset">
+                            <label 
+                                htmlFor="state"
+                                className="form__input__label"
+                                id="label__state">
+                                State
+                            </label>
+                            <select 
+                                className="form__select"
+                                id="state"
+                                onChange={handleFieldChange}
+                                value={provider.state}
+                                name="state"
+                                required >
+                                <option value="0"></option>
+                                {states.map(
+                                    state => (
+                                            <option key={state.id} value={state.abbreviation}>{state.abbreviation}</option>
+                                    ))}
+                            </select>
                         </fieldset>
 
-                        <div className="subhed__hr"></div>
-
-                        <h3>Contact information</h3>
-                        <div className="form__inputs">
-                            <fieldset className="form__input__fieldset">
-                                <label 
-                                    htmlFor="officePhone" 
-                                    className="form__input__label"
-                                    id="label__officePhone">
-                                    Office 
-                                </label>
-                                <input 
-                                    type="text" 
-                                    className="input__field__form provider__contact" 
-                                    id="officePhone" 
-                                    onChange={handleFieldChange} 
-                                    value={provider.officePhone} 
-                                    placeholder="555-555-5555">
-                                </input>
-                            </fieldset>
-
-                            <fieldset className="form__input__fieldset">
-                                <label 
-                                    htmlFor="cellPhone" 
-                                    className="form__input__label"
-                                    id="label__cellPhone">
-                                    Cellular
-                                </label>
-                                <input 
-                                    type="text" 
-                                    className="input__field__form provider__contact" 
-                                    id="cellPhone" 
-                                    onChange={handleFieldChange} 
-                                    value={provider.cellPhone} 
-                                    placeholder="555-555-5555">
-                                </input>
-                            </fieldset>
-
-                            <fieldset className="form__input__fieldset">
-                                <label 
-                                    htmlFor="emailaddress" 
-                                    className="form__input__label"
-                                    id="label__email">
-                                    Email
-                                </label>
-                                <input 
-                                    type="email" 
-                                    className="input__field__form" 
-                                    id="emailaddress" 
-                                    onChange={handleFieldChange} 
-                                    value={provider.emailaddress} 
-                                    placeholder="email@email.com">
-                                </input>
-                            </fieldset>
-                        </div>
-
-                        <div className="form__inputs">
-                            <fieldset className="form__input__fieldset form">
-                                <label 
-                                    htmlFor="twitter" 
-                                    className="form__input__label">
-                                    Twitter
-                                </label>
-                                <input 
-                                    type="text" 
-                                    className="input__field__form provider__contact" 
-                                    id="twitter" 
-                                    onChange={handleFieldChange} 
-                                    value={provider.twitter} 
-                                    placeholder="@twitter">
-                                </input>
-                            </fieldset>
-
-                            <fieldset className="form__input__fieldset form">
-                                <label 
-                                    htmlFor="facebook" 
-                                    className="form__input__label">
-                                    Facebook
-                                </label>
-                                <input 
-                                    type="url" 
-                                    className="input__field__form provider__contact" 
-                                    id="facebook" 
-                                    onChange={handleFieldChange} 
-                                    value={provider.facebook} 
-                                    placeholder="/facebook">
-                                </input>
-                            </fieldset>
-
-                            <fieldset className="form__input__fieldset form">
-                                <label 
-                                    htmlFor="website" 
-                                    className="form__input__label">
-                                    Web site
-                                </label>
-                                <input 
-                                    type="url" 
-                                    className="input__field__form" 
-                                    id="website" 
-                                    onChange={handleFieldChange} 
-                                    value={provider.website} 
-                                    placeholder="Website.com">
-                                </input>
-                            </fieldset>
-                        </div>
-                        </form>
-
-                        <div>
-                            <fieldset className="fieldset__button">
-                                <button 
-                                    type="submit"
-                                    className="invoice__btn"
-                                    onClick={updateProvider} >
-                                    Submit
-                                </button>
-                            </fieldset>
-                        </div>
+                        <fieldset className="form__input__fieldset ">
+                            <label
+                                htmlFor="zip" 
+                                className="form__input__label"
+                                id="label__zip">
+                                ZIP code
+                            </label>
+                            <input 
+                                type="text"
+                                className="input__field__form"
+                                id="zip"
+                                onChange={handleFieldChange}
+                                value={provider.zip}
+                                required >
+                            </input>
+                        </fieldset>
                     </div>
 
-                <div className="page__grid__right">
-                    {/* <h3>Recently added</h3>
-                    {providers.slice(0,5).map(provider =>
-                    <RecentProviders 
-                    key={provider.id}
-                    provider={provider}/>
-                    )} */}
+                    <fieldset>
+                        <div className="form__input__fieldset">
+                            <label
+                                htmlFor="typeId" 
+                                className="form__input__label">
+                                Type*
+                            </label>
+                            <select  
+                                className="form__select"
+                                id="typeId"
+                                onChange={handleFieldChange}
+                                value={provider.typeId}
+                                name="typeId"
+                                required >
+                                <option value="0">Please select ...</option>
+                                {types.map(
+                                    type => (
+                                        <option key={type.id} value={type.id}>{type.name}</option>
+                                    ))}
+                            </select>
+                        </div>
+                        <div  className="form__textlinks__provider">
+                            <div className="form__textlink form__textlink__left__type"> <span onClick={() => setTypePopup(true)}>Add new type</span> </div>
+                            <div className="form__textlink form__textlink__right"> <span onClick={() => editThisType()}>Edit</span> </div>
 
+                            <AddType types={types} setTypes={setTypes} typeTrigger={typePopup} setTypeTrigger={setTypePopup} handleInputChange={handleInputChange}/>
+                            <EditType type={typeObject} setTypes={setTypes} editTypePopup={editTypePopup} setEditTypePopup={setEditTypePopup} />
+                        </div>
+                    </fieldset>
+
+                    <div className="subhed__hr"></div>
+
+                    <h3>Contact information</h3>
+                    <div className="form__inputs form__firstrow">
+                        <fieldset className="form__input__fieldset">
+                            <label 
+                                htmlFor="officePhone" 
+                                className="form__input__label"
+                                id="label__officePhone">
+                                Office 
+                            </label>
+                            <input 
+                                type="text" 
+                                className="input__field__form provider__contact" 
+                                id="officePhone" 
+                                onChange={handleFieldChange} 
+                                value={provider.officePhone} 
+                                placeholder="555-555-5555">
+                            </input>
+                        </fieldset>
+
+                        <fieldset className="form__input__fieldset">
+                            <label 
+                                htmlFor="cellPhone" 
+                                className="form__input__label"
+                                id="label__cellPhone">
+                                Cellular
+                            </label>
+                            <input 
+                                type="text" 
+                                className="input__field__form provider__contact" 
+                                id="cellPhone" 
+                                onChange={handleFieldChange} 
+                                value={provider.cellPhone} 
+                                placeholder="555-555-5555">
+                            </input>
+                        </fieldset>
+
+                        <fieldset className="form__input__fieldset">
+                            <label 
+                                htmlFor="emailaddress" 
+                                className="form__input__label"
+                                id="label__email">
+                                Email
+                            </label>
+                            <input 
+                                type="email" 
+                                className="input__field__form" 
+                                id="emailaddress" 
+                                onChange={handleFieldChange} 
+                                value={provider.emailaddress} 
+                                placeholder="email@email.com">
+                            </input>
+                        </fieldset>
+                    </div>
+
+                    <div className="form__inputs form__firstrow">
+                        <fieldset className="form__input__fieldset form">
+                            <label 
+                                htmlFor="twitter" 
+                                className="form__input__label">
+                                Twitter
+                            </label>
+                            <input 
+                                type="text" 
+                                className="input__field__form provider__contact" 
+                                id="twitter" 
+                                onChange={handleFieldChange} 
+                                value={provider.twitter} 
+                                placeholder="@twitter">
+                            </input>
+                        </fieldset>
+
+                        <fieldset className="form__input__fieldset form">
+                            <label 
+                                htmlFor="facebook" 
+                                className="form__input__label">
+                                Facebook
+                            </label>
+                            <input 
+                                type="url" 
+                                className="input__field__form provider__contact" 
+                                id="facebook" 
+                                onChange={handleFieldChange} 
+                                value={provider.facebook} 
+                                placeholder="/facebook">
+                            </input>
+                        </fieldset>
+
+                        <fieldset className="form__input__fieldset form">
+                            <label 
+                                htmlFor="website" 
+                                className="form__input__label">
+                                Web site
+                            </label>
+                            <input 
+                                type="url" 
+                                className="input__field__form" 
+                                id="website" 
+                                onChange={handleFieldChange} 
+                                value={provider.website} 
+                                placeholder="Website.com">
+                            </input>
+                        </fieldset>
+                    </div>
+                    </form>
+
+                    <div>
+                        <fieldset className="fieldset__button">
+                            <button 
+                                type="submit"
+                                className="invoice__btn"
+                                onClick={updateProvider} >
+                                Submit
+                            </button>
+                        </fieldset>
+                    </div>
+                </div>
+
+            <div className="page__grid__right__provider">
                     <h3>Recently updated</h3>
                     {providers.slice(0,6).map(provider => {
                         if (provider.updatedTimestamp) {
@@ -492,9 +485,8 @@ export const EditServiceProvider = () => {
                             provider={provider}/>}
                         }
                     )}
-
-                </div>
             </div>
+        </div>
         </>
     )
 }

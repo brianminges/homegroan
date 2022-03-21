@@ -11,16 +11,88 @@ import './AddServiceProvider.css'
 import "./../HomeGroan.css"
 
 export const AddServiceProvider = () => {
+    //Gets logged-in user info 
     const sessionUser = JSON.parse(window.sessionStorage.getItem("homegroan_user"))
     const sessionUserId = sessionUser.id;
 
     const navigate = useNavigate();
- 
+  
+
+    // Fetches all states and sets in state for states dropdown on load
     const [states, setStates] = useState([])
 
+    useEffect(() => {
+        getAllStates()
+            .then(setStates)
+    }, []);    
+
+
+    // Fetches all providers and sets in state for providers dropdown on load
+    const [providers, setProviders] = useState([]);
+    const [sortedProviders, setSortedProviders] = useState([]);
+
+    const getProviders = () => {
+        return getAllProviders(sessionUserId).then(dataFromAPI => {
+            setProviders(dataFromAPI)
+        });
+    };
+
+    useEffect(() => {
+        getProviders()
+    }, [])
+
+    // Sorts all providers by most recent for 'Recently Added' box
+    useEffect(() => {
+        if (providers.length > 0) {
+            const tempProviders = providers.sort((a,b) => (parseInt(a.timestamp) > parseInt(b.timestamp)) ? 1 : -1)
+            setSortedProviders(tempProviders)}
+    }, [providers])
+
+
+
+
+// TYPES TYPES TYPES TYPES *****************************************************************************
+    //Sets types dropdown on load
     const [types, setTypes] = useState([]);
     const [sortedTypes, setSortedTypes] = useState([]);
 
+    //Sets state for type object 
+    const [typeObject, setTypeObject] = useState("");
+
+    // Fetches all types and sets in state for types dropdown on load
+    useEffect(() => {
+        getAllTypes(sessionUserId)
+            .then(setTypes)
+    }, []);
+
+    // Sorts all types alphabetically for dropdown on load
+    useEffect(() => {
+        if (types.length > 0) {
+            const tempTypes = types.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1)
+            setSortedTypes(tempTypes)}
+    }, [types])
+    
+    //Sets state of 'Add new type' popup to false on load
+    const [typePopup, setTypePopup] = useState(false)
+
+    //Sets state of 'Edit new type' popup to false on load
+    const [editTypePopup, setEditTypePopup] = useState(false)
+
+    // Checks to make sure a type is selected before routing to edit popup
+    const editThisType = () => {
+        if (provider.typeId === "") {
+            providerDialog.current.showModal()
+        } else {
+            setEditTypePopup(true)
+        }
+    }
+
+    
+
+
+
+// *****************************************************************************
+    // Sets empty object to receive user-input values   
     const [provider, setProvider] = useState ({
         userId: sessionUserId,
         name: "",
@@ -39,79 +111,7 @@ export const AddServiceProvider = () => {
         // .toLocaleString()
     })
 
-    const [typeObject, setTypeObject] = useState("");
-
-
-    //Sets state of 'Add new type' popup to false on load
-    const [typePopup, setTypePopup] = useState(false)
-
-    //Sets state of 'Edit new type' popup to false on load
-    const [editTypePopup, setEditTypePopup] = useState(false)
-
-
-
-
-    // Checks to make sure a type is selected before routing to edit popup
-    const editThisType = () => {
-        if (provider.typeId === "") {
-            providerDialog.current.showModal()
-        } else {
-            setEditTypePopup(true)
-        }
-    }
-
-// *****************************************************************************
-    const [providers, setProviders] = useState([]);
-    const [sortedProviders, setSortedProviders] = useState([]);
-
-    // Fetches all providers and sets in state
-    const getProviders = () => {
-        return getAllProviders(sessionUserId).then(dataFromAPI => {
-            setProviders(dataFromAPI)
-        });
-    };
-
-    useEffect(() => {
-        getProviders()
-    }, [])
-
-    useEffect(() => {
-        if (providers.length > 0) {
-            const tempProviders = providers.sort((a,b) => (parseInt(a.timestamp) > parseInt(b.timestamp)) ? 1 : -1)
-            setSortedProviders(tempProviders)}
-    }, [providers])
-
-// *****************************************************************************
-
-
-
-
-
-
-
-
-
-
-
-    // Sets states dropdown on load
-    useEffect(() => {
-        getAllStates()
-            .then(setStates)
-    }, []);
-
-    // Sets types dropdown on load
-    useEffect(() => {
-        getAllTypes(sessionUserId)
-            .then(setTypes)
-    }, []);
-
-    // Alphabetizes types dropdown
-    useEffect(() => {
-        if (types.length > 0) {
-            const tempTypes = types.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1)
-            setSortedTypes(tempTypes)}
-    }, [types])
-
+    // Updates state for each user keystroke
     const handleInputChange = (event) => {
         const newProvider = {...provider}
         let selectedVal = event.target.value
@@ -128,7 +128,7 @@ export const AddServiceProvider = () => {
         setProvider(newProvider)
     };
 
-    // Checks for values in required fields
+    // Checks for values in required fields and then posts to database
     const handleSubmit = (event) => {
         event.preventDefault()
         if ((provider.name === "") || (provider.typeId === "")) {
@@ -150,7 +150,7 @@ export const AddServiceProvider = () => {
             </dialog>
 
             <h2 className="page__title"> Add Service Provider</h2>
-                        <div className="page__grid">
+            <div className="page__grid">
                 <div className="page__grid__left">
                     <picture>
                         <img 
@@ -195,7 +195,7 @@ export const AddServiceProvider = () => {
                             </input>
                         </fieldset>
 
-                        <div className="form__inputs">
+                        <div className="form__inputs form__firstrow">
                             <fieldset className="form__input__fieldset">
                                 <label
                                     htmlFor="city" 
@@ -286,7 +286,7 @@ export const AddServiceProvider = () => {
                         <div className="subhed__hr"></div>
 
                         <h3>Contact information</h3>
-                        <div className="form__inputs">
+                        <div className="form__inputs form__firstrow">
                             <fieldset className="form__input__fieldset">
                                 <label 
                                     htmlFor="officePhone" 
@@ -339,7 +339,7 @@ export const AddServiceProvider = () => {
                             </fieldset>
                         </div>
 
-                        <div className="form__inputs">
+                        <div className="form__inputs form__firstrow">
                             <fieldset className="form__input__fieldset form">
                                 <label 
                                     htmlFor="twitter" 
@@ -402,7 +402,7 @@ export const AddServiceProvider = () => {
                         </div>
                     </div>
 
-                <div className="page__grid__right">
+                <div className="page__grid__right__provider">
                     <h3>Recently added</h3>
                     {providers.slice(0,5).map(provider =>
                     <RecentProviders 

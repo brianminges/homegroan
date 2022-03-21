@@ -1,5 +1,5 @@
+/* CARD GRID ******************** */
 .provider__card {
-    align-content: space-between;
     background-color: rgba(30, 77, 148, 0.3);
     border-radius: 10px;
     box-shadow: 3px 3px 10px black;
@@ -12,6 +12,7 @@
     width: 300px;
 }
 
+/* BUTTONS ******************** */
 .provider__buttons {
     display: flex;
     flex-direction: row;
