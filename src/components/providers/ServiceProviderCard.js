@@ -1,15 +1,10 @@
 import React from "react"
 import { Link, useNavigate } from "react-router-dom"
-
 import "./ServiceProviderCard.css"
-import "./../HomeGroan.css"
 
 export const ServiceProviderCard = ({ provider, handleDeleteProvider }) => {
     
     const navigate = useNavigate();
-
-
-
  
     return (
         <>

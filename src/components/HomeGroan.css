@@ -10,8 +10,29 @@ body {
     background: rgb(30,76,146);
     background: radial-gradient(circle, rgba(30,76,146,1) 0%, rgba(30,76,146,0.09877454399728647) 0%, rgba(30,76,146,0.692612079011292) 100%);
 }
+ 
+/* PAGE GRID ********************  */
+fieldset {
+    border: none;
+    padding: .5rem 0;
+}
 
-/* LINKS ********************  */
+.form__login {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.input__field {
+    border-radius: 5px;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    padding: .2rem .5rem;
+    width: 200px;
+}
+ 
+/* TEXT LINKS ********************  */
 a {
     color: #1e4c92;
     cursor: pointer;
@@ -30,65 +51,6 @@ a:hover {
     text-decoration: none;
 }
 
-/* .form__textlink {
-    color: 
-    cursor: pointer;
-}
-
-.form__textlink:visited {
-    cursor: pointer;
-}
-
-.form__textlink:hover {
-    cursor: pointer;
-} */
-
-/* LAYOUT ********************  */
-fieldset {
-    border: none;
-    padding: .5rem 0;
-}
-
-.form__login {
-    width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.input__field {
-    border-radius: 5px;
-    border: none;
-    background-color: white;
-    margin-left: auto;
-    margin-right: auto;
-    padding: .2rem .5rem;
-    width: 200px;
-}
-
-.input__field:hover {
-    border-radius: 5px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: .2rem .5rem;
-    width: 200px;
-}
- 
-.main__input {
-    margin-left: auto;
-    margin-right: auto;
-    width: 200px;
-}
-
-.name__inputs {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
-#email__register {
-    width: 410px;
-}
- 
 /* IMAGES ******************** */
 .main__image {
     display: block;
@@ -96,15 +58,6 @@ fieldset {
     margin-left: auto;
     margin-right: auto;
     margin-top: 4%;
-}
-
-.main__image:hover {
-    display: block;
-    height: 450px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 4%;
-
 }
 
 /* HEADINGS ********************  */
@@ -149,15 +102,4 @@ h3 {
     color: #1e4c92;
     font-weight: bold;
 }
-
-.option__btns {
-    display: flex;
-    width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 40px;
-}
- 
-
-
  

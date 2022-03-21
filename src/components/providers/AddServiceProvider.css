@@ -1,30 +1,42 @@
+/* PAGE GRID ******************** */
 .form__inputs {
     display: flex;
     justify-content: space-between;
-    /* width: 814.6px; */
-    /* width: 925px; */
 }
 
-/* .form__input__label {
-    align-items: center;
-    display: inline-block;
-    font-weight: bold;
-    margin-right: 0px;
-    text-align: left;
-    width: 75px;
-} */
+.page__grid__right__provider {
+    background-color: lightgray;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px black;
+    margin-left: 40px;
+    padding: 20px;
+    width: 230px;
+}
 
-/* .label__input__align {
-    display: flex;
-
-} */
+.page__grid__right {
+    background-color: lightgray;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px black;
+    margin-left: 40px;
+    padding: 20px;
+}
 
 .subhed__hr {
     border: 1px ridge white;
     margin: 30px 0;
-    width: 500px;
     margin-left: auto;
     margin-right: auto;
+    width: 500px;
+}
+
+/* LABEL/INPUT BOX FIELDS ******************** */
+.provider__contact {
+    width: 125px;
+}
+
+#name, 
+#address {
+    width: 925px;
 }
 
 #label__city {
@@ -34,7 +46,7 @@
 #city {
     border: 2px solid black;
     height: 32.67px;
-    width: 400px;
+    width: 425px;
 }
 
 #state {
@@ -59,20 +71,50 @@
     text-align: right;
 }
 
-
-
+/* TEXT LINKS ******************** */
 .form__textlinks__provider {
     display: flex;
     font-size: .8rem;
     justify-content: space-between;
     width: 325px;
 }
+ 
+/* MEDIA QUERIES ******************** */
+@media only screen and (max-width: 1540px) {
+    .page__grid__right__provider {
+        margin-bottom: 20px;
+    }
+}
 
+@media only screen and (max-width: 1020px) {
+    #name, 
+    #address {
+        width: 825px;
+    }
+}
 
+@media only screen and (max-width: 925px) {
+    #name, 
+    #address {
+        width: 625px;
+    }
+}
 
+@media only screen and (max-width: 810px) {
+    label {
+        text-align: left !important;
+        width: 80px !important;
+    }
 
+    #name, 
+    #address {
+        width: 525px;
+    }
+}
 
-
-.provider__contact {
-    width: 125px;
+@media only screen and (max-width: 720px) {
+    #name, 
+    #address {
+        width: 425px;
+    }
 }

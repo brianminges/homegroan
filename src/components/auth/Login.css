@@ -1,7 +1,24 @@
+/* PAGE GRID ******************** */
+.name__inputs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.main__input {
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+}
+
+#email__register {
+    width: 410px;
+}
+
+/* ERROR ALERT ******************** */
 .dialog {
     background-color: #1e4c92;
-    
-    border-radius: 10px;
+    border-radius: 5px;
     color: white;
     font-weight: bold;
     margin-left: auto;
@@ -9,17 +26,16 @@
     margin-top: auto;
     margin-bottom: auto;
     padding: 1rem;
-    /* width: 270px;
-    height: 270px; */
+    width: 300px;
 }
 
 .dialog__login {
     background-color: #1e4c92;
+    text-align: center;
 }
 
 .dialog__btn {
     background-color: white;
-    /* box-shadow: 3px 3px 5px white; */
     border-radius: 25px;
     display: block;
     margin-left: auto;
@@ -33,7 +49,7 @@
     background-color: lightgray;
     color: #1e4c92;
     font-weight: bold;
-    /* box-shadow: 3px 3px 5px white; */
+    box-shadow: 3px 3px 20px lightgray;
     border-radius: 25px;
     display: block;
     margin-left: auto;
@@ -43,31 +59,12 @@
     width: 100px;
 }
 
+/* TEXT LINKS ******************** */
 .register__link {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-    width: 300px;
-}
-
-input[id=email] {
-    text-align: center;
-}
-
-/* #house1 {
-
+    width: 200px;
 }
 
 
-@keyframes home {
-    0% {background-color: #4A412A;}
-    25% {background-color: #F0BE03}
-    50% {background-color: olive;}
-    75% {background-color: #F0BE03}
-    100% {background-color: purple;}
-}
-
-#badbackground {
-    background: blue;
-    animation: home 10s infinite ease;
-} */
