@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { getAllProviders } from "./../../modules/TypeManager"
-import { getAllInvoices } from "./../../modules/InvoiceManager"
+// import { getAllProviders } from "./../../modules/TypeManager"
+// import { getAllInvoices } from "./../../modules/InvoiceManager"
 import "./Search.css"
 
 export const Search = () => {
@@ -38,7 +38,7 @@ export const Search = () => {
                         <img 
                             className="main__image" 
                             src={'./../../images/laundry.png'} 
-                            alt="Computer-generated figure holding a large wrench" />
+                            alt="Computer-generated figures fix a washing machine" />
                     </picture>
             </div>
             <div className="search__menus">

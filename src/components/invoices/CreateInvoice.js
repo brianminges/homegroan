@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from "react"
 import { useNavigate, Link } from "react-router-dom"
-import { addInvoice, getAllInvoices } from "./../../modules/InvoiceManager"
+import { addInvoice } from "./../../modules/InvoiceManager"
 import { getAllTypes } from "./../../modules/TypeManager"
 import { getAllProvidersByType } from "./../../modules/ProviderManager"
 import { AddType } from "./../types/CreateType"
 import { EditType } from "./../types/EditType"
 import "./CreateInvoice.css"
-// import "./../HomeGroan.css"
 
 export const CreateInvoice = () => {
     //Gets logged-in user info 
@@ -21,7 +20,6 @@ export const CreateInvoice = () => {
     const [providers, setProviders] = useState([]);
     const [sortedProviders, setSortedProviders] = useState([]);
 
-    //Sets state for type object 
     const [typeObject, setTypeObject] = useState("");
 
     const [invoice, setInvoice] = useState({
@@ -73,7 +71,9 @@ export const CreateInvoice = () => {
             (invoice.costTax === "") ||
             (calculatedTotal === null) ||
             (invoice.typeId === "") ||
-            (invoice.providerId === "")) {
+            (invoice.typeId === 0) ||
+            (invoice.providerId === "") ||
+            (invoice.providerId === 0)) {
                 fieldsDialog.current.showModal()
         } else {
             addInvoice(invoice)
@@ -112,10 +112,10 @@ export const CreateInvoice = () => {
 
    //Adds costs and displays dynamically in the Total Cost input field
     const calcCosts = () => {
-        const total = (invoice.costService *100) + (invoice.costParts *100 + (invoice.costLabor *100) + (invoice.costMisc *100) + (invoice.costTax *100))
+        const total = (invoice.costService *100) + (invoice.costParts *100) + (invoice.costLabor *100) + (invoice.costMisc *100) + (invoice.costTax *100)
         invoice.costTotal = total/100
         const formattedTotal = total.toFixed(2)
-        return formattedTotal /100
+        return formattedTotal/100
     }
     const calculatedTotal = calcCosts()
 
@@ -344,6 +344,7 @@ export const CreateInvoice = () => {
                             </label>
                             <input 
                                 type="number" 
+                                step="0.01"
                                 className="form__input__input__calc" 
                                 id="costService"
                                 placeholder="$0.00" 

@@ -58,19 +58,7 @@ export const EditServiceProvider = () => {
                 .then(() => navigate(-1)
         )}
     }
-
-
-
-
-    
-
-
-
-
-
-
-
-
+ 
 
     //Sets state of 'Add new type' popup to false on load
     const [typePopup, setTypePopup] = useState(false)
@@ -92,10 +80,6 @@ export const EditServiceProvider = () => {
     const [isLoading, setIsLoading] = useState(false);
     const {providerId} = useParams();
     const navigate = useNavigate();
-
-    
-    
-    
 
 
     // Sets states dropdown on load
@@ -123,8 +107,6 @@ export const EditServiceProvider = () => {
             const tempTypes = types.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1)
             setSortedTypes(tempTypes)}
     }, [types])
-
-
 
 
 
