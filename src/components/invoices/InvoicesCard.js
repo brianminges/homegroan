@@ -104,11 +104,6 @@ export const InvoicesCard = ({ invoice, handleDeleteInvoice, handleEditInvoice }
                     onClick={() => handleDeleteInvoice(invoice.id)}>
                     Delete
                 </button>
-                {/* <button
-                    id="invoice__details__button"
-                    onClick={() => handleDeleteInvoice(invoice.id)}>
-                    Details
-                </button> */}
                 <button
                     id="invoice__edit__button"
                     onClick={() => {navigate(`/Invoices/${invoice.id}/Edit`)}} >

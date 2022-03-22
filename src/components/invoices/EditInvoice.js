@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react"
 import { useNavigate, Link, useParams } from "react-router-dom"
-import { editInvoice, getAllInvoices, getAllInvoicesById } from "./../../modules/InvoiceManager"
+import { editInvoice, getAllInvoicesById } from "./../../modules/InvoiceManager"
 import { getAllTypes } from "./../../modules/TypeManager"
 import { getAllProvidersByType } from "./../../modules/ProviderManager"
 import { AddType } from "./../types/CreateType"
@@ -14,6 +14,8 @@ export const EditInvoice = () => {
     const sessionUserId = sessionUser.id;
 
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
+    const {invoiceId} = useParams();
 
     const [types, setTypes] = useState([]);
     const [sortedTypes, setSortedTypes] = useState([]);
@@ -21,7 +23,6 @@ export const EditInvoice = () => {
     const [providers, setProviders] = useState([]);
     const [sortedProviders, setSortedProviders] = useState({});
 
-    //Sets state for type object 
     const [typeObject, setTypeObject] = useState("");
 
     const [invoice, setInvoice] = useState({
@@ -73,21 +74,15 @@ export const EditInvoice = () => {
             (invoice.costMisc === "") ||
             (invoice.costTax === "") ||
             (calculatedTotal === null) ||
-            (invoice.typeId === "") ||
-            (invoice.providerId === "")) {
-                // fieldsDialog.current.showModal()
-                window.alert("You must fill in all required fields")
+            (invoice.typeId === 0) ||
+            (invoice.providerId === 0)) {
+                fieldsDialog.current.showModal()
         } else {
             editInvoice(invoice)
                 .then(() => navigate("/Invoices"))
         }
     };
 
-    const [isLoading, setIsLoading] = useState(false);
-    const {invoiceId} = useParams();
-    
-   
-    
     
     //Sets invoices on load
     useEffect(() => {
@@ -140,8 +135,7 @@ export const EditInvoice = () => {
     // Checks to make sure a provider is selected before routing to edit form
     const editThisInvoice = () => {
         if (invoice.providerId === "") {
-            // providerDialog.current.showModal()
-            window.alert("Select from the menu before clicking edit")
+            providerDialog.current.showModal()
         } else {
             navigate(`/ServiceProviders/${invoice.providerId}/Edit`)
         }
@@ -150,8 +144,7 @@ export const EditInvoice = () => {
     // Checks to make sure a type is selected before routing to edit popup
     const editThisType = () => {
         if (invoice.typeId === "") {
-            // providerDialog.current.showModal()
-            window.alert("Select from the menu before clicking edit")
+            providerDialog.current.showModal()
         } else {
             setEditTypePopup(true)
         }
@@ -164,13 +157,13 @@ export const EditInvoice = () => {
     const [editTypePopup, setEditTypePopup] = useState(false)
 
 
-    // const providerDialog = useRef()
-    // const fieldsDialog = useRef()
+    const providerDialog = useRef()
+    const fieldsDialog = useRef()
 
 
     return (
         <>
-            {/* <dialog className="dialog" ref={providerDialog}>
+            <dialog className="dialog" ref={providerDialog}>
                 <div className="dialog__login">Select from the menu before clicking Edit.</div>
                 <button className="dialog__btn" onClick={e => providerDialog.current.close()}>Close</button>
             </dialog>
@@ -178,7 +171,7 @@ export const EditInvoice = () => {
             <dialog className="dialog" ref={fieldsDialog}>
                 <div className="dialog__login">Fill in all required fields.</div>
                 <button className="dialog__btn" onClick={e => fieldsDialog.current.close()}>Close</button>
-            </dialog> */}
+            </dialog>
 
             <h2 className="page__title"> Editing Invoice</h2>
             <div className="page__grid">
@@ -361,6 +354,7 @@ export const EditInvoice = () => {
                             </label>
                             <input 
                                 type="number" 
+                                step="0.01"
                                 className="form__input__input__calc" 
                                 id="costService"
                                 placeholder="$0.00" 
