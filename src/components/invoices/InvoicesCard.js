@@ -38,8 +38,11 @@ export const InvoicesCard = ({ invoice, handleDeleteInvoice, handleEditInvoice }
             <div className="invoice__card__body">
                 <div className="invoice__card__left">
                     <h3 className="invoice__card__title">{invoice.title}</h3>
-                    <p><strong>Provider: </strong>{invoice.provider.name}</p> 
-                    <p><strong>Date: </strong> {changeDateFormat(invoice.date)}</p>
+                    <p><strong>Provider: </strong>{invoice.provider.name} </p>
+                    <p><strong>Account No.: </strong>{invoice.invoiceNumber} <strong>Invoice No.: </strong>{invoice.invoiceNumber}</p> 
+                     
+                    
+                    <p><strong>Date of service: </strong> {changeDateFormat(invoice.date)}</p>
                     <p><strong>Details:</strong> {invoice.details}</p>  
                 </div>
                 <div className="invoice__card__right">

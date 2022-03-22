@@ -176,20 +176,6 @@ export const EditServiceProvider = () => {
 
 
 
-
-
-    // Checks for values in required fields
-    // const handleNewProvider = (event) => {
-    //     event.preventDefault()
-    //     if ((provider.name === "") || (provider.typeId === "")) {
-    //         window.alert('Name and Type are required fields')
-    //     } else {
-    //         editProvider(provider)
-    //             .then(window.alert(`👍'${provider.name} has been updated'`))
-    //             .then(() => navigate(-1))
-    //     }
-    // };
-
     // Fetches all providers and sets in state
     const [providers, setProviders] = useState([]);
     const [sortedProviders, setSortedProviders] = useState([]);
@@ -206,7 +192,7 @@ export const EditServiceProvider = () => {
 
     useEffect(() => {
         if (providers.length > 0) {
-            const tempProviders = providers.sort((a,b) => (a.updatedTimestamp < b.updatedTimestamp) ? 1 : -1)
+            const tempProviders = providers.sort((a,b) => a.updatedTimestamp < b.updatedTimestamp ? 1 : -1)
             setSortedProviders(tempProviders)}
     }, [providers])
 
@@ -223,7 +209,7 @@ export const EditServiceProvider = () => {
             <button className="dialog__btn" onClick={e => providerDialog.current.close()}>Close</button>
         </dialog>
 
-        <h2 className="page__title"> Add Service Provider</h2>
+        <h2 className="page__title"> Edit Service Provider</h2>
         <div className="page__grid">
             <div className="page__grid__left">
                 <picture>

@@ -30,7 +30,13 @@ export const EditType = ({type, setTypes, editTypePopup, setEditTypePopup}) => {
     //Executes the edit function and re-renders page
     const handleEditType = (e) => {
         e.preventDefault()
-        editType(editedType)
+        const editname = editedType.name
+        const finalEdit = {
+            user: sessionUserId,
+            name: editname
+        }
+
+        editType(finalEdit)
         .then(() => getAllTypes(sessionUserId).then(setTypes));
         setEditedType({name: "", userId: sessionUserId})
         setEditTypePopup(false)
@@ -39,8 +45,6 @@ export const EditType = ({type, setTypes, editTypePopup, setEditTypePopup}) => {
     const handleInputChange = (event) => {
         const newTypes = {...type}
         let selectedVal = event.target.value
-        //Need to check for empty string
- 
         newTypes[event.target.id] = selectedVal
         setEditedType(newTypes)
     };
@@ -53,11 +57,10 @@ export const EditType = ({type, setTypes, editTypePopup, setEditTypePopup}) => {
                 <input 
                     type="text"
                     className="input__field__form overlay__input"
-                    id="name"
+                    id="editname"
                     onChange={handleInputChange} 
-                    value={editedType.name}
+                    // value={editedType.name}
                     defaultValue={type.name}
-                    // defaultValue={"Enter new name"}
                     autoFocus>
                 </input>
                 <div className="type__btns">

@@ -36,3 +36,7 @@
 .overlay__btn {
     margin-top: 20px;
 }
+
+#addNewName {
+    width: 400px !important;
+}
