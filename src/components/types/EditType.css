@@ -67,3 +67,7 @@
     padding: 3px 0;
     width: 80px;
 }
+
+#editname {
+    width: 400px !important;
+}

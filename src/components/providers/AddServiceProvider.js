@@ -132,7 +132,8 @@ export const AddServiceProvider = () => {
     const handleSubmit = (event) => {
         event.preventDefault()
         if ((provider.name === "") || (provider.typeId === "")) {
-            window.alert('Name and Type are required fields')
+            // window.alert('Name and Type are required fields')
+            fieldsDialog.current.showModal()
         } else {
             addProvider(provider)
                 .then(window.alert('Your provider has been added'))
@@ -141,12 +142,24 @@ export const AddServiceProvider = () => {
     };
 
     const providerDialog = useRef()
+    const fieldsDialog = useRef()
+    const confirmationDialog = useRef()
 
     return (
         <>
             <dialog className="dialog" ref={providerDialog}>
                 <div className="dialog__login">Select from the menu before clicking Edit.</div>
                 <button className="dialog__btn" onClick={e => providerDialog.current.close()}>Close</button>
+            </dialog>
+
+            <dialog className="dialog" ref={fieldsDialog}>
+                <div className="dialog__login">Name and Type are required fields.</div>
+                <button className="dialog__btn" onClick={e => fieldsDialog.current.close()}>Close</button>
+            </dialog>
+
+            <dialog className="dialog" ref={confirmationDialog}>
+                <div className="dialog__login">Your provider has been added.</div>
+                <button className="dialog__btn" onClick={e => confirmationDialog.current.close()}>Close</button>
             </dialog>
 
             <h2 className="page__title"> Add Service Provider</h2>
