@@ -13,10 +13,10 @@ export const AddType = ({types, setTypes, typeTrigger, setTypeTrigger}) => {
 
     const [type, setType] = useState({
         userId: sessionUserId,
-        name: "",
+        typename: "",
     })
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     //Stores input values then sets them in state
     const handleInputChange = (event) => {
@@ -30,12 +30,16 @@ export const AddType = ({types, setTypes, typeTrigger, setTypeTrigger}) => {
 
     //Checks that popup input is filled in, then saves to database, alerts, clears popup and routes user back to Create Invoice page
     const handleNewType = (event) => {
-        if (type.name === "") {
+        if (type.X === "") {
             window.alert('Fill in all required fields')
         } else {
-            addNewType(type)
+            const newType = {
+                userId: sessionUserId,
+                name: type.typename,
+                }
+            addNewType(newType)
                 .then(window.alert("A new type has been added"))
-                .then(setType({name: "", userId: sessionUserId}))
+                .then(setType({typename: "", userId: sessionUserId}))
                 .then(getAllTypes(sessionUserId).then(setTypes))
                 .then(setTypeTrigger(false))
         }
@@ -49,10 +53,10 @@ export const AddType = ({types, setTypes, typeTrigger, setTypeTrigger}) => {
                 <h3>What new Type do you want to add?</h3>
                 <input 
                     type="text"
-                    className="input__field__form overlay__input"
-                    id="name"
+                    className="input__field__form overlay__input__create"
+                    id="typename"
                     onChange={handleInputChange} 
-                    value={type.name}
+                    value={type.typename}
                     autoFocus>
                 </input>
                 <div className="overlay__btns">

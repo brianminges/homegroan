@@ -35,7 +35,6 @@ export const Register = ({setAuthUser}) => {
                         .then(res => res.json())
                         .then(createdUser => {
                             if (createdUser.hasOwnProperty("id")) {
-                                // setAuthUser(createdUser)
                                 navigate("/")
                             }
                         })
@@ -64,7 +63,6 @@ export const Register = ({setAuthUser}) => {
                 <div className="name__inputs">
                         <div>
                         <fieldset className="main__inputs name__input">
-                            {/* <label htmlFor="firstName"> First Name </label> */}
                             <input ref={firstName} 
                                 type="text" 
                                 name="firstName" 
@@ -75,7 +73,6 @@ export const Register = ({setAuthUser}) => {
                         </div>
                         <div>
                         <fieldset className="main__input name__input">
-                            {/* <label htmlFor="lastName"> Last Name </label> */}
                             <input ref={lastName} 
                                 type="text" 
                                 name="lastName" 
@@ -86,7 +83,6 @@ export const Register = ({setAuthUser}) => {
                         </div>
                 </div>
                 <fieldset className="main__input">
-                    {/* <label htmlFor="inputEmail"> Email address </label> */}
                     <input ref={email}
                         id="email__register" 
                         type="email" 

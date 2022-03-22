@@ -5,8 +5,6 @@ import { getAllTypes } from "./../../modules/TypeManager"
 import { RecentProviders } from "./RecentProviders"
 import { AddType } from "./../types/CreateType"
 import { EditType } from "./../types/EditType"
-
-// import './../invoices/CreateInvoice.css'
 import './AddServiceProvider.css'
 import "./../HomeGroan.css"
 
@@ -68,6 +66,7 @@ export const AddServiceProvider = () => {
     // Sorts all types alphabetically for dropdown on load
     useEffect(() => {
         if (types.length > 0) {
+            // const tempTypes = types.sort((a,b) => (a.name > b.name) ? 1 : -1)
             const tempTypes = types.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1)
             setSortedTypes(tempTypes)}
     }, [types])
@@ -86,13 +85,11 @@ export const AddServiceProvider = () => {
             setEditTypePopup(true)
         }
     }
-
+// *****************************************************************************
     
 
 
-
-// *****************************************************************************
-    // Sets empty object to receive user-input values   
+// Sets empty object to receive user-input values   
     const [provider, setProvider] = useState ({
         userId: sessionUserId,
         name: "",

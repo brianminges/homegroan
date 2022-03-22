@@ -23,10 +23,11 @@
     width: 100%;
 }
 
-.overlay__input {
+.overlay__input__create {
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
+    width: 400px;
 }
 
 .overlay__btns {
@@ -35,4 +36,8 @@
 
 .overlay__btn {
     margin-top: 20px;
+}
+ 
+#typename {
+    width: 400px;
 }

@@ -9,6 +9,7 @@ export const EditType = ({type, setTypes, editTypePopup, setEditTypePopup}) => {
     const sessionUserId = sessionUser.id;
 
     const [editedType, setEditedType] = useState({...type});
+    // NOTE: There is a known bug on this component such that editedType is not being set and the value cannot be edited. The delete function on the modal works even though the selected value does not show up in the modal. 
 
     const{typeId} = useParams()
 
@@ -37,12 +38,12 @@ export const EditType = ({type, setTypes, editTypePopup, setEditTypePopup}) => {
     }
 
     const handleInputChange = (event) => {
-        const newTypes = {...type}
+        const newEditedType = {...editedType}
         let selectedVal = event.target.value
         //Need to check for empty string
  
-        newTypes[event.target.id] = selectedVal
-        setEditedType(newTypes)
+        newEditedType[event.target.id] = selectedVal
+        setEditedType(newEditedType)
     };
 
     //Checks if popup link was selected and then pops up new window
@@ -53,11 +54,10 @@ export const EditType = ({type, setTypes, editTypePopup, setEditTypePopup}) => {
                 <input 
                     type="text"
                     className="input__field__form overlay__input"
-                    id="name"
+                    id="newname"
                     onChange={handleInputChange} 
                     value={editedType.name}
                     defaultValue={type.name}
-                    // defaultValue={"Enter new name"}
                     autoFocus>
                 </input>
                 <div className="type__btns">

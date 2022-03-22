@@ -1,3 +1,5 @@
+
+
 .editing__overlay {
     display: flex;
     flex-direction: column;
@@ -66,4 +68,13 @@
     font-size: .75rem;
     padding: 3px 0;
     width: 80px;
+}
+
+.overlay__input {
+    margin-top: 20px;
+    width: 400px;
+}
+
+#newname {
+    width: 400px;
 }

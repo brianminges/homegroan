@@ -40,5 +40,5 @@ export const editType = (editedType) => {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(editedType)
-    }).then(res => res.json())
+    }).then(res => res.json());
 }
