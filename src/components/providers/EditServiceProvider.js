@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useRef } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { getAllStates, editProvider, getAllProviders, getProviderById } from "./../../modules/ProviderManager"
-
 import { getAllTypes } from "./../../modules/TypeManager"
 import { AddType } from "./../types/CreateType"
 import { EditType } from "./../types/EditType"
-import { RecentProviders } from "./RecentProviders"
 import { RecentProvidersUpdated } from "./RecentProvidersUpdated"
 import './../invoices/CreateInvoice.css'
 import './AddServiceProvider.css'
@@ -51,7 +49,7 @@ export const EditServiceProvider = () => {
                 emailaddress: provider.emailaddress,
                 twitter: provider.twitter,
                 facebook: provider.facebook,
-                updatedTimestamp: new Date
+                updatedTimestamp: new Date().toUTCString()
             };
         
             editProvider(editedProvider)
@@ -109,7 +107,7 @@ export const EditServiceProvider = () => {
     }, [types])
 
 
-
+    //Gets provider selected by each edit button
     useEffect(() => {
         getProviderById(providerId)
             .then(provider => {
@@ -172,11 +170,24 @@ export const EditServiceProvider = () => {
         getProviders()
     }, [])
 
+    // useEffect(() => {
+    //     if (providers.length > 0) {
+    //         const tempProviders = providers.sort((a,b) => a.updatedTimestamp < b.updatedTimestamp ? 1 : -1)
+    //         setSortedProviders(tempProviders)}
+    // }, [providers])
+
+    //Sorts providers by updatedTimestamp
     useEffect(() => {
+        const newProviders = [];
         if (providers.length > 0) {
-            const tempProviders = providers.sort((a,b) => a.updatedTimestamp < b.updatedTimestamp ? 1 : -1)
-            setSortedProviders(tempProviders)}
-    }, [providers])
+            providers.map(provider => {
+                if (provider.updatedTimestamp) {
+                    newProviders.push(provider) }
+            })
+        }
+        const tempProviders = newProviders.sort((a,b) => Date.parse(a.updatedTimestamp) < Date.parse(b.updatedTimestamp) ? 1 : -1)
+        setSortedProviders(tempProviders)
+    }, [providers]);
 
 
 
@@ -446,17 +457,22 @@ export const EditServiceProvider = () => {
 
             <div className="page__grid__right__provider">
                     <h3>Recently updated</h3>
-                    {providers.slice(0,6).map(provider => {
+                    {/* {providers.slice(0,5).map(provider => {
                         if (provider.updatedTimestamp) {
                             return <RecentProvidersUpdated 
                             key={provider.id}
                             provider={provider}/>}
                         }
+                    )} */}
+                    {sortedProviders.slice(0,5).map(provider => 
+                    <RecentProvidersUpdated 
+                            key={provider.id}
+                            provider={provider}/>
+            
                     )}
+
             </div>
         </div>
         </>
     )
 }
-
-
