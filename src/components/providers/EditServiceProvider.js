@@ -154,8 +154,6 @@ export const EditServiceProvider = () => {
     };
 
 
-
-
     // Fetches all providers and sets in state
     const [providers, setProviders] = useState([]);
     const [sortedProviders, setSortedProviders] = useState([]);
