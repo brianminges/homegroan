@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { getProviderById, deleteProvider, getAllProviders } from "./../../modules/ProviderManager"
-import { getAllInvoices } from "./../../modules/InvoiceManager"
+import { getInvoicesByProviderId, deleteInvoice } from "./../../modules/InvoiceManager"
+import { InvoicesCard } from "./../invoices/InvoicesCard"
 import "./ServiceProviderDetail.css"
+import "./../invoices/InvoicesList.css"
+import "./../invoices/InvoicesCard.css"
+
 
 export const ServiceProviderDetail = () => {
   //Gets logged-in user info
@@ -21,11 +25,16 @@ export const ServiceProviderDetail = () => {
       });
   }, [providerId]);
 
+
+
+
+
+
   //Fetches invoices on page load and sets to hook 
   const [invoices, setInvoices] = useState([])
 
   const getInvoices = () => {
-    return getAllInvoices(sessionUserId).then(dataFromAPI => {
+    return getInvoicesByProviderId(sessionUserId, providerId).then(dataFromAPI => {
         setInvoices(dataFromAPI)
     });
   };
@@ -34,29 +43,18 @@ export const ServiceProviderDetail = () => {
       getInvoices() 
   }, []);
 
-  const arrayOfInvoicesByProvider = []
-  const setProviderArray = () => {
-    invoices.map(invoice => {
-      if (invoice.providerId === providerId) {
-        console.log(invoice.providerId)
-        console.log(providerId)
-        arrayOfInvoicesByProvider.push(invoice)
-      }
-    })
-  }
+  // useEffect(() => {
+  //   console.log(invoices)
+  //   console.log(providerId)
+  // }, [invoices]);
 
-  useEffect(() => {
-    console.log(invoices)
-  }, [invoices]);
-  
-  useEffect(() => {
-    setProviderArray()
-  }, [invoices]);
 
-  
-  
+//Executes the delete function and re-renders page
+const handleDeleteInvoice = (id) => {
+  deleteInvoice(id)
+  .then(() => getInvoicesByProviderId(providerId).then(setInvoices));
+};
 
-  
 
 
 
@@ -82,19 +80,19 @@ export const ServiceProviderDetail = () => {
  
 
   //Gets current year
-  const currentDate = new Date()
-  const currentYear = currentDate.getFullYear()
+  // const currentDate = new Date()
+  // const currentYear = currentDate.getFullYear()
 
 
-  const getInvoiceYear = (inputDate) => {
-    let date = new Date(inputDate);
+  // const getInvoiceYear = (inputDate) => {
+  //   let date = new Date(inputDate);
     
-    return date.toLocaleString('en-US', {
-      year: 'numeric', // numeric, 2-digit
-    });
-  }
+  //   return date.toLocaleString('en-US', {
+  //     year: 'numeric', // numeric, 2-digit
+  //   });
+  // }
 
-
+  
  
  
 
@@ -105,16 +103,26 @@ export const ServiceProviderDetail = () => {
    
 
     <div className="detail__page__grid__center">
-        <h3 className="detail__subhed">Address</h3> 
-        <p>{provider.address}</p>
-        <p>{provider.city}, {provider.state} {provider.zip}</p>
-        <h3 className="detail__subhed">Contact</h3> 
-        <p>Office: {provider.officePhone}</p> <p>Cell: {provider.officePhone}</p>
-        <p><a href={`http://www.${provider.website}`} target="_blank" rel="noopener noreferrer">Website</a></p>
-        <p><a href={`mailto:{provider.emailaddress}`}>{provider.emailaddress}</a></p>
-        <h3 className="detail__subhed">Social Media</h3> 
-        <p><a href={`http://www.twitter.com/${provider.twitter}`} target="_blank" rel="noopener noreferrer">{provider.twitter}</a></p>
-        <p><a href={`http://www.facebook.com${provider.facebook}`} target="_blank" rel="noopener noreferrer">Facebook.com{provider.facebook}</a></p>
+      <h3 className="detail__subhed">Address</h3> 
+      <p>{provider.address}</p>
+      <p>{provider.city}, {provider.state} {provider.zip}</p>
+      <h3 className="detail__subhed">Contact</h3> 
+      <p>Office: {provider.officePhone}</p> <p>Cell: {provider.officePhone}</p>
+      <p><a href={`http://www.${provider.website}`} target="_blank" rel="noopener noreferrer">Website</a></p>
+      <p><a href={`mailto:{provider.emailaddress}`}>{provider.emailaddress}</a></p>
+      <h3 className="detail__subhed">Social Media</h3> 
+      <p><a href={`http://www.twitter.com/${provider.twitter}`} target="_blank" rel="noopener noreferrer">{provider.twitter}</a></p>
+      <p><a href={`http://www.facebook.com${provider.facebook}`} target="_blank" rel="noopener noreferrer">Facebook.com{provider.facebook}</a></p>
+    
+        
+    </div>
+    <div className="detailtest">
+      {invoices.map(invoice =>
+      <InvoicesCard 
+      key={invoice.id}
+      invoice={invoice}
+      handleDeleteInvoice={handleDeleteInvoice}/>
+      )}
     </div>
     {/* <div className="provider__buttons">
         <div>
@@ -137,7 +145,7 @@ export const ServiceProviderDetail = () => {
             </button>
         </div>
     </div> */}
-
+    
     </>
   )
 }

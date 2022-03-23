@@ -79,7 +79,7 @@ export const EditInvoice = () => {
                 fieldsDialog.current.showModal()
         } else {
             editInvoice(invoice)
-                .then(() => navigate("/Invoices"))
+                .then(() => navigate(-1))
         }
     };
 

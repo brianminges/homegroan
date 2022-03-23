@@ -14,6 +14,12 @@ export const getAllInvoicesById = (invoiceId) => {
     .then(res => res.json())
 }
 
+// Gets all invoices by Provider ID
+export const getInvoicesByProviderId = (sessionUserId, providerId) => { 
+    return fetch(`${URL}/invoices/?providerId=${providerId}`)
+    .then(res => res.json())
+}
+
 //Posts a new invoice 
 export const addInvoice = (newInvoice) => {
     return fetch(`${URL}/invoices`, {
