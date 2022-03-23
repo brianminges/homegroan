@@ -40,7 +40,7 @@ a {
 }
 
 a:visited {
-    color: white;
+    color: #DE7452;
     cursor: pointer;
     text-decoration: none;
 }
