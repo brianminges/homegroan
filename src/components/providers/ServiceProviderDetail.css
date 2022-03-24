@@ -1,5 +1,6 @@
 .detail__subhed {
     margin-top: 10px;
+    text-align: center;
 }
 
 .detail__timestamp__added {
@@ -20,12 +21,19 @@
     margin-left: auto;
     margin-right: auto;
     overflow-x: auto;
-    width: 250px;
+    width: 700px;
+    display: flex;
+    justify-content: space-evenly;
 }
 
-.detailtest {
+.detail__invoices {
     margin-left: auto;
     margin-right: auto;
     width: 1000px;
 }
  
+.detail__flex {
+    display: flex;
+    flex-direction: column;
+    /* background-color: red; */
+}
