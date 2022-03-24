@@ -41,7 +41,7 @@ export const Login = ({setAuthUser}) => {
                         <img className="main__image" id="house1" src={'./../../images/house1.png'} alt="Computer-generated 3D house" />
                     </picture>
                     <h1 className="main__hed">Home Groan</h1>
-                    <h2 className="main__subhed">Please sign in</h2>
+                    <h2 className="main__subhed">For the unhappy homeowner</h2>
                     <fieldset className="main__input">
                         <input 
                             ref={email} 

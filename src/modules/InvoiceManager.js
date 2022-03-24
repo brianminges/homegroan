@@ -15,10 +15,24 @@ export const getAllInvoicesById = (invoiceId) => {
 }
 
 // Gets all invoices by Provider ID
+// export const getInvoicesByProviderId = (sessionUserId, providerId) => { 
+//     return fetch(`${URL}/invoices/?providerId=${providerId}`)
+//     .then(res => res.json())
+// }
+
+// Gets all invoices by Provider ID
+// export const getInvoicesByProviderId = (sessionUserId, providerId) => { 
+//     return fetch(`${URL}/invoices/?userId=${sessionUserId}&_expand=provider?providerId=${providerId}`)
+//     .then(res => res.json())
+// }
+
+// Gets all invoices by Provider ID
 export const getInvoicesByProviderId = (sessionUserId, providerId) => { 
-    return fetch(`${URL}/invoices/?providerId=${providerId}`)
+    return fetch(`${URL}/invoices/?providerId=${providerId}&_expand=provider`)
     .then(res => res.json())
 }
+
+
 
 //Posts a new invoice 
 export const addInvoice = (newInvoice) => {

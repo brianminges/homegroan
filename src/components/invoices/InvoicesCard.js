@@ -4,7 +4,7 @@ import { useParams, Link, useNavigate } from "react-router-dom"
 import "./InvoicesCard.css"
 
 
-export const InvoicesCard = ({ invoice, handleDeleteInvoice, handleEditInvoice }) => {
+export const InvoicesCard = ({  invoice, handleDeleteInvoice, handleEditInvoice }) => {
     
 
     const {providerId} = useParams();
@@ -38,7 +38,7 @@ export const InvoicesCard = ({ invoice, handleDeleteInvoice, handleEditInvoice }
             <div className="invoice__card__body">
                 <div className="invoice__card__left">
                     <h3 className="invoice__card__title">{invoice.title}</h3>
-                    {/* <p><strong>Provider: </strong>{invoice.provider.name} </p> */}
+                    <p><strong>Provider: </strong>{invoice.provider.name} </p>
                     <p><strong>Account No.: </strong>{invoice.invoiceNumber} <strong>Invoice No.: </strong>{invoice.invoiceNumber}</p> 
                      
                     

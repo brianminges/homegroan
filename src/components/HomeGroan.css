@@ -40,13 +40,13 @@ a {
 }
 
 a:visited {
-    color: #DE7452;
+    color: black;
     cursor: pointer;
     text-decoration: none;
 }
 
 a:hover {
-    color: black;
+    color: #DE7452;
     cursor: pointer;
     text-decoration: none;
 }

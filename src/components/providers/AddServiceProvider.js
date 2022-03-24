@@ -107,8 +107,8 @@ export const AddServiceProvider = () => {
         website: "",
         twitter: "",
         facebook: "",
-        timestamp: new Date()
-        // .toLocaleString()
+        timestamp: new Date(),
+        favorite: false
     })
 
     // Updates state for each user keystroke

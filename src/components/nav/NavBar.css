@@ -25,7 +25,7 @@
 }
 
 .navbar__item:hover {
-    color: black !important;
+    color: #DE7452 !important;
     list-style: none;
     font-weight: bold;
     width: 150px;
