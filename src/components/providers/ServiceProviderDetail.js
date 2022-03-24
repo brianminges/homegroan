@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { getProviderById, deleteProvider, getAllProviders } from "./../../modules/ProviderManager"
-import { getInvoicesByProviderId, deleteInvoice } from "./../../modules/InvoiceManager"
+import { getInvoicesByProviderId, deleteInvoice, getAllInvoices } from "./../../modules/InvoiceManager"
 import { InvoicesCard } from "./../invoices/InvoicesCard"
 import "./ServiceProviderDetail.css"
 import "./../invoices/InvoicesList.css"
@@ -30,7 +30,7 @@ export const ServiceProviderDetail = () => {
 
 
 
-  //Fetches invoices on page load and sets to hook 
+  //Fetches invoices by Provider ID on page load and sets to hook 
   const [invoices, setInvoices] = useState([])
 
   const getInvoices = () => {
@@ -43,17 +43,19 @@ export const ServiceProviderDetail = () => {
       getInvoices() 
   }, []);
 
-  // useEffect(() => {
-  //   console.log(invoices)
-  //   console.log(providerId)
-  // }, [invoices]);
+  useEffect(() => {
+    console.log(invoices)
+    console.log(providerId)
+  }, [invoices]);
 
 
-//Executes the delete function and re-renders page
-const handleDeleteInvoice = (id) => {
-  deleteInvoice(id)
-  .then(() => getInvoicesByProviderId(providerId).then(setInvoices));
-};
+
+
+  //Executes the delete function and re-renders page
+  const handleDeleteInvoice = (id) => {
+    deleteInvoice(id)
+    .then(() => getInvoicesByProviderId(providerId).then(setInvoices));
+  };
 
 
 
@@ -65,35 +67,16 @@ const handleDeleteInvoice = (id) => {
     let date = new Date(inputDate);
     
     return date.toLocaleString('en-US', {
-        weekday: 'long', // long, short, narrow
-        day: 'numeric', // numeric, 2-digit
-        year: 'numeric', // numeric, 2-digit
-        month: 'long', // numeric, 2-digit, long, short, narrow
-        hour: 'numeric', // numeric, 2-digit
-        minute: 'numeric', // numeric, 2-digit
-        // second: 'numeric', // numeric, 2-digit
+        weekday: 'long', 
+        day: 'numeric',  
+        year: 'numeric',  
+        month: 'long',  
+        hour: 'numeric',  
+        minute: 'numeric',  
     });
   }
 
 
-
- 
-
-  //Gets current year
-  // const currentDate = new Date()
-  // const currentYear = currentDate.getFullYear()
-
-
-  // const getInvoiceYear = (inputDate) => {
-  //   let date = new Date(inputDate);
-    
-  //   return date.toLocaleString('en-US', {
-  //     year: 'numeric', // numeric, 2-digit
-  //   });
-  // }
-
-  
- 
  
 
   return (
