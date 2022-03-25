@@ -30,7 +30,7 @@ export const ServiceProviderDetail = () => {
   const [invoices, setInvoices] = useState([])
 
   const getInvoices = () => {
-    return getInvoicesByProviderId(sessionUserId, providerId).then(dataFromAPI => {
+    return getInvoicesByProviderId(providerId).then(dataFromAPI => {
         setInvoices(dataFromAPI)
     });
   };
@@ -52,7 +52,7 @@ export const ServiceProviderDetail = () => {
   // Executes the delete function on each invoice and re-renders page
   const handleDeleteInvoice = (id) => {
     deleteInvoice(id)
-    .then(() => getInvoicesByProviderId(sessionUserId, providerId).then(setInvoices));
+    .then(() => getInvoicesByProviderId(providerId).then(setInvoices));
   };
 
 
@@ -75,53 +75,53 @@ export const ServiceProviderDetail = () => {
   }
 
   //Lines 77-132 calculate total cost for each invoice category
-  const [serviceCost, setServiceCost] = useState([]);
-  const [partsCost, setPartsCost] = useState([]);
-  const [laborCost, setLaborCost] = useState([]);
-  const [miscCost, setMiscCost] = useState([]);
-  const [taxCost, setTaxCost] = useState([]);
+  // const [serviceCost, setServiceCost] = useState([]);
+  // const [partsCost, setPartsCost] = useState([]);
+  // const [laborCost, setLaborCost] = useState([]);
+  // const [miscCost, setMiscCost] = useState([]);
+  // const [taxCost, setTaxCost] = useState([]);
   const [totalCost, setTotalCost] = useState([]);
 
 
-  useEffect(() => {
-    let totalCounter = 0
-    invoices.forEach(invoice => {
-      totalCounter += invoice.costService
-      setServiceCost(totalCounter.toFixed(2))
-    })
-  }, [invoices]);
+  // useEffect(() => {
+  //   let totalCounter = 0
+  //   invoices.forEach(invoice => {
+  //     totalCounter += invoice.costService
+  //     setServiceCost(totalCounter.toFixed(2))
+  //   })
+  // }, [invoices]);
 
-  useEffect(() => {
-    let totalCounter = 0
-    invoices.forEach(invoice => {
-      totalCounter += invoice.costParts
-      setPartsCost(totalCounter.toFixed(2))
-    })
-  }, [invoices]);
+  // useEffect(() => {
+  //   let totalCounter = 0
+  //   invoices.forEach(invoice => {
+  //     totalCounter += invoice.costParts
+  //     setPartsCost(totalCounter.toFixed(2))
+  //   })
+  // }, [invoices]);
 
-  useEffect(() => {
-    let totalCounter = 0
-    invoices.forEach(invoice => {
-      totalCounter += invoice.costLabor
-      setLaborCost(totalCounter.toFixed(2))
-    })
-  }, [invoices]);
+  // useEffect(() => {
+  //   let totalCounter = 0
+  //   invoices.forEach(invoice => {
+  //     totalCounter += invoice.costLabor
+  //     setLaborCost(totalCounter.toFixed(2))
+  //   })
+  // }, [invoices]);
 
-  useEffect(() => {
-    let totalCounter = 0
-    invoices.forEach(invoice => {
-      totalCounter += invoice.costMisc
-      setMiscCost(totalCounter.toFixed(2))
-    })
-  }, [invoices]);
+  // useEffect(() => {
+  //   let totalCounter = 0
+  //   invoices.forEach(invoice => {
+  //     totalCounter += invoice.costMisc
+  //     setMiscCost(totalCounter.toFixed(2))
+  //   })
+  // }, [invoices]);
 
-  useEffect(() => {
-    let totalCounter = 0
-    invoices.forEach(invoice => {
-      totalCounter += invoice.costTax
-      setTaxCost(totalCounter.toFixed(2))
-    })
-  }, [invoices]);
+  // useEffect(() => {
+  //   let totalCounter = 0
+  //   invoices.forEach(invoice => {
+  //     totalCounter += invoice.costTax
+  //     setTaxCost(totalCounter.toFixed(2))
+  //   })
+  // }, [invoices]);
 
   useEffect(() => {
     let totalCounter = 0
@@ -134,35 +134,18 @@ export const ServiceProviderDetail = () => {
 
   return (
     <>
-    <h2 className="page__title">{provider.name}</h2>
+    <h2 className="page__title"><a href={`http://www.${provider.website}`} target="_blank" rel="noopener noreferrer">{provider.name}</a></h2>
     <p className="detail__timestamp__added">Added on {changeDateFormat(provider.timestamp)}</p>
-    <p> You've spent ${changeCurrencyFormat(totalCost)} at {provider.name}</p>
-    <p>Service: {serviceCost}</p>
-    <p>Parts: {partsCost}</p>
-    <p>Labor: {laborCost}</p>
-    <p>Misc: {miscCost}</p>
-    <p>Tax: {taxCost}</p>
-
-    <div className="detail__page__grid__center">
-      <div className="detail__flex">
-          <h3 className="detail__subhed">Address</h3> 
-            <p>{provider.address}</p>
-            <p>{provider.city}, {provider.state} {provider.zip}</p>
-            
-      </div>
-      <div className="detail__flex">
-        <h3 className="detail__subhed">Contact</h3> 
-          <p>Office: {provider.officePhone}</p> <p>Cell: {provider.officePhone}</p>
-          <p><a href={`http://www.${provider.website}`} target="_blank" rel="noopener noreferrer">Website</a></p>
-          <p><a href={`mailto:{provider.emailaddress}`}>{provider.emailaddress}</a></p>
-      </div>
-      <div className="detail__flex">
-        <h3 className="detail__subhed">Social Media</h3> 
-        <p><a href={`http://www.twitter.com/${provider.twitter}`} target="_blank" rel="noopener noreferrer">{provider.twitter}</a></p>
-        <p><a href={`http://www.facebook.com${provider.facebook}`} target="_blank" rel="noopener noreferrer">Facebook.com{provider.facebook}</a></p>
-      </div>
-        
+    <div className="detail__address"> 
+    <p>{provider.address}, {provider.city}, {provider.state} {provider.zip}</p>
+    <p><strong>Office:</strong> {provider.officePhone} <strong>Cell:</strong> {provider.officePhone} (c)</p>
+    <p><strong>Email:</strong> <a href={`mailto:{provider.emailaddress}`}>{provider.emailaddress}</a> <strong>Web: </strong><a href={`http://www.${provider.website}`} target="_blank" rel="noopener noreferrer">{provider.website}</a></p>
+    <p><strong>Social: </strong> <a href={`http://www.twitter.com/${provider.twitter}`} target="_blank" rel="noopener noreferrer">{provider.twitter}</a> | <a href={`http://www.facebook.com${provider.facebook}`} target="_blank" rel="noopener noreferrer">Facebook.com{provider.facebook}</a></p>
+    <strong>Total spent to date:</strong> ${changeCurrencyFormat(totalCost)}
     </div>
+
+
+    
     
     <div className="detail__invoices">
 
@@ -173,27 +156,7 @@ export const ServiceProviderDetail = () => {
       handleDeleteInvoice={handleDeleteInvoice}/>
       )}
     </div>
-    {/* <div className="provider__buttons">
-        <div>
-            <button
-                id="provider__delete__button"
-                onClick={() => handleDeleteProvider(provider.id)}>
-                Delete
-            </button>
-        </div>
-        <div>
-            <Link to={`/ServiceProviders/${provider.id}`}>
-                <button id="provider__details__button">Details</button>
-            </Link>
-        </div>
-        <div>
-            <button
-                id="provider__edit__button"
-                onClick={() => {navigate(`/ServiceProviders/${provider.id}/Edit`)}} >
-                Edit
-            </button>
-        </div>
-    </div> */}
+
     
     </>
   )

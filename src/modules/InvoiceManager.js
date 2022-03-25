@@ -15,7 +15,7 @@ export const getAllInvoicesById = (invoiceId) => {
 }
 
 // Gets all invoices by Provider ID
-export const getInvoicesByProviderId = (sessionUserId, providerId) => { 
+export const getInvoicesByProviderId = (providerId) => { 
     return fetch(`${URL}/invoices/?providerId=${providerId}&_expand=provider`)
     .then(res => res.json())
 }
