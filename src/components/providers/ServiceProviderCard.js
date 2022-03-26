@@ -3,16 +3,18 @@ import { Link, useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter} from '@fortawesome/free-brands-svg-icons'
 import { faFacebook} from '@fortawesome/free-brands-svg-icons'
+import { faStar } from '@fortawesome/free-solid-svg-icons'
 import "./ServiceProviderCard.css"
-{/* <FontAwesomeIcon icon={faTwitter} /> 
-<FontAwesomeIcon icon={faFacebook} /> */}
+{/* <FontAwesomeIcon icon={faTwitter}  */}
+{/* <FontAwesomeIcon icon={faFacebook} />   */}
 export const ServiceProviderCard = ({ provider, handleDeleteProvider, handleMakeFavorite, handleMakeUnfavorite }) => {
     
     const navigate = useNavigate();
 
     let favoriteResult = ""
     if (provider.favorite === true) {
-        favoriteResult = "⭐" 
+        // favoriteResult = <FontAwesomeIcon className="color" icon={faTwitter} /> 
+        favoriteResult = <FontAwesomeIcon className="color" icon={faStar} /> 
     } 
  
     return (
