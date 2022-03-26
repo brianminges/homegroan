@@ -6,8 +6,8 @@ import { deleteProvider, editProvider } from "./../../modules/ProviderManager"
 import "./ServiceProviderList.css"
 
 export const ServiceProviderList = () => {
-    const [isLoading, setIsLoading] = useState(false);
-    const {providerId} = useParams();
+    // const [isLoading, setIsLoading] = useState(false);
+    // const {providerId} = useParams();
 
     const [providers, setProviders] = useState([]);
     const [sortedProviders, setSortedProviders] = useState([]);
@@ -43,14 +43,12 @@ export const ServiceProviderList = () => {
 
 
     //Controls favorites
-    // const [favorite, setFavorite] = useState({})
     const handleMakeFavorite = id => {
  
         const favoritedProvider = {
           id: id,
           favorite: true
         };
-        // setFavorite(favorite)
         editProvider(favoritedProvider)
         .then(() => getAllProviders(sessionUserId).then(setProviders));
     }
@@ -60,18 +58,9 @@ export const ServiceProviderList = () => {
           id: id,
           favorite: false
         };
-        // setFavorite(favorite)
         editProvider(unfavoritedProvider)
         .then(() => getAllProviders(sessionUserId).then(setProviders));
     }
-
-
-
-
-    // useEffect(() => {
-    //     console.log(favorite)
-    // }, [providers])
-
 
 
     return (
