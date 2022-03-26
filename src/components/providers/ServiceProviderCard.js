@@ -6,14 +6,20 @@ import { faFacebook} from '@fortawesome/free-brands-svg-icons'
 import "./ServiceProviderCard.css"
 {/* <FontAwesomeIcon icon={faTwitter} /> 
 <FontAwesomeIcon icon={faFacebook} /> */}
-export const ServiceProviderCard = ({ provider, handleDeleteProvider }) => {
+export const ServiceProviderCard = ({ provider, handleDeleteProvider, handleMakeFavorite, handleMakeUnfavorite }) => {
     
     const navigate = useNavigate();
+
+    let favoriteResult = ""
+    if (provider.favorite === true) {
+        favoriteResult = "⭐" 
+    } 
  
     return (
         <>
         <div className="provider__card">
                 <div>
+                    <p className="provider__favorite">{favoriteResult}</p>
                     <h3>{provider.name}</h3>
                     <p>{provider.address}</p>
                     <p>{provider.city}, {provider.state} {provider.zip}</p>
@@ -38,11 +44,25 @@ export const ServiceProviderCard = ({ provider, handleDeleteProvider }) => {
                     </div>
                     <div>
                         <button
+                            id="provider__favorite__button"
+                            onClick={() => {
+                                if (provider.favorite === false) {
+                                    handleMakeFavorite(provider.id) 
+                                } else if (provider.favorite === true) {
+                                    handleMakeUnfavorite(provider.id)
+                                }
+                            }} > 
+                            Favorite
+                        </button>
+                    </div>
+                    <div>
+                        <button
                             id="provider__edit__button"
-                            onClick={() => {navigate(`/ServiceProviders/${provider.id}/Edit`)}} >
+                            onClick={() => {navigate(`/ServiceProviders/${provider.id}/Edit`)}}>
                             Edit
                         </button>
                     </div>
+
                 </div>
             </div>
         </>

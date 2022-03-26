@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react"
+import { useParams } from "react-router-dom"
 import { getAllProviders } from "./../../modules/ProviderManager"
 import { ServiceProviderCard } from "./ServiceProviderCard";
-import { deleteProvider } from "./../../modules/ProviderManager"
+import { deleteProvider, editProvider } from "./../../modules/ProviderManager"
 import "./ServiceProviderList.css"
 
 export const ServiceProviderList = () => {
+    const [isLoading, setIsLoading] = useState(false);
+    const {providerId} = useParams();
+
     const [providers, setProviders] = useState([]);
     const [sortedProviders, setSortedProviders] = useState([]);
 
@@ -35,6 +39,41 @@ export const ServiceProviderList = () => {
             setSortedProviders(tempProviders)}
     }, [providers])
 
+
+
+
+    //Controls favorites
+    // const [favorite, setFavorite] = useState({})
+    const handleMakeFavorite = id => {
+ 
+        const favoritedProvider = {
+          id: id,
+          favorite: true
+        };
+        // setFavorite(favorite)
+        editProvider(favoritedProvider)
+        .then(() => getAllProviders(sessionUserId).then(setProviders));
+    }
+
+    const handleMakeUnfavorite = id => {
+        const unfavoritedProvider = {
+          id: id,
+          favorite: false
+        };
+        // setFavorite(favorite)
+        editProvider(unfavoritedProvider)
+        .then(() => getAllProviders(sessionUserId).then(setProviders));
+    }
+
+
+
+
+    // useEffect(() => {
+    //     console.log(favorite)
+    // }, [providers])
+
+
+
     return (
         <>
         <h2 className="page__title">All Service Providers</h2>
@@ -44,6 +83,8 @@ export const ServiceProviderList = () => {
             <ServiceProviderCard 
             key={provider.id}
             provider={provider}
+            handleMakeFavorite={handleMakeFavorite}
+            handleMakeUnfavorite={handleMakeUnfavorite}
             handleDeleteProvider={handleDeleteProvider}/>
             )}
         </div>

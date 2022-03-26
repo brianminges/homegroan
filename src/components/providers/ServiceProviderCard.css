@@ -12,6 +12,10 @@
     width: 300px;
 }
 
+.provider__favorite {
+    text-align: center;
+}
+
 /* BUTTONS ******************** */
 .provider__buttons {
     display: flex;
@@ -51,6 +55,23 @@
 }
 
 #provider__details__button:hover {
+    background-color: lightgray;
+    box-shadow: 1px 1px 20px #1e4c92;
+    color: #1e4c92;
+    font-size: .75rem;
+    padding: 3px 0;
+    width: 60px;
+}
+
+#provider__favorite__button {
+    background-color: #1e4c92;
+    color: white;
+    font-size: .75rem;
+    padding: 3px 0;
+    width: 60px;
+}
+
+#provider__favorite__button:hover {
     background-color: lightgray;
     box-shadow: 1px 1px 20px #1e4c92;
     color: #1e4c92;

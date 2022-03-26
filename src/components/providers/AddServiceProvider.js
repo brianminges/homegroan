@@ -168,7 +168,7 @@ export const AddServiceProvider = () => {
                     <picture>
                         <img 
                             className="main__image" 
-                            src={'./../../images/black.png'} 
+                            src={'./../../images/handyman1.png'} 
                             alt="Computer-generated figure holding a large wrench" />
                     </picture>
                 </div>

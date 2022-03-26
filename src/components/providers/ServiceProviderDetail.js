@@ -53,6 +53,7 @@ export const ServiceProviderDetail = () => {
   const handleDeleteInvoice = (id) => {
     deleteInvoice(id)
     .then(() => getInvoicesByProviderId(providerId).then(setInvoices));
+    this.forceUpdate()
   };
 
 
@@ -138,7 +139,7 @@ export const ServiceProviderDetail = () => {
     <p className="detail__timestamp__added">Added on {changeDateFormat(provider.timestamp)}</p>
     <div className="detail__address"> 
     <p>{provider.address}, {provider.city}, {provider.state} {provider.zip}</p>
-    <p><strong>Office:</strong> {provider.officePhone} <strong>Cell:</strong> {provider.officePhone} (c)</p>
+    <p><strong>Office:</strong> {provider.officePhone} <strong>Cell:</strong> {provider.officePhone} </p>
     <p><strong>Email:</strong> <a href={`mailto:{provider.emailaddress}`}>{provider.emailaddress}</a> <strong>Web: </strong><a href={`http://www.${provider.website}`} target="_blank" rel="noopener noreferrer">{provider.website}</a></p>
     <p><strong>Social: </strong> <a href={`http://www.twitter.com/${provider.twitter}`} target="_blank" rel="noopener noreferrer">{provider.twitter}</a> | <a href={`http://www.facebook.com${provider.facebook}`} target="_blank" rel="noopener noreferrer">Facebook.com{provider.facebook}</a></p>
     <strong>Total spent to date:</strong> ${changeCurrencyFormat(totalCost)}
