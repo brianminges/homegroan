@@ -7,7 +7,6 @@ import "./ServiceProviderDetail.css"
 import "./../invoices/InvoicesList.css"
 import "./../invoices/InvoicesCard.css"
 
-
 export const ServiceProviderDetail = () => {
   //Gets logged-in user info
   const sessionUser = JSON.parse(window.sessionStorage.getItem("homegroan_user"))
