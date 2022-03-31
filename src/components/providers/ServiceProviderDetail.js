@@ -43,9 +43,8 @@ export const ServiceProviderDetail = () => {
   const [sortedInvoices, setSortedInvoices] = useState([]);
 
   useEffect(() => {
-      if (invoices.length > 0) {
-          const tempInvoices = invoices.sort((a,b) => (a.date < b.date) ? 1 : -1)
-          setSortedInvoices(tempInvoices)}
+    const tempInvoices = invoices.sort((a,b) => (a.date < b.date) ? 1 : -1)
+    setSortedInvoices(tempInvoices)
   }, [invoices])
 
 
@@ -53,7 +52,6 @@ export const ServiceProviderDetail = () => {
   const handleDeleteInvoice = (id) => {
     deleteInvoice(id)
     .then(() => getInvoicesByProviderId(providerId).then(setInvoices));
-    this.forceUpdate()
   };
 
 
