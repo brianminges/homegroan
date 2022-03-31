@@ -1,70 +1,27 @@
-# Getting Started with Create React App
+# Home Groan - for the unhappy homeowner
+An app to keep track of household invoices and service providers.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## General information
+This is my second attempt at a working app, but first using React, after studing front-end coding at Nashville Software School. It incorporates many of the areas of study, including fetch API, JSON, array methods, forms and state. The sign-in code was provided by instructors at NSS. Authentication is not an objective of the class, and this is meant only to allow for multiple users. It is not secure, and is not meant to be. 
 
-## Available Scripts
+## Technologies
+- React v.17
+- ES6
+- HTML5
+- CSS3
 
-In the project directory, you can run:
+## Features
+- Service providers can be created under varius industries that are fully customizable by user. 
+- 'Add Service Provider' page keeps track of past five most recent additions, listed in reverse chronological order.
+- 'Edit Service Provider' page keeps track of past five most recent edits, listed in reverse chonological order.
+- Calculator on Servie Provider Details page keeps track of total expenses spent at each provider.
+- Providers can be favorited.
 
-### `npm start`
+## Setup
+To run this project, install it locally. In terminal, run `npm install` from the root directory. Make a copy of database.json.example in the API directory and name it database.json. Run `json-server database.json -p 8088 -w` from the API directory. Run `npm start` from the root directory. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Project status
+Complete. 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Acknowledgements
+Main image courtesy [OpenClipart-Vectors](https://pixabay.com/users/openclipart-vectors-30363/), and images of workers courtesy [Peggy_Marco](https://pixabay.com/users/peggy_marco-1553824/), both via [Pixabay.com](https://pixabay.com/). 
