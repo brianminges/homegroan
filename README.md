@@ -1,3 +1,6 @@
+
+![Homepage](https://github.com/brianminges/homegroan/blob/main/public/images/homepage.jpg?raw=true)
+
 # Home Groan - for the unhappy homeowner
 An app to keep track of household invoices and service providers.
 
@@ -11,10 +14,10 @@ This is my second attempt at a working app, but first using React, after studing
 - CSS3
 
 ## Features
-- Service providers can be created under varius industries that are fully customizable by user. 
+- Service providers can be created under various industries that are fully customizable by user. 
 - 'Add Service Provider' page keeps track of past five most recent additions, listed in reverse chronological order.
 - 'Edit Service Provider' page keeps track of past five most recent edits, listed in reverse chonological order.
-- Calculator on Servie Provider Details page keeps track of total expenses spent at each provider.
+- Calculator on Service Provider Details page keeps track of total expenses spent at each provider.
 - Providers can be favorited.
 
 ## Setup
