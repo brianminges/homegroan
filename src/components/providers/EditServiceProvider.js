@@ -47,6 +47,7 @@ export const EditServiceProvider = () => {
                 typeId: provider.typeId,
                 phone: provider.phone,
                 emailaddress: provider.emailaddress,
+                website: provider.website,
                 twitter: provider.twitter,
                 facebook: provider.facebook,
                 updatedTimestamp: new Date().toUTCString()
