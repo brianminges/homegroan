@@ -21,7 +21,7 @@ This is my second attempt at a working app, but first using React, after studing
 - Providers can be favorited.
 
 ## Setup
-To run this project, install it locally. In terminal, run `npm install` from the root directory. Make a copy of database.json.example in the API directory and name it database.json. Run `json-server database.json -p 8088 -w` from the API directory. Run `npm start` from the root directory. 
+To run this project, clone from this repository to your local machine. In terminal, run `npm install` from the root directory. Make a copy of database.json.example in the API directory and name it database.json. Run `json-server database.json -p 8088 -w` from the API directory. Run `npm start` from the root directory. 
 
 ## Project status
 Complete. 
