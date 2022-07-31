@@ -13,7 +13,7 @@ This is my second attempt at a working app, but first using React, after studing
 - HTML5
 - CSS3
 - Miro
- 
+
 ## Features  
 - Service providers can be created under various industries that are fully customizable by user.  
 - 'Add Service Provider' page keeps track of past five most recent additions, listed in reverse chronological order.
@@ -22,7 +22,8 @@ This is my second attempt at a working app, but first using React, after studing
 - A running total of expenses spent at each provider is displayed on that provider's page.
 - Service providers can be favorited.
 
-## Page views
+## Selected pages and features
+<img src="https://user-images.githubusercontent.com/91277363/182011178-13afa8f9-84c0-44b9-8633-d9b9fc7d028a.png?raw=true" height="400" >
 <img src="https://user-images.githubusercontent.com/91277363/182010562-acc7d339-3d1f-4c1a-84ec-0e1f21495eff.png?raw=true" height="400" >
 <img src="https://user-images.githubusercontent.com/91277363/182010753-83455392-77d6-458e-8d2b-5b371d8ae342.png?raw=true" height="400" >
 <img src="https://user-images.githubusercontent.com/91277363/182010833-00f3074f-0e49-4933-9038-4014af3e4f4d.gif?raw=true" height="200" >
