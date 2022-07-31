@@ -34,8 +34,13 @@ This is my second attempt at a working app, but first using React, after studing
 <img src="https://user-images.githubusercontent.com/91277363/182011178-13afa8f9-84c0-44b9-8633-d9b9fc7d028a.png?raw=true" height="500" >
 
 ## Setup
-To run this project, clone from this repository to your local machine. In terminal, run `npm install` from the root directory. Make a copy of database.json.example in the API directory and name it database.json. Run `json-server database.json -p 8088 -w` from the API directory. Run `npm start` from the root directory. 
-
+1. Clone this reposity.
+2. `cd` into the directory it creates.
+3. Run `npm install` and wait for all dependencies to be installed.
+4. Make a copy of `database.json.exampl`e in the `api` directory and name it `database.json`.
+5. Run `json-server database.json -p 8088 -w` from the `api` directory.
+6. Run 'npm start` to verify that installation was successful. 
+ 
 ## Project status
 Complete. 
 
