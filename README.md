@@ -37,7 +37,7 @@ This is my second attempt at a working app, but first using React, after studing
 1. Clone this reposity.
 2. `cd` into the directory it creates.
 3. Run `npm install` and wait for all dependencies to be installed.
-4. Make a copy of `database.json.exampl`e in the `api` directory and name it `database.json`.
+4. Make a copy of `database.json.example` in the `api` directory and name it `database.json`.
 5. Run `json-server database.json -p 8088 -w` from the `api` directory.
 6. Run 'npm start` to verify that installation was successful. 
  
