@@ -15,6 +15,8 @@ This is my second attempt at a working app, but first using React, after studing
 - Miro
 
 ## Features  
+- Full CRUD capabilities.
+- Sign in allows for multiple, distinct users and profiles.
 - Service providers can be created under various industries that are fully customizable by user.  
 - 'Add Service Provider' page keeps track of past five most recent additions, listed in reverse chronological order.
 - 'Edit Service Provider' page keeps track of past five most recent edits, listed in reverse chonological order.
