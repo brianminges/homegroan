@@ -1,7 +1,7 @@
 
 ![Homepage](https://github.com/brianminges/homegroan/blob/main/public/images/homepage.jpg?raw=true)
 
-# Home Groan - for the unhappy homeowner
+# Home Groan: For the unhappy homeowner
 An app to keep track of household invoices and service providers.
 
 ## General information
